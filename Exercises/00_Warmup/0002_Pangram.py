@@ -11,10 +11,10 @@
 
 # Solution:
 # Use a hash set to store all the lower-case English letters, then traverse the sentence one character at a time
-# removing its lower case version from the set. If the set is empty return True, as it means that all the characters
-# in the English letters set have been removed, thus all the English letters have been "seen" at least once in the
-# sentence, making it a pangram. If the end of the sentence is reached and there are still characters in the set,
-# return False.
+# removing its lower case version from the set and checking if this made the set is empty. If the set is empty 
+# return True, as it means that all the characters in the English letters set have been "seen" at least once in the
+# sentence, making it a pangram. Otherwise, continue until we finish traversing the sentence. If the end of the sentence 
+# is reached and there are still characters in the set, return False.
 #
 # Solution complexity:
 # Time complexity: O(n) where n is the number of elements in the array.
