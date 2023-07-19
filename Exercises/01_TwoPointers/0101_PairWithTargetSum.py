@@ -5,12 +5,8 @@
 # For example, an input of: [1, 2, 3, 4, 6], 6
 # should produce an output of: [1, 3]
 # as the positions 1 and 3 of the array (zero index based) correspond to the numbers 2 and 4,
-# and 2 + 4 = 6
-#
-# Constraints:
-# Time complexity: O(n) where n is the number of elements in the array
-# Space complexity: O(1) constant space
-#
+# and 2 + 4 = 6.
+
 # Solution:
 # Use two indexes, and place them at the begining and the end of the array.
 # The first index (low) will traverse the array from left to right.
@@ -21,6 +17,10 @@
 # - If the sum equals the target, return an array with the two pointers i.e. [low, high].
 # - If the sum is lower than the target, increment the lower pointer (low += 1).
 # - If the sum is higher than the target, decrement the higher pointer (high -= 1).
+#
+# Solution complexity:
+# Time complexity: O(n) where n is the number of elements in the array.
+# Space complexity: O(1) constant space.
 def PairWithTargetSum(arr, target):
     low = 0
     high = len(arr) - 1
