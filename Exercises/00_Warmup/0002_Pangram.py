@@ -10,23 +10,19 @@
 # - The sentence "This is not a pangram" is not a pangram. Thus, when passed to the IsPangram function, it should return False.
 
 # Solution:
-# Use a hash set to store all the lower-case English letters, then traverse the sentence one character at a time
-# removing its lower case version from the set and checking if this made the set is empty. If the set is empty 
-# return True, as it means that all the characters in the English letters set have been "seen" at least once in the
-# sentence, making it a pangram. Otherwise, continue until we finish traversing the sentence. If the end of the sentence 
-# is reached and there are still characters in the set, return False.
+# Traverse the sentence one character at a time. For each character check if it is an English letter. If so, add it to an auxiliary
+# set so all the different English letters in the sentence are stored in there. Finally check if the cardinality of this auxiliary
+# set equals 26, as that is the total number of different English letters.
 #
 # Solution complexity:
 # Time complexity: O(n) where n is the number of elements in the array.
 # Space complexity: O(1) constant space.
 def IsPangram(sentence):
-    charSet = set([i for i in "abcdefghijklmnopqrstuvwxyz"])
+    englishLettersSet = set()
     for c in sentence:
-        if c.lower() in charSet:
-            charSet.remove(c.lower())
-        if len(charSet) == 0:
-            return True
-    return False
+        if c.isalpha():
+            englishLettersSet.add(c.lower())
+    return len(englishLettersSet) == 26
 
 if __name__ == "__main__":
     example = "TheQuickBrownFoxJumpsOverTheLazyDog"
