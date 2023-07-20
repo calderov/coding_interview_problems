@@ -9,6 +9,10 @@
 # are pointing to. If these values are equal, move the left pointer to the right and
 # the right pointer to the left, and repeat. If at any point the pointed values differ,
 # return False. Otherwise return True once the pointers converge in the middle of the list.
+#
+# Solution complexity:
+# Time complexity: O(n) where n is number of characters in the input.
+# Space complexity: O(n) space due to the support list.
 def IsPalindrome(s):
     S = [i.lower() for i in s if i.isalpha() or i.isdigit()]
     left = 0
