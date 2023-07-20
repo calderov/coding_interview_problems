@@ -28,7 +28,7 @@ def ContainsDuplicateV1(nums):
 # 
 # Solution 2 complexity:
 # Time complexity: O(n) where n is the number of elements in the array, as there is only one traversal of the array.
-# Space complexity: O(n) constant space, as the set uses at most n slots to store a copy of the array.
+# Space complexity: O(n) space, as the set uses at most n slots to store a copy of the array.
 def ContainsDuplicateV2(nums):
     hashSet = set(nums)
     return not len(nums) == len(hashSet)

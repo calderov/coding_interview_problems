@@ -3,20 +3,17 @@
 # The returned integer should be non-negative as well.
 
 # Solution 1:
-# Given an integer x, loop through all the integers between 0 and x + 1.
-# In each iteration, check if the current integer i satisfies that i * i == x, if this is the case return i as it is the square root of x.
-# Otherwise, check if i * i > x, if this is the case return i - 1 as the exact square root of x is not an integer but it is approximately i - 1.
+# Given an integer x, loop through all the integers from 0 onwards until you find a number i such that i * i > x (this will happen one iteration after i is the square root).
+# Then, just return i - 1 as it is the square root. 
 #
 # Solution 1 complexity:
 # Time complexity: O(x) where x is the given number to extract the square root of.
 # Space complexity: O(1) constant space.
 def SqrtV1(x):
-    for i in range(x + 1):
-        if i * i == x:
-            return i
-        if i * i > x:
-            return i - 1
-    return None
+    i = 0
+    while i * i <= x:
+        i += 1
+    return i - 1
 
 
 # Solution 2:
