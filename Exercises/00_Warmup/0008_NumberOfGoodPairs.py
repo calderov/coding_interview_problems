@@ -22,8 +22,8 @@ def NumberOfGoodPairs(nums):
 # Then return the sum of all those pairs.
 
 # Solution 2 complexity:
-# Time complexity: O(n) square.
-# Time space: O(n)
+# Time complexity: O(n) linear time.
+# Time space: O(n) space.
 def NumberOfGoodPairsV2(nums):
     totalGoodPairs = 0
     freq = {}
