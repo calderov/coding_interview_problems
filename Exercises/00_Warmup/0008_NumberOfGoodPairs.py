@@ -18,7 +18,8 @@ def NumberOfGoodPairs(nums):
     return totalGoodPairs
 
 # Solution 2:
-# Use a frequency
+# Use a frequency map to register how many pairs does a given number appear on.
+# Then return the sum of all those pairs.
 
 # Solution 2 complexity:
 # Time complexity: O(n) square.
