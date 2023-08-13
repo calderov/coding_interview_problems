@@ -41,7 +41,7 @@ def TripletSumCloseToTarget(nums, target):
 #  
 # Solution 2 complexity:
 # Time complexity: O(n^2) as we use two nested loops to build candidate triplets.
-# Space complexity: O(1) as we rely only on a few auxiliar variables.
+# Space complexity: O(1) as we rely only on a few auxiliar variables that take constant space.
 def TripletSumCloseToTargetV2(nums, target):
     nums.sort()
     n = len(nums)
