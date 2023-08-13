@@ -71,11 +71,11 @@ if __name__ == "__main__":
     print(nums == expectedOutput)
 
     # Example 2
-    # nums = [2, 2, 0, 1, 2, 0]
-    # expectedOutput = [0, 0, 1, 2, 2, 2]
+    nums = [2, 2, 0, 1, 2, 0]
+    expectedOutput = [0, 0, 1, 2, 2, 2]
 
-    # DutchNationalFlagV2(nums)
+    DutchNationalFlagV2(nums)
 
-    # print(nums)
-    # print(expectedOutput)
-    # print(nums == expectedOutput)
+    print(nums)
+    print(expectedOutput)
+    print(nums == expectedOutput)
