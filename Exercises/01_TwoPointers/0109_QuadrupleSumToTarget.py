@@ -26,35 +26,17 @@ def QuadrupletSumToTarget(nums, target):
     return quadruplets
 
 # Solution 2:
-# Sort nums to simplify the construction of viable quadruplets.
-# Use two pointers i and j to traverse the nums array from start to finish and from finish to start respectively.
-# In each iteration use two additional pointers k and l to construct quadruplets as follows:
-#     quadruplet = sorted([nums[i], nums[j], nums[k], nums[l]])
-# and its sum as:
-#     quadrupletSum = sum(quadruplet)
-#
-# By manipulating k and l we could end up finding quadruplets that satisfy the condition:
-#      quadrupletSum == target
-# in which case, they should be added to the list of quadruplets that will be returned.
-# 
-# The trick is to move k and l around while k < l in the following way.
-#
-# 0. Initialize k and l as k = i + 1 and l = j - 1 respectively.
-# 1. While k < l, use the pointers to create a quadruplet and evaluate its sum.
-# 2. Compare the quadruplet sum with the target. 
-# 3. If the quadruplet sum and the target are equal, add the quadruplet to the quadruplets list. 
-#    Then, add 1 to k and substract 1 from l, so k and l move towards the center of the array.
-#    Loop back to step 1 and continue.
-# 3. If the quadruplet sum is less than the target, add 1 to k so it moves to one position to the right.
-#    Thus pointing to a larger value. Loop back to step 1 and continue.
-# 4. If the quadruplet sum is greater than the target, substract 1 from l so it moves to one position to the left.
-#    Thus pointing to a smaller value. Loop back to step 1 and continue.
-# 5. Once k == l it means that all the intermediate elements between those pointed by i and j have been
-#    exhausted for this iteration. Move i and j as to their new positions and repeat the process from step 0 onwards.
-# 
-# If i and j have reached the end and the start of the array respectively, return the list of quadruplets we
-# have been populating.
-# 
+# 1. Sort the list of nums to aid in finding quadruplets efficiently.
+# 2. Two nested loops traverse the first two elements of the potential quadruplet.
+# 3. At each iteration of the first two elements, maintain two pointers, left and right, for the remaining elements.
+#    While left is less than right, explore combinations of the third and fourth elements.
+#    adjusting left and right pointers based on the comparison of the current sum with the target:
+#       - If the sum matches the target, a quadruplet is found. Add the quadruplet to a list.
+#         Increment left and decrement right while skipping duplicates.
+#       - If the sum is less, increment left to consider larger values.
+#       - If the sum is more, decrement right to consider smaller values.
+# 4. When the first two pointers have finished traversing the array, return the list of quadruplets that matched the target.
+
 # Solution 2 complexity:
 # Time complexity: O(n^3) as we use 3 nested loops to produce candidate quadruplets from nums.
 # Space complexity: O(n choose 4) as that is the max number of possible quadruplet combinations in nums.
@@ -63,19 +45,23 @@ def QuadrupletSumToTargetV2(nums, target):
     n = len(nums)
     nums.sort()
 
-    for i in range(n - 1):
-        for j in range(n - 1, 0, -1):
-            k = i + 1 # Left
-            l = j - 1 # Right
+    for i in range(n - 3):
+        for j in range(i + 1, n - 2):
+            k = j + 1 # Left
+            l = n - 1 # Right
+
             while k < l:
-                quadruplet = sorted([nums[i], nums[j], nums[k], nums[l]])
-                quadrupletSum = sum(quadruplet)
-                
+                quadrupletSum = nums[i] + nums[j] + nums[k] + nums[l]
+
                 if quadrupletSum == target:
-                    if quadruplet not in quadruplets:
-                        quadruplets.append(quadruplet)
+                    quadruplets.append([nums[i], nums[j], nums[k], nums[l]])
                     k += 1
                     l -= 1
+                    # Skip dupes
+                    while k < l and nums[k] == nums[k - 1]:
+                        k += 1
+                    while k < l and nums[l] == nums[l + 1]:
+                        l -= 1
                 elif quadrupletSum < target:
                     k += 1
                 elif quadrupletSum > target:
