@@ -1,4 +1,4 @@
-# Problem
+# Problem:
 # Given an array of unsorted numbers and a target sum,
 # count all triplets in it such that nums[i] + nums[j] + nums[k] < target
 # where i, j, and k are three different indices.

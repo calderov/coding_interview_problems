@@ -20,7 +20,6 @@ from functools import reduce
 # operations where j - i is at most n, then: 
 # O(n^2) * O(j - i) = O(n^2) * O(n) = O(n^3) 
 #                  
-#                  
 # Space complexity: O(2^n * n) as there are at most 2^n subsets on a set
 # of at most n elements. 
 def SubarrayWithProductLessThanATarget(nums, target):
