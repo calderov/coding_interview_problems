@@ -51,10 +51,12 @@ def QuadrupletSumToTargetV2(nums, target):
             l = n - 1 # Right
 
             while k < l:
+                quadruplet = [nums[i], nums[j], nums[k], nums[l]]
                 quadrupletSum = nums[i] + nums[j] + nums[k] + nums[l]
 
                 if quadrupletSum == target:
-                    quadruplets.append([nums[i], nums[j], nums[k], nums[l]])
+                    if quadruplet not in quadruplets:
+                         quadruplets.append(quadruplet)
                     k += 1
                     l -= 1
                     # Skip dupes
