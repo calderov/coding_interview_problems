@@ -7,7 +7,7 @@
 #
 # Solution 1 complexity:
 # Time complexity: O(n3) as we use three nested loops for traversing nums.
-# Space complexity: O(n) as the triplets list can hold up to n/3 triplets.
+# Space complexity: O(n choose 3) as that is the max number of possible triplets in nums.
 def TripletSumToZero(nums):
     triplets = []
     n = len(nums)
