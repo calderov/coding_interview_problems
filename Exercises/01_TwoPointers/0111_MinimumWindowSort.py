@@ -112,31 +112,31 @@ def MinimumWindowSortV2(nums):
     return high - low + 1
 
 if __name__ == "__main__":
-    # Example 1:
+    # Example 1
     nums = [1, 2, 5, 3, 7, 10, 9, 12]
     expectedOutput = 5
     output = MinimumWindowSortV2(nums)
     print(output, expectedOutput, output == expectedOutput)
 
-    # Example 2:
+    # Example 2
     nums = [1, 3, 2, 0, -1, 7, 10]
     expectedOutput = 5
     output = MinimumWindowSortV2(nums)
     print(output, expectedOutput, output == expectedOutput)
 
-    # Example 3:
+    # Example 3
     nums = [1, 2, 3]
     expectedOutput = 0
     output = MinimumWindowSortV2(nums)
     print(output, expectedOutput, output == expectedOutput)
 
-    # Example 4:
+    # Example 4
     nums = [3, 2, 1]
     expectedOutput = 3
     output = MinimumWindowSortV2(nums)
     print(output, expectedOutput, output == expectedOutput)
 
-    # Example 5:
+    # Example 5
     nums = [2, 3, 3, 2]
     expectedOutput = 3
     output = MinimumWindowSortV2(nums)

@@ -48,14 +48,14 @@ def AreArraysEqual(array1, array2):
     return True
 
 if __name__ == "__main__":
-    # Example 1:
+    # Example 1
     nums = [2, 5, 3, 10]
     target = 30                                  
     expectedOutput = [[2], [5], [2, 5], [3], [5, 3], [10]]
     output = SubarrayWithProductLessThanATarget(nums, target)
     print(AreArraysEqual(output, expectedOutput))
 
-    # Example 2:
+    # Example 2
     nums = [8, 2, 6, 5]
     target = 50
     expectedOutput = [[8], [2], [8, 2], [6], [2, 6], [5], [6, 5]]

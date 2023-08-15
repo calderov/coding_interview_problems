@@ -88,42 +88,42 @@ def CompareStringsContainingBackspacesV2(string1, string2):
     return True
 
 if __name__ == "__main__":
-    # Example 1:
+    # Example 1
     string1 = "xy#z"
     string2 = "xzz#"
     expectedOutput = True
     output = CompareStringsContainingBackspacesV2(string1, string2)
     print(output, expectedOutput, "\n")
 
-    # Example 2:
+    # Example 2
     string1 = "xy#z"
     string2 = "xyz#"
     expectedOutput = False
     output = CompareStringsContainingBackspacesV2(string1, string2)
     print(output, expectedOutput, "\n")
 
-    # Example 3:
+    # Example 3
     string1 = "xp#"
     string2 = "xyz##"
     expectedOutput = True
     output = CompareStringsContainingBackspacesV2(string1, string2)
     print(output, expectedOutput, "\n")
 
-    # Example 4:
+    # Example 4
     string1 = "xywrrmp"
     string2 = "xywrrmu#p"
     expectedOutput = True
     output = CompareStringsContainingBackspacesV2(string1, string2)
     print(output, expectedOutput, "\n")
 
-    # Example 5:
+    # Example 5
     string1 = "abc#"
     string2 = "abc##"
     expectedOutput = False
     output = CompareStringsContainingBackspacesV2(string1, string2)
     print(output, expectedOutput, "\n")
 
-    # Example 6:
+    # Example 6
     string1 = "#"
     string2 = "#"
     expectedOutput = True
