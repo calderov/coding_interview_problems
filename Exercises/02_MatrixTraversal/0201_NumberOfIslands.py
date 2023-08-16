@@ -28,18 +28,20 @@
 
 class Solution:
     # Solution:
-    # Create an empty array named 'visited' to keep the track of all the
-    # pieces of land (1s) present in the matrix. Each coordinate must be 
-    # represented by a tuple (row, col). Also, initialize an island counter
-    # to zero, to keep track of all the islands we'll discover later on.
+    # Create an empty array named 'visited' to keep track of the coordinates
+    # for all the pieces of land (1s) present in the matrix. Each coordinate
+    # must be represented by a tuple (row, col). Also, initialize an island
+    # counter to zero, to keep track of all the islands we'll discover later
+    # on.
     # 
     # Then, traverse the island linearly looking for 1s. If a 1 is found, 
     # check if its coordinates have already been visited. If not, it 
     # means that a new island has been found, add 1 to the island counter
-    # and use Breadth-First Search (BFS) to explore the island, then add
-    # all the explored coordinates to the 'visited' array. Once the
-    # matrix has been traversed all of the islands should have been
-    # explored. Return the island counter now. 
+    # and use Breadth-First Search (BFS) to explore the island adding
+    # all the explored coordinates to the 'visited' array. 
+    # 
+    # Once the matrix has been traversed, all of the islands should have
+    # been explored. Return the island counter now. 
 
     # Solution complexity:
     # Time complexity: O(m * n) as this is the complexity of the underlying BFS step.

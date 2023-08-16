@@ -27,10 +27,26 @@
 
 class Solution:
     # Solution:
-    # BFS
+    # Create an empty array named 'visited' to keep track of the coordinates
+    # for all the pieces of land (1s) present in the matrix. Each coordinate
+    # must be represented by a tuple (row, col). Then, initialize a variable
+    # named bigestIslandArea to store the area of the largest island found at
+    # any point of the algorithm's execution, have it initialized to zero.
+    # 
+    # Then, traverse the island linearly looking for 1s. If a 1 is found, 
+    # check if its coordinates have already been visited. If not, it 
+    # means that a new island has been found, use Breadth-First Search (BFS)
+    # to explore the island, make this BFS process return the set of different
+    # coordinates that were visited by it. The size of this set is the area of
+    # the current island. Compare this area with bigestIslandArea and update
+    # bigestIslandArea if needed.
+    # 
+    # Once the matrix has been completely traversed, all of the islands should 
+    # have been and explored and bigestIslandArea should contain the area of the
+    # largest one. Return bigestIslandArea. 
     #
     # Solution complexity:
-    # Time complexity: O(m * n)
+    # Time complexity: O(m * n) as this is the complexity of the underlying BFS step.
     # Space complexity: O(m * n)
     def BiggestIsland(self, matrix):
         rows = len(matrix)
