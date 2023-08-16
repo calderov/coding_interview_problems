@@ -23,3 +23,8 @@ I've included code for the proposed solutions, notes and references for the foll
 1. Pattern: Multi-threaded (*NEW*)
 
 The included code is written in Python, although a C++ version of the solutions may come in the future.
+
+# Coding standard
+- **Classes:** PascalCase
+- **Functions:** PascalCase
+- **Variables:** camelCase
