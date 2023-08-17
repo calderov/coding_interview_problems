@@ -27,43 +27,39 @@
 #                   [0, 2, 2, 0, 0],
 #                   [0, 0, 0, 0, 0]]
 # 
-
 class Solution:
-    def floodFill(self, matrix, row, col, newColor):
-        self.FloodFill(matrix, row, col, newColor)
-        return matrix
-
     # Solution:
+    # Use Depth-First Search (DFS) to traverse the matrix from the given
+    # starting cell replacing the color of those adjacent cells that are
+    # of the original color of the starting one. 
+    #
     # Solution complexity:
-    # Time complexity: O(m * n)
+    # Time complexity: O(m * n) as that is the complexity of DFS
     # Space complexity: O(1)
     def FloodFill(self, matrix, row, col, newColor):
-        rows = len(matrix)
-        cols = len(matrix[0])
+        if self.IsInMatrix(matrix, row, col):
+            self.FloodFillDFS(matrix, row, col, matrix[row][col], newColor)
+        return matrix
 
-        # Return early if x or y are out of bounds
-        if row < 0 or col < 0 or row > rows - 1 or col > cols - 1:
+    def FloodFillDFS(self, matrix, row, col, oldColor, newColor):
+        # Return early if row or col are out of bounds
+        # or the color of the cell is not that of the
+        # color we want to change.
+        if not self.IsInMatrix(matrix, row, col) or matrix[row][col] != oldColor:
             return
 
-        # Save the old color for reference and apply the new color to the cell
-        oldColor = matrix[row][col]
+        # Change the color of the current cell
         matrix[row][col] = newColor
 
-        # Color UP
-        if row > 0 and matrix[row - 1][col] == oldColor:
-            self.FloodFill(matrix, row - 1, col, newColor)
+        self.FloodFillDFS(matrix, row - 1, col, oldColor, newColor) # Color UP
+        self.FloodFillDFS(matrix, row + 1, col, oldColor, newColor) # Color DOWN
+        self.FloodFillDFS(matrix, row, col - 1, oldColor, newColor) # Color LEFT
+        self.FloodFillDFS(matrix, row, col + 1, oldColor, newColor) # Color RIGHT
 
-        # Color DOWN
-        if row < rows - 1 and matrix[row + 1][col] == oldColor:
-            self.FloodFill(matrix, row + 1, col, newColor)
-
-        # Color LEFT
-        if col > 0 and matrix[row][col - 1] == oldColor:
-            self.FloodFill(matrix, row, col - 1, newColor)
-
-        # Color RIGHT
-        if col < cols - 1 and matrix[row][col + 1] == oldColor:
-            self.FloodFill(matrix, row, col + 1, newColor)
+    def IsInMatrix(self, matrix, row, col):
+        rows = len(matrix)
+        cols = len(matrix[0])
+        return not (row < 0 or col < 0 or row > rows - 1 or col > cols - 1)
 
 def PrintMatrix(matrix):
     for row in matrix:
@@ -100,7 +96,7 @@ if __name__ == "__main__":
     print("Output")
     PrintMatrix(matrix)
 
-    print("\nSuccess:", matrix == expectedOutput)
+    print("\nSuccess:", matrix == expectedOutput, "\n")
 
     # Example 2
     matrix = \
