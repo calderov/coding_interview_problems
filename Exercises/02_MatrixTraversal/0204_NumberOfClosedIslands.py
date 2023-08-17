@@ -68,27 +68,29 @@ class Solution:
         return visited, isClosed 
     
     def GetUp(self, matrix, i, j):
-        if self.IsInMatrix(matrix, i - 1, j):
+        if self.IsInMatrix(matrix, i - 1, j) and matrix[i - 1][j] == 1:
             return (i - 1, j)
         return None
 
     def GetDown(self, matrix, i, j):
-        if self.IsInMatrix(matrix, i + 1, j):
+        if self.IsInMatrix(matrix, i + 1, j) and matrix[i + 1][j] == 1:
             return (i + 1, j)
         return None
     
     def GetLeft(self, matrix, i, j):
-        if self.IsInMatrix(matrix, i, j - 1):
+        if self.IsInMatrix(matrix, i, j - 1) and matrix[i][j - 1] == 1:
             return (i, j - 1)
         return None
 
     def GetRight(self, matrix, i, j):
-        if self.IsInMatrix(matrix, i, j + 1):
+        if self.IsInMatrix(matrix, i, j + 1) and matrix[i][j + 1] == 1:
             return (i, j + 1)
         return None
 
     def IsEdge(self, matrix, i, j):
-        return False
+        rows = len(matrix)
+        cols = len(matrix[0])
+        return i == 0 or j == 0 or i == rows - 1 or j == cols - 1
     
     def IsInMatrix(self, matrix, row, col):
         rows = len(matrix)
@@ -109,3 +111,13 @@ if __name__ == "__main__":
     output = solution.CountClosedIslands(matrix)
     print(output, expectedOutput, output == expectedOutput)
     
+    # Example 2
+    matrix = [[0, 0, 0, 0],
+              [0, 1, 0, 0],
+              [0, 1, 0, 0],
+              [0, 0, 1, 0],
+              [0, 0, 0, 0]]
+
+    expectedOutput = 2
+    output = solution.CountClosedIslands(matrix)
+    print(output, expectedOutput, output == expectedOutput)
