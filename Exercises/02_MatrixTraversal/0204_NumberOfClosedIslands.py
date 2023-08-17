@@ -52,6 +52,7 @@ class Solution:
         while pending:
             i, j = pending.pop()
             visited.add((i, j))
+            isClosed = isClosed and not self.IsEdge(matrix, i, j)
 
             directions = [
                 self.GetUp(matrix, i, j),
@@ -63,7 +64,6 @@ class Solution:
             for direction in directions:
                 if direction and direction not in visited:
                     pending.add(direction)
-                    isClosed = isClosed and not self.IsEdge(matrix, direction[0], direction[1])
 
         return visited, isClosed 
     
@@ -119,5 +119,14 @@ if __name__ == "__main__":
               [0, 0, 0, 0]]
 
     expectedOutput = 2
+    output = solution.CountClosedIslands(matrix)
+    print(output, expectedOutput, output == expectedOutput)
+
+    # Example 3
+    matrix = [[1, 0, 1, 0, 1],
+              [0, 0, 0, 0, 0],
+              [1, 0, 1, 0, 1]]
+
+    expectedOutput = 0
     output = solution.CountClosedIslands(matrix)
     print(output, expectedOutput, output == expectedOutput)
