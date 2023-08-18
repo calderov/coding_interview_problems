@@ -43,7 +43,7 @@ class Solution:
     # 
     # Once the matrix has been completely traversed, all of the islands should 
     # have been and explored and bigestIslandArea should contain the area of the
-    # largest one. Return bigestIslandArea. 
+    # largest one. Return bigestIslandArea.
     #
     # Solution complexity:
     # Time complexity: O(m * n) as this is the complexity of the underlying BFS step.

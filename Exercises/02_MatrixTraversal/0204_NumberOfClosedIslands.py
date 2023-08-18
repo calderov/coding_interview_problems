@@ -22,7 +22,24 @@
 
 class Solution:
     # Solution:
-    # Breadth-First Search.
+    # Create an empty array named 'visited' to keep track of the all the cells
+    # in the matrix that represent land (1s). Each cell is a coordinate that
+    # must be represented by a tuple (row, col). Then, initialize a variable
+    # named closedIslandsCount to zero, it will count how many different
+    # closed islands have been found at any point of the algorithm's execution.
+    # 
+    # Then, traverse the island linearly looking for 1s. If a 1 is found, 
+    # check if its cell has already been visited. If not, it means that a new
+    # island has been found, use Breadth-First Search (BFS) to explore the 
+    # rest of the island, make this BFS process return the set of visited
+    # cells that constitute the island, and if the island is closed or not.
+    # An island is closed if none of its cells are on the edges of the matrix.
+    # 
+    # If a discovered island is closed, add 1 to the closedIslandsCount variable.
+    #
+    # Once the matrix has been completely traversed, all of the islands should 
+    # have been and explored and the number of closed islands should be stored
+    # in closedIslandsCount. Return closedIslandsCount and exit.
     #
     # Solution complexity:
     # Time complexity: O(m * n) as this is the complexity of the underlying BFS step.
@@ -128,5 +145,14 @@ if __name__ == "__main__":
               [1, 0, 1, 0, 1]]
 
     expectedOutput = 0
+    output = solution.CountClosedIslands(matrix)
+    print(output, expectedOutput, output == expectedOutput)
+
+    matrix = [[1, 1, 0, 0, 0],
+              [0, 1, 0, 0, 0],
+              [0, 0, 1, 1, 0],
+              [0, 1, 1, 0, 0],
+              [0, 0, 0, 0, 0]]
+    expectedOutput = 1
     output = solution.CountClosedIslands(matrix)
     print(output, expectedOutput, output == expectedOutput)
