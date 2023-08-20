@@ -31,7 +31,7 @@ class Solution:
     # exploring.
     # 
     # Store the signatures of all the islands that you find in a set, once the matrix has been fully
-    # traversed, return the cardinality (lenght) of such set. Since sets do not allow for repetition
+    # traversed, return the cardinality (length) of such set. Since sets do not allow for repetition
     # that should be the total number of unique island shapes in the matrix.
     #  
     # Solution complexity:

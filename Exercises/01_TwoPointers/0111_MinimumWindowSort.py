@@ -72,7 +72,7 @@ class Solution:
     # last position of the array.
     #
     # At this point, low and high are at the edges of the minimum subarray
-    # that needs to be sorted to sort the original array, its lenght
+    # that needs to be sorted to sort the original array, its length
     # should be high - low + 1. Thus return high - low + 1
 
     # Solution 2 complexity:

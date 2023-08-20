@@ -22,7 +22,7 @@ class Solution:
 
     # Solution 2:
     # Use a hash set to store a copy of the elements of the array. Since hash sets do not admit duplication, any duplicate value
-    # will accepted only once. This should make the lenght of the set different to that of the array if the original array had duplicates in it.
+    # will accepted only once. This should make the length of the set different to that of the array if the original array had duplicates in it.
     # Thus, copy the values of the array into a set and compare their respective lengths, if they are equal return False (as no value got discarted,
     # meaning all the elements in the array are also in the set) otherwise return True.
     # 
