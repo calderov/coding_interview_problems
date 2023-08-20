@@ -20,6 +20,8 @@
 
 class Solution:
     # Solution:
+    # Traverse the matrix linearly finding the different chunks of letters in it.
+    # For 
     #
     # Solution complexity:
     # Time complexity: O(m * n)
@@ -56,7 +58,7 @@ class Solution:
             return True
 
         # Explore Left
-        if col - 1!= prevCol and self.FindCycleDFS(matrix, visited, symbol, row, col - 1, row, col):
+        if col - 1 != prevCol and self.FindCycleDFS(matrix, visited, symbol, row, col - 1, row, col):
             return True
 
         # Explore Right
