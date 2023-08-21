@@ -10,9 +10,6 @@
 # 23 is a happy number, 12 is not
 
 class Solution:
-    def find(self, number):
-        return self.IsHappyNumber(number)
-
     # Solution:
     # Add the squared digits of the number as stated in the problem description
     # but use the fast and slow approach to detect cycles, if a cycle is found
