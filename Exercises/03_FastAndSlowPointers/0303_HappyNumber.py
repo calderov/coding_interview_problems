@@ -14,28 +14,37 @@ class Solution:
         return self.IsHappyNumber(number)
 
     # Solution:
+    # Add the squared digits of the number as stated in the problem description
+    # but use the fast and slow approach to detect cycles, if a cycle is found
+    # return False (as no cycles contain 1 in non-happy numbers). Otherwise
+    # keep adding the digits until they converge to 1, then return True.
+    # 
     # Solution complexity:
-    # Time complexity: O*
-    # Space complexity:
+    # Time complexity: O(log(N)) where N is the given number
+    # Space complexity: O(1)
     def IsHappyNumber(self, number):
-        # Return early for negative numbers
-        if number < 0:
-            return False
-
-        visited = set()
+        slow = number
+        fast = number
 
         while True:
-            if number == 1:
-                return True
-            
-            if number in visited:
+            slow = self.GetSquaredDigitsSum(slow)
+            fast = self.GetSquaredDigitsSum(self.GetSquaredDigitsSum(fast))
+
+            if fast == slow:
                 return False
-            
-            visited.add(number)
-            number = sum([i * i for i in self.GetDigits(number)])
+
+            if slow == 1 or fast == 1:
+                return True
     
-    def GetDigits(self, number):
-        return [int(i) for i in str(number)] 
+    def GetSquaredDigitsSum(self, number):
+        squaredDigitsSum = 0
+
+        while number > 0:
+            digit = number % 10
+            number //= 10 # number = int(number / 10)
+            squaredDigitsSum += digit ** 2
+
+        return squaredDigitsSum
     
 if __name__ == "__main__":
     solution = Solution()
