@@ -21,32 +21,22 @@ class Node:
 
 class Solution:
     # Solution:
-    # Use a fast and slow pointer to detect the cycle, keep track of how many
-    # jumps did the slow pointer made along the way, and keep this count in a
-    # variable named slowJumps.
-    #
-    # Once we know how far the slow pointer was when the cycle was detected,
-    # (head + slowJums) we know that the cycle starts somewhere up to that point.
-    #
-    # Reset the slow pointer to point at the head of the list and move the fast
-    # pointer one position ahead of slow.
-    #
-    # Now, lets run two nested loops. One will move the slow pointer through the
-    # list while the other moves the fast pointer up to jumpSlow positions ahead
-    # of it. At every position touched by the fast pointer, compare the nodes
-    # pointed by both pointers. If they have the same value, it means that we
-    # have found the node that starts the cycle. Return the node and finish.
+    # Use a fast and slow pointer to detect the cycle. When the cycle is detected
+    # compute the cycle lenght (N) and keep it in a variable.
+    # 
+    # Then set the fast pointer N positions ahead of the head and set the slow 
+    # pointer on the head. Now both slow and fast are spaced by N positions.
+    # Move slow and fast one position forward until their values are the same,
+    # then return either of them
     #
     # Solution complexity:
-    # Time complexity: O(n ^ 2)
+    # Time complexity: O(n)
     # Space complexity: O(1)
     def FindCycleStart(self, head):
         fast = head
         slow = head
 
-        # Find how far the slow pointer goes at the time the cycle is detected
-        slowJumps = 0
-
+        # Detect cycle
         while True:
             # Return early if there is noloop in the list
             if fast == None or fast.next == None or fast.next.next == None:
@@ -55,34 +45,37 @@ class Solution:
             fast = fast.next.next
             slow = slow.next
 
-            slowJumps += 1
-
             if fast.val == slow.val:
                 break
 
-        # Find the exact point where the cycle starts
-        cycleIndex = 0
-        slow = head
-        fast = head.next # One position ahead of slow
-
-        # Slow loop
-        while cycleIndex < slowJumps + 1:
-
-            # Fast loop
-            for i in range(slowJumps + 1):
-                if fast.val == slow.val:
-                    return slow
-
-                fast = fast.next
-
-            # Move the slow pointer one position and reset fast pointer            
-            slow = slow.next
-            fast = slow.next # One position ahead of slow
-
-            cycleIndex += 1
+        # Compute cycle lenght
+        cycleLength = self.GetCycleLength(slow)
         
-        # This should be unreachable!
+        # Move the fast pointer cycleLength positions ahead of the head
+        # and point the slow pointer to the head
+        fast = slow
+        slow = head
+
+        # Move slow and fast together until their values are equal, then return
+        for i in range(cycleLength + 1):
+            if slow.val == fast.val:
+                return slow
+            slow = slow.next
+            fast = fast.next
+        
+        # Unreachable
         return None
+        
+    
+    def GetCycleLength(self, nodeInLoop):
+        cycleLength = 1
+        val = nodeInLoop.val
+
+        while nodeInLoop.next.val != val:
+            cycleLength += 1
+            nodeInLoop = nodeInLoop.next
+
+        return cycleLength
 
 # Example 1:
 #
