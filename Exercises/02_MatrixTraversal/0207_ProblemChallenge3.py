@@ -21,7 +21,10 @@
 class Solution:
     # Solution:
     # Traverse the matrix linearly finding the different chunks of letters in it.
-    # For 
+    # For each chunk, use DFS to look for loops. A loop can be found if the DFS
+    # traversal ends up on attempting to visit a cell more than once, despite
+    # each step directing the traversal towards cells that are different
+    # from the imediately previous one.
     #
     # Solution complexity:
     # Time complexity: O(m * n)
