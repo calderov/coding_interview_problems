@@ -116,7 +116,7 @@ class Solution:
     def Reverse(self, head, prevNode=None):
         # Return early if the list is empty or singular
         if head == None or head.next == None:
-            return True
+            return head
 
         node = head
         nextNode = node.next
@@ -154,16 +154,58 @@ def Example2():
     head.next.next.next.next.next = Node(2)
     return head, False
 
+def MakeLinkedList(arr):
+    head = None
+    tail = None
+
+    for val in arr:
+        # If this is the fist item in the list
+        if tail == None:
+            tail = Node(val)
+            head = tail
+        else:
+            node = Node(val)
+            tail.next = node
+            tail = node
+
+    return head
+
+def PrintList(head):
+    node = head
+    listString = ""
+    while node != None:
+        listString += str(node.val) + " "
+        node = node.next
+    print(listString)
+
 if __name__ == "__main__":
     solution = Solution()
 
-    # Example 1
-    head, expectedOutput = Example1()
-    output = solution.IsPalindrome(head)
-    print(output, expectedOutput, output == expectedOutput)
+    examples = {
+        1: ([2,4,6,4,2], True),
+        2: ([2,4,6,4,2,2], False),
+        3: ([1], True),
+        4: ([1,2,1], True),
+        5: ([1,2], True),
+        6: ([1,2,2,1], True),
+        7: ([1,2,3,2,1], True),
+        8: ([1,2,3,4,2,1], False),
+        9: ([1,2,3,3,2,1], True),
+        10: ([1,2,3,4,5,6,7,8,9,10,9,8,7,6,5,4,3,2,1], True),
+        11: ([1,2,3,4,5,6,7,8,9,10,10,8,7,6,5,4,3,2,1], False),
+        12: ([1,1,2,2,3,3,4,4], False),
+        13: ([4,4,3,3,2,2,1,1], False),
+        14: ([10,20,30,40,50,60,70,80,90,100,90,80,70,60,50,40,30,20,10], True),
+    }
 
-    # Example 2
-    head, expectedOutput = Example2()
-    output = solution.IsPalindrome(head)
-    print(output, expectedOutput, output == expectedOutput)
+    for example in examples:
+        nums, expectedOutput = examples[example]
+        head = MakeLinkedList(nums)
+        output = solution.IsPalindrome(head)
+
+        print("Example %d:" % example)
+        PrintList(head)
+        print("Palindrome:", output)
+        print("Expected:  ", expectedOutput)
+        print()
     
