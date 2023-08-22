@@ -22,15 +22,16 @@ class Node:
 
 class Solution:
     # Solution:
-    # 1. Split the list in two by the center.
+    # 1. Find the center of the list.
     # 
-    # 2. Reverse the right list and compare it with the left one until the left list is
-    #    traversed or a difference is found. If the comparisons are all equal, it means
-    #    that the original list is a palindrome, otherwise it is not. Save this info in
-    #    a variable named isPalindrome.
+    # 2. Reverse the right side of the list.
     # 
-    # 3. Reverse the right list once again and merge the left and right lists together to
-    #   restore the original list.
+    # 3. Initialize a variable isPalidnrome to True and traverse the list comparing
+    #    the elements from start to the center (left side) to the elements from the
+    #    center to the end (right side). If a difference between elements if found
+    #    change the value of isPalindrome to False. 
+    # 
+    # 3. Reverse the right side once again to restore the original list.
     # 
     # 4. Return wether or not the list is a palindrome. i.e. return isPalindrome.
     #
@@ -39,97 +40,48 @@ class Solution:
     # Space complexity: O(1)
     def IsPalindrome(self, head):
         # Return early if the list is empty or singular
-        if head == None or head.next == None:
+        if head is None or head.next is None:
             return True
 
         # Find the list center
         center = self.GetListCenter(head)
-        
-        # Slice the list in two
-        leftList, rightList = self.SliceList(head, center)
-        
-        # Reverse right side
-        rightList = self.Reverse(rightList)
 
-        # Compare the lists until the left list is traversed or a difference is found
+        # Reverse the list from the center onwards
+        center = self.Reverse(center)
+
+        # Compare the left and right sides of the list to see if the original list is a palindrome
+        left = head
+        right = center
         isPalindrome = True
-
-        leftNode = leftList
-        rightNode = rightList
-
-        while leftNode is not None:
-            if leftNode.val != rightNode.val:
+        while left is not None and right is not None:
+            if left.val != right.val:
                 isPalindrome = False
                 break
-            leftNode = leftNode.next
-            rightNode = rightNode.next
+            left = left.next
+            right = right.next
 
         # Reverse the right side once again
-        rightList = self.Reverse(rightList)
-        
-        # Append the right side to the left side so the original list is restored
-        self.MergeLists(leftList, rightList)
+        center = self.Reverse(center)
 
         # Return if the original list is palindrome or not
         return isPalindrome
 
-    def MergeLists(self, leftList, rightList):
-        if leftList == None:
-            return rightList
-        
-        if rightList == None:
-            return leftList
-        
-        leftNode = leftList
-        while leftNode.next is not None:
-            leftNode = leftNode.next
-        
-        leftNode.next = rightList
-        return leftList
-
-    def SliceList(self, startNode, endNode):
-        node = startNode
-        while node.next != endNode:
-            node = node.next
-        node.next = None
-        return startNode, endNode
-
     def GetListCenter(self, head):
-        # Return early if the list is empty or singular
-        if head == None or head.next == None:
-            return head
-
-        # Find the middle
         slow = head
-        fast = head.next
-
-        while True:
-            if fast == None:
-                return slow
-            
-            if fast.next == None:
-                return slow.next
-
+        fast = head
+        while fast is not None and fast.next is not None:
             slow = slow.next
-            fast = fast.next.next   
+            fast = fast.next.next
+        return slow
     
-    def Reverse(self, head, prevNode=None):
-        # Return early if the list is empty or singular
-        if head == None or head.next == None:
-            return head
-
-        node = head
-        nextNode = node.next
-
-        while True:
-            node.next = prevNode
-            if nextNode == None:
-                break
-            prevNode = node
-            node = nextNode
-            nextNode = node.next
-
-        return node
+    def Reverse(self, head):
+        prevNode = None
+        while head is not None:
+            nextNode = head.next
+            head.next = prevNode
+            prevNode = head
+            head = nextNode
+        return prevNode
 
 def MakeLinkedList(arr):
     head = None
