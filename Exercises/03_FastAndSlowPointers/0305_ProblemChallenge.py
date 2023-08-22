@@ -57,7 +57,7 @@ class Solution:
         leftNode = leftList
         rightNode = rightList
 
-        while leftNode != None:
+        while leftNode is not None:
             if leftNode.val != rightNode.val:
                 isPalindrome = False
                 break
@@ -81,7 +81,7 @@ class Solution:
             return leftList
         
         leftNode = leftList
-        while leftNode.next != None:
+        while leftNode.next is not None:
             leftNode = leftNode.next
         
         leftNode.next = rightList
@@ -131,29 +131,6 @@ class Solution:
 
         return node
 
-# Example1
-#   Input: 2 -> 4 -> 6 -> 4 -> 2 -> null
-#   Output: True
-def Example1():
-    head = Node(2)
-    head.next = Node(4)
-    head.next.next = Node(6)
-    head.next.next.next = Node(4)
-    head.next.next.next.next = Node(2)
-    return head, True
-
-# Example2
-#   Input: 2 -> 4 -> 6 -> 4 -> 2 -> 2 -> null
-#   Output: False
-def Example2():
-    head = Node(2)
-    head.next = Node(4)
-    head.next.next = Node(6)
-    head.next.next.next = Node(4)
-    head.next.next.next.next = Node(2)
-    head.next.next.next.next.next = Node(2)
-    return head, False
-
 def MakeLinkedList(arr):
     head = None
     tail = None
@@ -186,7 +163,7 @@ if __name__ == "__main__":
         2: ([2,4,6,4,2,2], False),
         3: ([1], True),
         4: ([1,2,1], True),
-        5: ([1,2], True),
+        5: ([1,2], False),
         6: ([1,2,2,1], True),
         7: ([1,2,3,2,1], True),
         8: ([1,2,3,4,2,1], False),
@@ -205,7 +182,6 @@ if __name__ == "__main__":
 
         print("Example %d:" % example)
         PrintList(head)
-        print("Palindrome:", output)
-        print("Expected:  ", expectedOutput)
+        print("Palindrome:", output, "  Expected:", expectedOutput, "  Success:", output == expectedOutput)
         print()
     
