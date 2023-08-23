@@ -31,3 +31,18 @@ def Reverse(self, head):
         head = nextNode
     return prevNode
 ```
+
+### Compare linked lists
+```python
+def AreListsEqual(list1, list2):
+    while list1 is not None and list2 is not None:
+        if list1.val != list2.val:
+            return False
+        list1 = list1.next
+        list2 = list2.next
+
+    if list1 is not None or list2 is not None:
+        return False
+
+    return True
+```
