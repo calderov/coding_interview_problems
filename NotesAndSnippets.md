@@ -1,6 +1,33 @@
 # Useful code snippets
 
+## Searches and traversals
+
+### Depth-First Search (iterative)
+```python
+def dfs(graph, start):
+    visited = set()
+    pending = [start] # Stack
+
+    while pending:
+        node = pending.pop()
+        print(node)
+        pending += filter(lambda x: x not in visited, reversed([neighbor for neighbor in graph[node]]))
+```
+
+### Breadth-First Search (iterative)
+```python
+def bfs_iterative(graph, start):
+    visited = set()
+    pending = [start] # Queue
+
+    while pending:
+        node = pending.pop(0)
+        print(node)
+        pending += filter(lambda x: x not in visited, [neighbor for neighbor in graph[node]])
+```
+
 ## Linked lists
+
 ### Barebones linked list
 ```python
 class Node:
