@@ -1,5 +1,8 @@
 # Useful code snippets
 
+## Two pointer patterns 
+PENDING
+
 ## Searches and traversals
 
 ### Depth-First Search (iterative)
@@ -72,4 +75,33 @@ def AreListsEqual(list1, list2):
         return False
 
     return True
+```
+
+## Sliding Window
+
+### Sliding window example
+```python
+# Given an array of positive numbers and a positive number 'k,' find
+# the maximum sum of any contiguous subarray of size 'k'.
+def FindMaxSumSubarray(nums, k):
+    start = 0
+    end = k - 1
+    windowSum = 0
+    maxWindowSum = 0
+    
+    while end < len(nums):
+        if start == 0:
+            windowSum = sum(nums[0 : k])
+            maxWindowSum = windowSum
+        else:
+            windowSum -= nums[start - 1]
+            windowSum += nums[end]
+        
+        if windowSum > maxWindowSum:
+            maxWindowSum = windowSum
+
+        start += 1
+        end += 1
+
+    return maxWindowSum
 ```
