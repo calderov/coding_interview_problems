@@ -19,21 +19,51 @@
 
 class Solution:
     # Solution:
-    #
+    # 1. Start by assuming that there is no subarray which sum is greater than or equal to S
+    #    by initializing a variable named minWindowLength as follows:
+    #    minWindowLength = len(nums) + 1
+    # 
+    # 2. Initialize a variable to keep track of the sliding window sum as well as two pointers
+    #    that will delimit the window:
+    #    windowSum = 0
+    #    start = 0    
+    #    end = 0    
+    # 
+    # 3. Use a while loop to move the end pointer to accross the array adding nums[end] to 
+    #    windowSum in each iteration.
+    # 
+    # 4. If at any point windowSum >= S, it means that we have found a window that meets our
+    #    desired criteria. Check if the size of the window is less than minWindowLength.
+    #    If so, update minWindowLenght (remember that the window length is computed as
+    #    windowLength = end - start + 1).
+    # 
+    #    Now, try reducing the window length by moving the start pointer across the array
+    #    and substracting nums[start] from windowSum and updating the window length
+    #    until windowSum is no longer greater or equal to S. Do this using a nested
+    #    while loop.
+    # 
+    # 5. Once the end pointer has completely traversed the array check  (thus breaking
+    #    the main loop). Check if minWindowLength is still equal to len(nums) + 1.
+    #    If so, it means that we never found a subarray (window) which added to a
+    #    sum greater than or equal to S. In this case, return 0. Otherwise, return
+    #    minWindowLength. 
+    #    
     # Solution complexity:
     # Time complexity: O(n)
     # Space complexity: O(1)
     def FindMinSubArray(self, nums, s):
-        windowSum = 0
         minWindowLength = len(nums) + 1
-
+        windowSum = 0
         start = 0
-        for end in range(len(nums)):
+        end = 0
+
+        while end < len(nums):
             windowSum += nums[end]
             while windowSum >= s:
                 minWindowLength = min(minWindowLength, end - start + 1)
                 windowSum -= nums[start]
                 start += 1
+            end += 1
 
         if minWindowLength == len(nums) + 1:
             return 0
