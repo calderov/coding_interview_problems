@@ -18,17 +18,17 @@
 
 class Solution:
     # Solution:
-    #
+    # 
     # Solution complexity:
-    # Time complexity: 
-    # Space complexity: 
-    def MaxLengthAfterReplace(self, inputString, k):
+    # Time complexity: O(n ^ 2)
+    # Space complexity: O(n) as the substring of potential replacements can be as long as the input string
+    def MaxLengthAfterReplaceV1(self, inputString, k):
         maxLengthAfterReplace = 0
         start = 0
         end = 0
         
         while end < len(inputString):
-            if self.potentialReplacements(inputString[start: end + 1]) <= k:
+            if inputString[start] == inputString[end] or self.potentialReplacements(inputString[start: end + 1]) <= k:
                 maxLengthAfterReplace = max(maxLengthAfterReplace, end - start + 1)
             else:
                 c = inputString[start]
@@ -40,6 +40,38 @@ class Solution:
 
     def potentialReplacements(self, substring):
         return len([i for i in substring if i != substring[0]])
+    
+
+    # Solution:
+    #
+    # Solution complexity:
+    # Time complexity: O(n)
+    # Space complexity: O(1) as the characters dictionary has at most 26 entries, one for every character
+    def MaxLengthAfterReplaceV2(self, inputString, k):
+        maxLengthAfterReplace = 0
+        characters = {}
+        start = 0
+        end = 0
+        
+        while end < len(inputString):
+            if inputString[end] not in characters:
+                characters[inputString[end]] = 0
+            characters[inputString[end]] += 1
+            
+            replacements = (end - start + 1) - characters[inputString[start]]
+            
+            if replacements <= k:
+                maxLengthAfterReplace = max(maxLengthAfterReplace, end - start + 1)
+            else:
+                characters[inputString[start]] = 0
+                start = end - replacements + 1
+            end += 1
+        
+        return maxLengthAfterReplace
+    
+
+    def MaxLengthAfterReplace(self, inputString, k):
+        return self.MaxLengthAfterReplaceV2(inputString, k)
 
 if __name__ == "__main__":
     solution = Solution()
