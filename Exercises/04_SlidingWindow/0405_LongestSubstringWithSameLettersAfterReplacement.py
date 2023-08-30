@@ -63,8 +63,10 @@ class Solution:
             if replacements <= k:
                 maxLengthAfterReplace = max(maxLengthAfterReplace, end - start + 1)
             else:
-                characters[inputString[start]] = 0
-                start = end - replacements + 1
+                c = inputString[start]
+                while inputString[start] == c:
+                    characters[c] -= 1
+                    start += 1
             end += 1
         
         return maxLengthAfterReplace
@@ -87,5 +89,19 @@ if __name__ == "__main__":
     inputString = "abbcb"
     k = 1  
     expectedOutput = 4
+    output = solution.MaxLengthAfterReplace(inputString, k)
+    print(output, expectedOutput, output == expectedOutput)
+
+    # Example 3
+    inputString = "abababab"
+    k = 1
+    expectedOutput = 3
+    output = solution.MaxLengthAfterReplace(inputString, k)
+    print(output, expectedOutput, output == expectedOutput)
+
+    # Example 4
+    inputString = "aabbaabbaabb"
+    k = 2
+    expectedOutput = 6
     output = solution.MaxLengthAfterReplace(inputString, k)
     print(output, expectedOutput, output == expectedOutput)
