@@ -22,8 +22,24 @@ class Solution:
     # Solution complexity:
     # Time complexity: 
     # Space complexity: 
-    def foo(self, inputString, k):
-        pass
+    def MaxLengthAfterReplace(self, inputString, k):
+        maxLengthAfterReplace = 0
+        start = 0
+        end = 0
+        
+        while end < len(inputString):
+            if self.potentialReplacements(inputString[start: end + 1]) <= k:
+                maxLengthAfterReplace = max(maxLengthAfterReplace, end - start + 1)
+            else:
+                c = inputString[start]
+                while inputString[start] == c:
+                    start += 1            
+            end += 1
+        
+        return maxLengthAfterReplace
+
+    def potentialReplacements(self, substring):
+        return len([i for i in substring if i != substring[0]])
 
 if __name__ == "__main__":
     solution = Solution()
@@ -32,12 +48,12 @@ if __name__ == "__main__":
     inputString = "aabccbb"
     k = 2  
     expectedOutput = 5
-    output = solution.foo(inputString, k)
+    output = solution.MaxLengthAfterReplace(inputString, k)
     print(output, expectedOutput, output == expectedOutput)
     
     # Example 2
     inputString = "abbcb"
     k = 1  
     expectedOutput = 4
-    output = solution.foo(inputString, k)
+    output = solution.MaxLengthAfterReplace(inputString, k)
     print(output, expectedOutput, output == expectedOutput)
