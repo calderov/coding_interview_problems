@@ -87,7 +87,7 @@ class Solution:
             if sorted(substring) == pattern:
                 return True
             
-            # Otherwise, move the sliding window one item to the right
+            # Move the sliding window one item to the right
             start += 1
             end += 1
 
