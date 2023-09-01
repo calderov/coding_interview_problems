@@ -105,3 +105,11 @@ def FindMaxSumSubarray(nums, k):
 
     return maxWindowSum
 ```
+
+## Merge intervals
+
+### Check if two intervals overlap
+```python
+def IsOverlap(intervalA, intervalB):
+    return intervalA[1] > intervalB[0] and intervalB[1] > intervalA[0]
+```
