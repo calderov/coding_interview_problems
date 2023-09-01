@@ -17,7 +17,29 @@
 #   Intervals: [[1,4], [2,6], [3,5]]
 #   Output: [[1,6]]
 #   Explanation: Since all the given intervals overlap, we merged them into one.
-  # 
+#
+
+class Interval:
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+
+    def toPair(self):
+        return [self.start, self.end]
+
+    @staticmethod
+    def ListOfIntervals(listOfPairs):
+        intervals = []
+        for pair in listOfPairs:
+            intervals.append(Interval(pair[0], pair[1]))
+        return intervals
+
+    @staticmethod
+    def ListOfPairs(intervals):
+        listOfPairs = []
+        for interval in intervals:
+            listOfPairs.append([interval.start, interval.end])
+        return listOfPairs
 
 class Solution:
     # Solution:
@@ -38,14 +60,14 @@ class Solution:
     
     #        Otherwise, append the interval to the mergedIntervals list and go back to step 3.
     #
-    # 3. Return mergedIntervals.
+    # 4. Return mergedIntervals.
     #
     # Solution complexity:
-    # Time complexity: O(n)
+    # Time complexity: O(n log(n)) where n is the number of intervals in the list
     # Space complexity: O(1)
     def MergeIntervalsList(self, intervals):
         mergedIntervals = []
-        intervals.sort()
+        intervals.sort(key=lambda x: x.start)
 
         for interval in intervals:
             if not mergedIntervals or not self.IsOverlap(mergedIntervals[-1], interval):
@@ -56,30 +78,38 @@ class Solution:
         return mergedIntervals
 
     def Merge(self, intervalA, intervalB):
-        start = min(intervalA[0], intervalB[0])
-        end = max(intervalA[1], intervalB[1])
-        return [start, end]
+        start = min(intervalA.start, intervalB.start)
+        end = max(intervalA.end, intervalB.end)
+        return Interval(start, end)
 
     def IsOverlap(self, intervalA, intervalB):
-        return intervalA[1] > intervalB[0] and intervalB[1] > intervalA[0]
+        return not (intervalA.end < intervalB.start or intervalB.end < intervalA.start)
 
 if __name__ == "__main__":
     solution = Solution()
+    ListOfPairs = Interval.ListOfPairs;
+    ListOfIntervals = Interval.ListOfIntervals;
     
     # Example 1
     intervals = [[1,4], [2,5], [7,9]]
     expectedOutput = [[1,5], [7,9]]
-    output = solution.MergeIntervalsList(intervals)
+    output = ListOfPairs(solution.MergeIntervalsList(ListOfIntervals(intervals)))
     print(output, expectedOutput, output == expectedOutput)
 
-    # Example 2
+    # # Example 2
     intervals = [[6,7], [2,4], [5,9]]
     expectedOutput = [[2,4], [5,9]]
-    output = solution.MergeIntervalsList(intervals)
+    output = ListOfPairs(solution.MergeIntervalsList(ListOfIntervals(intervals)))
     print(output, expectedOutput, output == expectedOutput)
 
     # Example 3
     intervals = [[1,4], [2,6], [3,5]]
     expectedOutput = [[1,6]]
-    output = solution.MergeIntervalsList(intervals)
+    output = ListOfPairs(solution.MergeIntervalsList(ListOfIntervals(intervals)))
+    print(output, expectedOutput, output == expectedOutput)
+
+    # Example 4
+    intervals = [[1,2], [2,3], [3,4], [4,5]]
+    expectedOutput = [[1, 5]]
+    output = ListOfPairs(solution.MergeIntervalsList(ListOfIntervals(intervals)))
     print(output, expectedOutput, output == expectedOutput)
