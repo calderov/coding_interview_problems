@@ -48,10 +48,27 @@ class Interval:
 
 class Solution:
     # Solution:
-    # 
+    # 1. Insert the new interval into the intervals list just after the last interval that starts before it.
+    #
+    # 2. Initialize a list to store the merged intervals.
+    #      mergedIntervals = []
+    #
+    # 3. For each interval in the intervals list:
+    #    3. 1 Check if the mergedIntervals list is empty, if it is add the interval to it.
+    #         and go back to step 3.
+    #
+    #    3.2 Check if the interval overlaps with the last element of the mergedIntervals list.
+    #        If so, replace the last item of the mergedIntervals list with the merge of
+    #        it and the current interval:
+    #           mergedIntervals[-1] = merge(mergedIntervals[-1], interval)
+    #
+    #        Otherwise, append the interval to the mergedIntervals list and go back to step 3.
+    #
+    # 4. Return mergedIntervals.
+    #
     # Solution complexity:
-    # Time complexity: 
-    # Space complexity: 
+    # Time complexity: O(n)
+    # Space complexity: O(1)
     def InsertInterval(self, intervals, newInterval):
         for i in range(len(intervals)):
             if newInterval.start < intervals[i].start:
