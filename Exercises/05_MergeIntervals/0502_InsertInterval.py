@@ -68,7 +68,7 @@ class Solution:
     #
     # Solution complexity:
     # Time complexity: O(n)
-    # Space complexity: O(1)
+    # Space complexity: O(n) as the merged intervals list can have as many items as the orginal intervals list
     def InsertInterval(self, intervals, newInterval):
         for i in range(len(intervals)):
             if newInterval.start < intervals[i].start:
@@ -93,7 +93,7 @@ class Solution:
         return mergedIntervals
 
     def IsOverlap(self, intervalA, intervalB):
-        return intervalA.start < intervalB.end and intervalA.end > intervalB.start
+        return not (intervalA.end < intervalB.start or intervalB.end < intervalA.start)
 
     def Merge(self, intervalA, intervalB):
         start = min(intervalA.start, intervalB.start)
@@ -130,6 +130,16 @@ if __name__ == "__main__":
     intervals = [[2,3],[5,7]]
     newInterval = [1,4]
     expectedOutput = [[1,4], [5,7]]
+    output = ListOfPairs(solution.InsertInterval(ListOfIntervals(intervals), ToInterval(newInterval)))
+    print(output)
+    print(expectedOutput)
+    print(output == expectedOutput)
+    print()
+
+    # Example 4
+    intervals = [[1,2], [3,4], [5,6]]
+    newInterval = [2,5]
+    expectedOutput = [[1,6]]
     output = ListOfPairs(solution.InsertInterval(ListOfIntervals(intervals), ToInterval(newInterval)))
     print(output)
     print(expectedOutput)

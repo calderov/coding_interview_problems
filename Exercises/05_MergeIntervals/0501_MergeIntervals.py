@@ -64,7 +64,7 @@ class Solution:
     #
     # Solution complexity:
     # Time complexity: O(n log(n)) where n is the number of intervals in the list
-    # Space complexity: O(1)
+    # Space complexity: O(n) as the merged intervals list can have as many items as the orginal intervals list
     def MergeIntervalsList(self, intervals):
         mergedIntervals = []
         intervals.sort(key=lambda x: x.start)
