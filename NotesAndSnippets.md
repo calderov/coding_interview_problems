@@ -112,7 +112,7 @@ def FindMaxSumSubarray(nums, k):
 ```python
 # Use this when you want [1, 2], [2, 3] to be considered disjoint
 def IsOverlap(intervalA, intervalB):
-    return intervalA[0] < intervalB[1] and intervalA[1] > intervalB[0]
+    return intervalA.start < intervalB.end and intervalA.end > intervalB.start
 
 # Use this when you want [1, 2], [2, 3] to be considered overlapping
 def IsOverlap(self, intervalA, intervalB):
