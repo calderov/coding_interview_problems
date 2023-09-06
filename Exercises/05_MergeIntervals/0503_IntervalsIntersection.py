@@ -36,11 +36,13 @@ class Interval:
 
 class Solution:
     # Solution:
+    # Brute force, compare all intervals in the first and second list and
+    # create a third list with the intersections.
     # 
     # Solution complexity:
-    # Time complexity: 
-    # Space complexity: 
-    def IntervalsIntersections(self, intervals1, intervals2):
+    # Time complexity: O(n * m)
+    # Space complexity: O(n)
+    def IntervalsIntersectionsV1(self, intervals1, intervals2):
         intersectionList = []
 
         for i in range(len(intervals1)):
@@ -50,6 +52,33 @@ class Solution:
                     intersectionList.append(intersection)
         
         return intersectionList
+    
+    # Solution:
+    # Iterate through both lists together to see if any two intervals overlap. 
+    # If so intervals overlap, insert the overlapped part into a result list 
+    # and move on to the next interval which is finishing early.
+    # 
+    # Solution complexity:
+    # Time complexity: O(n + m)
+    # Space complexity: O(n)
+    def IntervalsIntersectionsV2(self, intervals1, intervals2):
+        intersectionList = []
+
+        i = 0
+        j = 0
+        while i < len(intervals1) and j < len(intervals2):
+            if self.IsOverlap(intervals1[i], intervals2[j]):
+                intersectionList.append(self.Intersection(intervals1[i], intervals2[j]))
+            
+            if intervals1[i].end < intervals2[j].end:
+                i += 1
+            else:
+                j += 1
+                
+        return intersectionList
+    
+    def IntervalsIntersections(self, intervals1, intervals2):
+        return self.IntervalsIntersectionsV2(intervals1, intervals2)
     
     def Intersection(self, intervalA, intervalB):
         if self.IsOverlap(intervalA, intervalB):
