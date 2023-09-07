@@ -84,7 +84,7 @@ class Solution:
         for meeting in meetings:
             # Remove previous meetings from the heap (those which finished
             # before the current meeting started) 
-            while minHeap and meeting.start >= minHeap[0].end:
+            while minHeap and minHeap[0].end <= meeting.start:
                 heappop(minHeap)
             
             # Push the meeting to the heap
