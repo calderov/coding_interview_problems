@@ -29,10 +29,10 @@
 from heapq import *
 
 class Job:
-    def __init__(self, start, end, cpuload):
+    def __init__(self, start, end, cpuLoad):
         self.start = start
         self.end = end
-        self.cpuload = cpuload
+        self.cpuLoad = cpuLoad
 
     @staticmethod
     def ListOfJobs(listOfTriplets):
@@ -83,7 +83,7 @@ class Solution:
 
             # Update the max CPU load by comparing its stored value with the
             # sum of cpu load values of those jobs present in the min heap
-            maxCPULoad = max(maxCPULoad, sum([i.cpuload for i in minHeap]))
+            maxCPULoad = max(maxCPULoad, sum([i.cpuLoad for i in minHeap]))
         
         # Return the max cpu load
         return maxCPULoad
