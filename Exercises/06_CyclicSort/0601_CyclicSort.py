@@ -52,8 +52,8 @@ class Solution:
     # 7. Finally, return the sorted nums array.
 
     # Solution complexity:
-    # Time complexity: 
-    # Space complexity: 
+    # Time complexity: O(n)
+    # Space complexity: O(1) 
     def SortInPlace(self, nums):
         i = 0
         while i < len(nums):
