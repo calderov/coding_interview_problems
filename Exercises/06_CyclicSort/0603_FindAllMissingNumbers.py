@@ -66,7 +66,7 @@ class Solution:
         # Traverse the input list (now semi-sorted)
         # finding missing numbers (those where nums[i] != i + 1).
         # When found, append them to the missing numbers list
-        for i in range(1, len(nums)):
+        for i in range(len(nums)):
             if nums[i] != i + 1:
                 missingNumbers.append(i + 1)
         
@@ -121,3 +121,10 @@ if __name__ == "__main__":
     expectedOutput = []
     output = solution.FindMissingNumbers(nums)
     print(output, expectedOutput, output == expectedOutput)
+    
+    # Example 6
+    nums = [3, 3, 3, 3, 3]
+    expectedOutput = [1, 2, 4, 5]
+    output = solution.FindMissingNumbers(nums)
+    print(output, expectedOutput, output == expectedOutput)
+    
