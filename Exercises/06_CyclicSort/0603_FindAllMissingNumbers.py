@@ -40,11 +40,44 @@ class Solution:
         return list(set([i for i in range(1, len(nums) + 1)]).difference(set(nums)))
     
     # Solution:
-    # 
+    # 1. Use cyclic sort to place the elements of the input array nums in their
+    #    proper place, or duplicate elements in the place of the missing ones.
+    #
+    # 2. Initialize a list of missing numbers.
+    #      missingNumbers = []
+    #
+    # 3. Traverse the input list (now semi-sorted) finding missing numbers (those
+    #    where nums[i] != i + 1). When found, append them to the missing numbers
+    #    list.
+    #
+    # 4. Return the list of missing numbers.
+    #
     # Solution complexity:
     # Time complexity: O(n)
     # Space complexity: O(n)
     def FindMissingNumbersV2(self, nums):
+        # Use cyclic sort to place all elements in their correct place and
+        # duplicates in the place of missing values
+        self.cyclicSort(nums)
+        
+        # Initialize a list of missing numbers
+        missingNumbers = []
+
+        # Traverse the input list (now semi-sorted)
+        # finding missing numbers (those where nums[i] != i + 1).
+        # When found, append them to the missing numbers list
+        for i in range(1, len(nums)):
+            if nums[i] != i + 1:
+                missingNumbers.append(i + 1)
+        
+        # Return the list of missing numbers
+        return missingNumbers
+
+    # Given an array of n numbers in the range 1 to n (inclusive) sorts the array
+    # in linear time. If the array contains duplicates and by extension is missing
+    # items from the range, this algorithm places the duplicates in the places that
+    # would correspond to the missing numbers.
+    def cyclicSort(self, nums):
         i = 0
         while i < len(nums):
             if nums[i] == nums[nums[i] - 1]:
@@ -52,13 +85,6 @@ class Solution:
                 continue
             j = nums[i] - 1
             nums[i], nums[j] = nums[j], nums[i]
-
-        missingNumbers = []
-        for i in range(1, len(nums)):
-            if nums[i] != i + 1:
-                missingNumbers.append(i + 1)
-        
-        return missingNumbers
 
     def FindMissingNumbers(self, nums):
         return self.FindMissingNumbersV2(nums)
