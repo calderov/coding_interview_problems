@@ -6,20 +6,16 @@
 # times. Find that duplicate number without using any extra space. You are,
 # however, allowed to modify the input array.
 # 
-# Example 1:
+# Examples:
 # 
-# Input: [1, 4, 4, 3, 2]
-# Output: 4
+#   Input: [1, 4, 4, 3, 2]
+#   Output: 4
 # 
-# Example 2:
+#   Input: [2, 1, 3, 3, 5, 4]
+#   Output: 3
 # 
-# Input: [2, 1, 3, 3, 5, 4]
-# Output: 3
-# 
-# Example 3:
-# 
-# Input: [2, 4, 1, 4, 4]
-# Output: 4
+#   Input: [2, 4, 1, 4, 4]
+#   Output: 4
 # 
 
 class Solution:
