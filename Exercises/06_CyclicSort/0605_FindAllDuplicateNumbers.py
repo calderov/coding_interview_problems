@@ -17,9 +17,9 @@
 class Solution:
     # Solution:
     # 1. Sort the nums array using cyclic sort, this will place all the
-    # duplicates in the place where the missing numbers from the 
-    # range 1 to n should be.
-    # 
+    # items in their correct place and the duplicates  where the missing
+    # numbers from the  range 1 to n should be.
+    #
     # 2. Initialize a list of duplicates.
     #      dupes = []
     # 
