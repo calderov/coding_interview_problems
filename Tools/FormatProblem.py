@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 import clipboard
 
 def format_text_to_python_comment_of_80_cols(text):
