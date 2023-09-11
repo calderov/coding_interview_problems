@@ -41,13 +41,21 @@ class Solution:
         return i
     
     # Solution:
+    # 1. Sort the numbers with a version of cyclic sort that acconts for
+    #    numbers outside the the range [1, n]. Skip zeros or numbers k > n
+    #    this will push them to the end of the array (as the correct numbers
+    #    are put in place).
+    #
+    # 2. Traverse the array until you find the first item out of place.
     # 
+    # 3. Return the expected value for that position.
+    #
     # Solution complexity:
     # Time complexity: O(n log(n))
     # Space complexity: O(1)
     def FindSmallestMissingPositiveNumberV2(self, nums):
         self.CyclicSortExtended(nums)
-        
+
         for i in range(len(nums)):
             if nums[i] != i + 1:
                 return i + 1
