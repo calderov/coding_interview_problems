@@ -17,7 +17,7 @@
 #   Explanation: The smallest missing positive numbers are 1 and 2.
 
 class Solution:
-    # Solution:
+    # Solution 1:
     # 1. Remove the zero and duplicate values from the input array nums.
     #
     # 2. Sort the remaining values on nums (ascending).
@@ -46,7 +46,7 @@ class Solution:
     # Solution complexity:
     # Time complexity: O(n log(n))
     # Space complexity: O(n)
-    def FindKMissingNumbers(self, nums, k):
+    def FindKMissingNumbersV1(self, nums, k):
         # Remove negatives, duplicates and zero
         nums = list(set([i for i in nums if i > 0]))
 
@@ -71,6 +71,85 @@ class Solution:
 
         # Return missing numbesr array
         return missingNumbers
+    
+    # Solution 2:
+    # 1. Sort the array using the extended version of cyclic sort (that which handles
+    #    numbers outside the [1, n] range). This will put zeros, dupes and items not in [1, n]
+    #    in the place of missing items.
+    #
+    # 2. Initialize an empty array of missing numbers, an empty set of misplaced numbers and an index i = 0.
+    #      missingNumbers = []
+    #      misplaced = set()
+    #      i = 0
+    # 
+    # 3. While there are less than k numbers in the missing numbers array.
+    #    
+    #    3.1 If i < len(nums), check if the value at i is correct (nums[i] = i + 1). If not, then add the i + 1 to
+    #        the missing numbers array, and nums[i] to the misplaced set.
+    #    
+    #    3.2 If i >= len(nums), add i + 1 to the missing numbers array if i + 1 is not in the missplaced set.
+    #
+    #    3.3 Increment i by one and continue.
+    #
+    # 4. Return the missing numbers array and finish
+    #
+    # Solution complexity:
+    # Time complexity: O(n)
+    # Space complexity: O(n)
+    def FindKMissingNumbersV2(self, nums, k):
+        # Return early if k is less than 1
+        if k < 1:
+            return []
+
+        # Sort the array using the extended version of cyclic sort (that which handles
+        # numbers outside the [1, n] range)
+        self.CyclicSortExtended(nums)        
+        
+        # Initialize an empty array of missing numbers and an empty set of misplaced numbers
+        missingNumbers = []
+        misplaced = set()
+
+        i = 0
+        while len(missingNumbers) < k:
+            if i < len(nums):
+                # If the current value is out of place, add the index
+                # of such value to the missing numbers array, and the
+                # value to the misplaced set.
+                if nums[i] != i + 1:
+                    missingNumbers.append(i + 1)
+                    misplaced.add(nums[i])
+            else:
+                # Check if the subsequent values (those after the length of the input nums array)
+                # are also missing (not in)
+                if i + 1 not in misplaced:
+                    missingNumbers.append(i + 1)
+
+            i += 1
+
+        return missingNumbers
+    
+    def FindKMissingNumbers(self, nums,k):
+        return self.FindKMissingNumbersV2(nums, k)
+
+
+    # Given an array of n numbers in the range 1 to n (inclusive) sorts the array
+    # in linear time. If the array contains duplicates and by extension is missing
+    # items from the range, this algorithm places the duplicates in the places that
+    # would correspond to the missing numbers.
+    #
+    # This version of the algorithm allows numbers outside the [1, n] range (negatives, 
+    # zero and numbers greater than n).
+    #
+    # Time complexity: O(n)
+    # Space complexity: O(1)
+    def CyclicSortExtended(self, nums):
+        i = 0
+        while i < len(nums):
+            if nums[i] > 0 and nums[i] <= len(nums) and nums[i] != nums[nums[i] - 1]:
+                j = nums[i] - 1
+                nums[i], nums[j] = nums[j], nums[i] # swap
+                continue
+            i += 1
 
 if __name__ == "__main__":
     solution = Solution()
