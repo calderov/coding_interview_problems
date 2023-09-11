@@ -46,7 +46,7 @@ class Solution:
     # Time complexity: O(n log(n))
     # Space complexity: O(1)
     def FindSmallestMissingPositiveNumberV2(self, nums):
-        self.CyclicSort(nums)
+        self.CyclicSortExtended(nums)
         
         for i in range(len(nums)):
             if nums[i] != i + 1:
@@ -59,9 +59,12 @@ class Solution:
     # items from the range, this algorithm places the duplicates in the places that
     # would correspond to the missing numbers.
     #
+    # This version of the algorithm allows numbers outside the [1, n] range (negatives, 
+    # zero and numbers greater than n).
+    #
     # Time complexity: O(n)
     # Space complexity: O(1)
-    def CyclicSort(self, nums):
+    def CyclicSortExtended(self, nums):
         i = 0
         while i < len(nums):
             if nums[i] > 0 and nums[i] < len(nums) and nums[i] != nums[nums[i] - 1]:
