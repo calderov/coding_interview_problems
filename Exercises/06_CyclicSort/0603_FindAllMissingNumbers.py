@@ -77,14 +77,17 @@ class Solution:
     # in linear time. If the array contains duplicates and by extension is missing
     # items from the range, this algorithm places the duplicates in the places that
     # would correspond to the missing numbers.
+    #
+    # Time complexity: O(n)
+    # Space complexity: O(1)
     def cyclicSort(self, nums):
         i = 0
         while i < len(nums):
-            if nums[i] == nums[nums[i] - 1]:
-                i += 1
+            if nums[i] != nums[nums[i] - 1]:
+                j = nums[i] - 1
+                nums[i], nums[j] = nums[j], nums[i]
                 continue
-            j = nums[i] - 1
-            nums[i], nums[j] = nums[j], nums[i]
+            i += 1
 
     def FindMissingNumbers(self, nums):
         return self.FindMissingNumbersV2(nums)

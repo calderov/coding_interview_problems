@@ -37,6 +37,9 @@ class Solution:
     # in linear time. If the array contains duplicates and by extension is missing
     # items from the range, this algorithm places the duplicates in the places that
     # would correspond to the missing numbers.
+    #
+    # Time complexity: O(n)
+    # Space complexity: O(1)
     def cyclicSort(self, nums):
         i = 0
         while i < len(nums):

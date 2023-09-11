@@ -57,12 +57,11 @@ class Solution:
     def SortInPlace(self, nums):
         i = 0
         while i < len(nums):
-            if nums[i] == i + 1:
-                i += 1
+            if nums[i] != i + 1:
+                j = nums[i] - 1
+                nums[i], nums[j] = nums[j], nums[i] # swap
                 continue
-            temp = nums[i]
-            nums[i] = nums[nums[i] - 1]
-            nums[temp - 1] = temp
+            i += 1
         return nums
 
 if __name__ == "__main__":
