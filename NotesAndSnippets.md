@@ -119,3 +119,19 @@ def IsOverlap(self, intervalA, intervalB):
     return not (intervalA.end < intervalB.start or intervalB.end < intervalA.start)
 ```
 
+## Cyclic Sort
+### Cyclic sort example
+```python
+# Given an array of n numbers in the range 1 to n (inclusive) sorts the array
+# in linear time. If the array contains duplicates and by extension is missing
+# items from the range, this algorithm places the duplicates in the places that
+# would correspond to the missing numbers.
+def CyclicSort(nums):
+    i = 0
+    while i < len(nums):
+        if nums[i] != nums[nums[i] - 1]:
+            j = nums[i] - 1
+            nums[i], nums[j] = nums[j], nums[i]
+            continue
+        i += 1
+```
