@@ -52,13 +52,17 @@ def GetListCenter(self, head):
 
 ### Reverse a linked list
 ```python
-def Reverse(self, head):
+def Reverse(head):
+    node = head
     prevNode = None
-    while head is not None:
-        nextNode = head.next
-        head.next = prevNode
-        prevNode = head
-        head = nextNode
+    nextNode = None
+    
+    while node:
+        nextNode = node.next
+        node.next = prevNode
+        prevNode = node
+        node = nextNode
+    
     return prevNode
 ```
 
