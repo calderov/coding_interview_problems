@@ -45,12 +45,44 @@ def ToLinkedList(nums):
 
 class Solution:
     # Solution:
-    # 
+    # 1. Initialize three pointers, to track the current, previous and next nodes
+    #    when we traverse the input list.
+    #      node = head
+    #      prevNode = None
+    #      nextNode = None
+    #
+    # 2. While node is not null (None):
+    #    2.1 Store the next node after the current node in nextNode.
+    #        nextNode = node.next
+    #
+    #    2.2 Point the current node to the previous pointer.
+    #        node.next = prevNode
+    #
+    #    2.3 Store the current node in prevNode.
+    #        prevNode = node
+    #    
+    #    2.4 Move the current node to the next node.
+    #        node = nextNode
+    #
+    #
+    # 3. After the loop, prevNode points to the new head of the reversed list.
+    #    Return prevNode and finish.
+    #
     # Solution complexity:
-    # Time complexity: 
-    # Space complexity: 
+    # Time complexity: O(n)
+    # Space complexity: O(1)
     def ReverseLinkedList(self, head):
-        return head
+        node = head
+        prevNode = None
+        nextNode = None
+        
+        while node:
+            nextNode = node.next
+            node.next = prevNode
+            prevNode = node
+            node= nextNode
+
+        return prevNode
 
 if __name__ == "__main__":
     solution = Solution()
