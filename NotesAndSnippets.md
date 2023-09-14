@@ -46,14 +46,16 @@ def ToLinkedList(nums):
     tail = None
 
     for i in range(len(nums)):
-        if tail == None:
-            tail = Node(nums[i])
-            head = tail
+        node = Node(nums[i])
+
+        if head == None:
+            head = node
+            tail = head
+
         else:
-            node = Node(nums[i])
             tail.next = node
             tail = node
-
+        
     return head
 ```
 
