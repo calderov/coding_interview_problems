@@ -73,8 +73,8 @@ class Solution:
     # 5. Return the head of the list and finish.
     #
     # Solution complexity:
-    # Time complexity: 
-    # Space complexity: 
+    # Time complexity: O(n)
+    # Space complexity: O(1)
     def ReverseAlternatingKElementSublist(self, head, k):
         n = self.GetLength(head)
 
