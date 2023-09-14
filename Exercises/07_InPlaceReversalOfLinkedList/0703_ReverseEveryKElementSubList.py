@@ -65,7 +65,7 @@ class Solution:
     # 4. After the for loop of the previous step is finished, there is a chance
     #    our list is still missing one more reversal. That is, if the remainder
     #    of n / k is different from zero (n % k != 0) then reverse the sub-list
-    #    between n - k * (n // k) and n:
+    #    between k * (n // k) + 1 and n:
     #      p = k * (n // k) + 1
     #      q = n
     #      head = ReverseSublist(head, p, q)
