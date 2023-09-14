@@ -45,7 +45,7 @@ def ToLinkedList(nums):
     head = None
     tail = None
 
-    for i in range(len(nums)):
+    for num in nums:
         node = Node(nums[i])
 
         if head == None:
