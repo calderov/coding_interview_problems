@@ -107,14 +107,14 @@ class Solution:
         P = self.NodeAtIndex(head, p)
         Q = self.NodeAtIndex(head, q)
 
-        P_prev = self.FindPredecessor(head, P)
+        P_prev = self.NodeAtIndex(head, p - 1)
         Q_next = Q.next
 
         if P_prev == None:
             Q.next = None
 
             R_head = self.Reverse(head)
-            R_Tail = self.FindTail(R_head)
+            R_Tail = self.GetTail(R_head)
 
             head = R_head
             R_Tail.next = Q_next
@@ -125,7 +125,7 @@ class Solution:
             Q.next = None
 
             R_head = self.Reverse(P)
-            R_Tail = self.FindTail(R_head)
+            R_Tail = self.GetTail(R_head)
 
             P_prev.next = R_head
             R_Tail.next = Q_next
@@ -145,18 +145,11 @@ class Solution:
         
         return prevNode
     
-    def FindTail(self, head):
+    def GetTail(self, head):
         tail = head
         while tail.next:
             tail = tail.next
         return tail
-
-    def FindPredecessor(self, head, P):
-        while head:
-            if head.next == P:
-                break
-            head = head.next
-        return head
 
     def NodeAtIndex(self, head, index):
         if index <= 0 or not head:
