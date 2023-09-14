@@ -97,7 +97,7 @@ class Solution:
 
             # Reverse the list between P and Q
             R_head = self.Reverse(P)
-            R_tail = self.FindTail(R_head)
+            R_tail = self.GetTail(R_head)
 
             # Replace the head of the list with that of the reversed list
             # and attach the tail of the reversed list to the successor of Q
@@ -114,7 +114,7 @@ class Solution:
 
             # Reverse the list between P and Q
             R_head = self.Reverse(P)
-            R_tail = self.FindTail(R_head)
+            R_tail = self.GetTail(R_head)
 
             # Attach the predecessor of P to the head of the reversed list
             # and the tail of the reversed list to the successor of Q
@@ -141,7 +141,7 @@ class Solution:
 
         return head
 
-    def FindTail(self, head):
+    def GetTail(self, head):
         tail = head
         while tail.next:
             tail = tail.next
