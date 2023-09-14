@@ -39,6 +39,34 @@ class Node:
         self.next = next
 ```
 
+### Python list to linked list
+```python
+def ToLinkedList(nums):
+    head = None
+    tail = None
+
+    for i in range(len(nums)):
+        if tail == None:
+            tail = Node(nums[i])
+            head = tail
+        else:
+            node = Node(nums[i])
+            tail.next = node
+            tail = node
+
+    return head
+```
+
+### Linked list to Python list
+```python
+def ToPythonList(head):
+    nums = []
+    while head:
+        nums.append(head.val)
+        head = head.next
+    return nums
+```
+
 ### Find the center of a liked list
 ```python
 def GetListCenter(self, head):
