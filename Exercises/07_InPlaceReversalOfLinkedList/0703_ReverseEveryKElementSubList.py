@@ -48,6 +48,29 @@ def ToLinkedList(nums):
 
 class Solution:
     # Solution:
+    # 1. Let n be the length of the list.
+    #
+    # 2. Then n / k is the number of sub-lists of length k in the list.
+    #    Since there is the chance that n is not perfectly divisible by k,
+    #    lets handle this as a regular integer division n // k and address
+    #    the remainder later.
+    #
+    # 3. For each i in the range [0, n // k) compute two indexes p and q to
+    #    delimit the start and end of the sub-list we want to reverse. Then,
+    #    reverse the sub-list:
+    #      p = k * i * + 1
+    #      q = k * (i + 1)
+    #      head = ReverseSublist(head, p, q)
+    # 
+    # 4. After the for loop of the previous step is finished, there is a chance
+    #    our list is still missing one more reversal. That is, if the remainder
+    #    of n / k is different from zero (n % k != 0) then reverse the sub-list
+    #    between n - k * (n // k) and n:
+    #      p = k * (n // k) + 1
+    #      q = n
+    #      head = ReverseSublist(head, p, q)
+    #
+    # 5. Return the head of the list and finish.
     #
     # Solution complexity:
     # Time complexity: O(n)
@@ -55,22 +78,26 @@ class Solution:
     def ReverseEveryKElementSuList(self, head, k):
         n = self.GetLength(head)
 
-        # Reverse substrings of length k
+        # Reverse sub-lists of length k
         for i in range(n // k):
             p = k * i + 1
             q = k * (i + 1)
-            head = self.ReverseSubstring(head, p, q)
+            head = self.ReverseSublist(head, p, q)
 
-        # Reverse residual string (if any)
+        # Reverse residual sub-list (if any)
         if n % k != 0:
-            p = q + 1
+            p = k * (n // k) + 1
             q = n
-            head = self.ReverseSubstring(head, p, q)
+            head = self.ReverseSublist(head, p, q)
 
         return head
 
-    # For an explaination see 0702_ReverseSublist.py
-    def ReverseSubstring(self, head, p, q):
+    # Given a list and two indexes p and q, reverses the sub-list between
+    # p and q in place and returns the list.
+    #
+    # Time complexity: O(n)
+    # Space complexity: O
+    def ReverseSublist(self, head, p, q):
         P = self.NodeAtIndex(head, p)
         Q = self.NodeAtIndex(head, q)
 
