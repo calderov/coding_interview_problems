@@ -1,11 +1,11 @@
-# Problem: 
+# Problem:
 # Given an array of integers temperatures representing daily temperatures,
 # your task is to calculate how many days you have to wait until a warmer
 # temperature. If there is no future day for which this is possible, put 0
 # instead.
-# 
+#
 # Example:
-# 
+#
 #   Input: temperatures = [70, 73, 75, 71, 69, 72, 76, 73]
 #   Output: [1, 1, 4, 2, 1, 1, 0, 0]
 #
@@ -17,6 +17,9 @@
 
 class Solution:
     # Solution:
+    # Brute force. Compare the temperature of every day with that of all the subsequent days in the array.
+    # If a greater one is found, compute the distance in days between the greater temperature day and the
+    # current day, add it to the answer and continue.
     # 
     # Solution complexity:
     # Time complexity: O(n ^ 2)
@@ -29,13 +32,13 @@ class Solution:
                 if temperatures[j] > temperatures[i]:
                     count = j - i
                     break
-            
+
             days.append(count)
 
         return days
-    
+
     # Solution:
-    # 
+    #
     # Solution complexity:
     # Time complexity: O(n)
     # Space complexity: O(n)
@@ -66,7 +69,7 @@ if __name__ == "__main__":
     print(expectedOutput)
     print(output == expectedOutput)
     print()
-    
+
     # Example 1
     temperatures = [73, 72, 71, 70]
     expectedOutput = [0, 0, 0, 0]
@@ -75,7 +78,7 @@ if __name__ == "__main__":
     print(expectedOutput)
     print(output == expectedOutput)
     print()
-    
+
     # Example 1
     temperatures = [70, 71, 72, 73]
     expectedOutput = [1, 1, 1, 0]
