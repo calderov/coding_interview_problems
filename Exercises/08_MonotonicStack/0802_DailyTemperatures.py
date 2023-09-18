@@ -38,7 +38,22 @@ class Solution:
         return days
 
     # Solution:
-    #
+    # 1. Initialize an empty stack to store the indices of the temperatures
+    #    array. Also, initialize a result array of the same length as temperatures
+    #    with all values set to 0.
+    #   
+    # 2. Iterate over the temperatures array. For each temperature:
+    #   
+    # 3. While the stack is not empty and the current temperature is greater
+    #    than the temperature at the index on the top of the stack, set the value in
+    #    the result array at the top index of the stack to the difference between
+    #    the current index and the top index of the stack. Pop the index from the
+    #    stack.
+    # 
+    # 4. Push the current index onto the stack.
+    # 
+    # 6. Return the result array.
+    # 
     # Solution complexity:
     # Time complexity: O(n)
     # Space complexity: O(n)
