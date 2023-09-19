@@ -43,7 +43,7 @@ class Solution:
     # Solution complexity:
     # Time complexity: O(k * n)
     # Space complexity: O(n)
-    def foo(self, s, k):
+    def RemoveKDuplicates(self, s, k):
         stack = []
 
         for c in s:
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     s = "abbbaaca"
     k = 3
     expectedOutput = "ca"
-    output = solution.foo(s, k)
+    output = solution.RemoveKDuplicates(s, k)
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     s = "abbaccaa"
     k = 3
     expectedOutput = "abbaccaa"
-    output = solution.foo(s, k)
+    output = solution.RemoveKDuplicates(s, k)
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
@@ -92,7 +92,7 @@ if __name__ == "__main__":
     s = "abbacccaa"
     k = 3
     expectedOutput = "abb"
-    output = solution.foo(s, k)
+    output = solution.RemoveKDuplicates(s, k)
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
