@@ -66,7 +66,7 @@ class Solution:
             k -= 1
 
         # Remove leading zeros
-        while stack[0] == '0':
+        while stack and stack[0] == '0':
             stack.pop(0)
 
         # If stack is empty, return zero
