@@ -25,15 +25,29 @@
 
 class Solution:
     # Solution:
-    # 
+    # 1. Initialize an empty stack.
+    #    stack = []
+    #
+    # 2. For each character c in the input string s:
+    #
+    #    2.1 Push c into the stack.
+    #
+    #    2.1 If the size of the stack is greater or equal than k, check if the
+    #        last k elements of the stack are repetitions. If so, pop the stack
+    #        k times.
+    #
+    # 3. Merge the characters in the stack from bottom to top into an output string.
+    #
+    # 4. Return the output string and finish.
+    #
     # Solution complexity:
     # Time complexity: O(k * n)
     # Space complexity: O(n)
     def foo(self, s, k):
         stack = []
 
-        for i in range(len(s)):
-            stack.append(s[i])
+        for c in s:
+            stack.append(c)
             
             if stack and len(stack) >= k:
                 substack = stack[-k:]
