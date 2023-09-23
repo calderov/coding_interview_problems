@@ -24,10 +24,37 @@ class TreeNode:
 
 class Solution:
     # Solution:
+    # 1. Initialize a queue of items pending of traversal and an a list of levels
+    #    (this will be our result).
+    #      pending = []
+    #      levels = []
     # 
+    # 2. Push the root into the pending queue.
+    #
+    # 3. While there are pending items in the queue: 
+    #    3.1 Initialize an empty list to hold the items in the current level.
+    #          currentLevel = []
+    #
+    #    3.2 Count the elements in the queue and save the count to a variable
+    #          levelSize = len(pending)
+    #
+    #    3.3 Remove levelSize nodes from the queue and push them into the
+    #        list representing the current level.
+    #
+    #    3.4 For each element in the current level list, insert both of its
+    #        children into the pending queue.
+    #
+    #    3.5 Insert the currentLevel into the levels list, and repeat step 3
+    #        if there are still items in the pending queue.
+    #
+    # 4. Now that the levels list contains all of the elements in the tree grouped by level,
+    #    compute average value on each level and place it in a new list. Return this list
+    #    of average values and finish.
+    #       return [sum(i) / len(i) for i in levels]
+    #
     # Solution complexity:
-    # Time complexity: 
-    # Space complexity: 
+    # Time complexity: O(n)
+    # Space complexity: O(n)
     def LevelAverages(self, root):
         levels = []
         pending = [root]
