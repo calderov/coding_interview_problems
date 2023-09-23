@@ -32,6 +32,10 @@ class Solution:
     #      pending = []
     #      levels = []
     # 
+    # 2. Initialize a variable to keep track if a given level shold be stored from
+    #    left to right.
+    #      leftToRight = True
+    #
     # 2. Push the root into the pending queue.
     #
     # 3. While there are pending items in the queue: 
@@ -42,13 +46,17 @@ class Solution:
     #          levelSize = len(pending)
     #
     #    3.3 Remove levelSize nodes from the queue and push them into the
-    #        list representing the current level.
+    #        list representing the current level. Do this from left to right
+    #        if leftToRight is True or from right to left if not.
     #
     #    3.4 For each element in the current level list, insert both of its
     #        children into the pending queue.
     #
-    #    3.5 Insert the currentLevel at the beginning of the levels list, 
-    #        and repeat step 3 if there are still items in the pending queue.
+    #    3.5 Append the currentLevel at the end of the levels list.
+    #
+    #    3.6 Negate the current value of leftToRight and repeat step 3 if there
+    #        are still items in the pending queue.
+    #          leftToRight = not leftToRight
     #
     # 4. Return the levels list and finish.
     #
@@ -59,7 +67,7 @@ class Solution:
         levels = []
         pending = [root]
         
-        leftToRight = 1
+        leftToRight = True
         
         while pending:
             levelSize = len(pending)
@@ -72,7 +80,7 @@ class Solution:
                     pending.append(node.left)
                     pending.append(node.right)
 
-                    if leftToRight > 0:
+                    if leftToRight:
                         currentLevel.append(node.val)
                     else:
                         currentLevel.insert(0, node.val)
@@ -80,7 +88,7 @@ class Solution:
             if currentLevel:
                 levels.append(currentLevel)
 
-            leftToRight *= -1
+            leftToRight = not leftToRight
         
         return levels
 
