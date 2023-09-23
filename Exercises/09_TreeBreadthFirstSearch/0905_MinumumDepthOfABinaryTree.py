@@ -29,10 +29,38 @@ class TreeNode:
 
 class Solution:
     # Solution:
+    # 1. Initialize a queue of items pending of traversal, a list of levels, and a
+    #    variable to track if a leaf node has been found.
+    #    (this will be our result).
+    #      pending = []
+    #      levels = []
+    #      isLeaf = False
     # 
+    # 2. Push the root into the pending queue.
+    #
+    # 3. While there are pending items in the queue and no leaf has been found: 
+    #    3.1 Initialize an empty list to hold the items in the current level.
+    #          currentLevel = []
+    #
+    #    3.2 Count the elements in the queue and save the count to a variable
+    #          levelSize = len(pending)
+    #
+    #    3.3 Remove levelSize nodes from the queue and push them into the
+    #        list representing the current level. Also, check if any of them
+    #        is a leaf node, if so, set isLeaf to True.
+    #
+    #    3.4 For each element in the current level list, insert both of its
+    #        children into the pending queue.
+    #
+    #    3.5 Insert the currentLevel into the levels list, and repeat step 3
+    #        if there are still items in the pending queue and if isLeaf is
+    #        equal to False.
+    #
+    # 4. Return the length of the levels list.
+    #
     # Solution complexity:
-    # Time complexity: 
-    # Space complexity: 
+    # Time complexity: O(n)
+    # Space complexity: O(n)
     def MinimumDepth(self, root):
         levels = []
         pending = [root]
