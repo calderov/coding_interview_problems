@@ -27,6 +27,15 @@ class TreeNode:
 
 class Solution:
     # Solution:
+    # Initialize a flag variable isValueFound to False. Then, use BFS to traverse 
+    # the tree level by level. 
+    # 
+    # For each node in the traversal:
+    #  - Check if the flag variable isValueFound is True and return the current node if that's the case. 
+    #  - Otherwise, check if the node node matches the given value k. If so, set isValueFound to True. 
+    #    This will return the next node in traversal in the next interation.
+    #
+    # If all the nodes were traversed and the none of them matched with the given value k, return None.
     # 
     # Solution complexity:
     # Time complexity: 
