@@ -31,10 +31,14 @@ class TreeNode:
 
 class Solution:
     # Solution:
-    # 
+    # Use a DFS approach and check if a given node is a leaf and if its value is equal to
+    # a given target. If that's the case, return True. Otherwise, recursively call this method
+    # again, passing the left and right neighbors of the node as input and the value of the
+    # current node substracted from the target value, as the new target value.
+    #  
     # Solution complexity:
-    # Time complexity: 
-    # Space complexity: 
+    # Time complexity: O(n) as each element is explored only once
+    # Space complexity: O(n)
     def FindSumDFS(self, root, targetSum):
         if not root:
             return False
