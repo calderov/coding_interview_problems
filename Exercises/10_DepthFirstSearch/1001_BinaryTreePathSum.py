@@ -4,7 +4,7 @@
 # S.
 #
 # Example:
-# 
+#
 #   Input:
 #             ┌─┐
 #        ┌────┤1├────┐
@@ -15,12 +15,12 @@
 #    ┌┴┐   ┌┴┐   ┌┴┐   ┌┴┐
 #    │4│   │5│   │6│   │7│
 #    └─┘   └─┘   └─┘   └─┘
-# 
+#
 #   S = 10
-# 
+#
 # Output: True
 # Explication: 1 + 3 + 6 = 10
-# 
+#
 
 class TreeNode:
     def __init__(self, value):
@@ -35,17 +35,17 @@ class Solution:
     # a given target. If that's the case, return True. Otherwise, recursively call this method
     # again, passing the left and right neighbors of the node as input and the value of the
     # current node substracted from the target value, as the new target value.
-    #  
+    #
     # Solution complexity:
     # Time complexity: O(n) as each element is explored only once
     # Space complexity: O(n)
     def FindSumDFS(self, root, targetSum):
         if not root:
             return False
-        
+
         if root.val == targetSum and not root.left and not root.right:
             return True
-        
+
         return self.FindSumDFS(root.left, targetSum - root.val) or self.FindSumDFS(root.right, targetSum - root.val)
 
 if __name__ == "__main__":
@@ -59,8 +59,8 @@ if __name__ == "__main__":
     tree.left.right = TreeNode(5)
     tree.right.left = TreeNode(6)
     tree.right.right = TreeNode(7)
-    
-    s = 10 
+
+    s = 10
 
     expectedOutput = True
     output = solution.FindSumDFS(tree, s)
