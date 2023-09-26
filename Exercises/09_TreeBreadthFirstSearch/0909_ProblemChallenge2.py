@@ -26,6 +26,8 @@ class TreeNode:
 
 class Solution:
     # Solution:
+    # Traverse the tree using BFS saving the last node of each level into an array.
+    # This array is our expected result.
     # 
     # Solution complexity:
     # Time complexity: O(n)
