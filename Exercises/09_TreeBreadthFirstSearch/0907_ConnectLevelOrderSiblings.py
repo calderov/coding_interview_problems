@@ -23,10 +23,12 @@ class TreeNode:
 
 class Solution:
     # Solution:
+    # Traverse the tree using BFS. On each level, remember the previous node to
+    # connect it with the current node.
     #
     # Solution complexity:
     # Time complexity: O(n)
-    # Space complexity: O(1)
+    # Space complexity: O(n)
     def ConnectLevelOrderSiblings(self, root: TreeNode):
         if not root:
             return
