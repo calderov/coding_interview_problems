@@ -40,11 +40,10 @@ class Solution:
             for _ in range(levelSize):
                 node = pending.pop(0)
 
-                if node:
-                    if node.left: pending.append(node.left)
-                    if node.right: pending.append(node.right)
-                    if prevNode: prevNode.next = node
-                    prevNode = node
+                if node.left: pending.append(node.left)
+                if node.right: pending.append(node.right)
+                if prevNode: prevNode.next = node
+                prevNode = node
 
         return root
 
