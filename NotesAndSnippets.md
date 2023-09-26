@@ -4,6 +4,8 @@
 PENDING
 
 ## Searches and traversals
+# A note on BFS and DFS
+The implementation of BFS and DFS is quite simmilar, their main difference is their underliying data structure. DFS uses a stack to keep track of pending states and BFS uses a queue.
 
 ### Depth-First Search (iterative)
 ```python
