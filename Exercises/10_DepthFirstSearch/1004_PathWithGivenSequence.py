@@ -29,12 +29,17 @@ class TreeNode:
 
 class Solution:
     # Solution:
+    # Use DFS to traverse the tree, tracking the element of the given sequence
+    # that should match with the current node. Returning False as soon as mismatch
+    # is found. If the algorithm ends up finding a leaf that matches the last element
+    # on the sequence, then the whole sequence is known to be in the tree. Return True
+    # in this case.
     #
     # Solution complexity:
     # Time complexity: O(n log(n))
     # Space complexity: O(n log(n))
     def IsSequenceInTree(self, node, sequence, index=0):
-        if not node or index >= len(sequence):
+        if not node or index >= len(sequence) or sequence[index] != node.val:
             return False
         
         if index == len(sequence) - 1 and not node.left and not node.right and node.val == sequence[index]:
@@ -56,5 +61,12 @@ if __name__ == "__main__":
     sequence = [1, 9, 9]
 
     expectedOutput = True
+    output = solution.IsSequenceInTree(tree, sequence)
+    print(output, expectedOutput, output == expectedOutput)
+
+    # Example 2
+    sequence = [1, 9, 3]
+
+    expectedOutput = False
     output = solution.IsSequenceInTree(tree, sequence)
     print(output, expectedOutput, output == expectedOutput)
