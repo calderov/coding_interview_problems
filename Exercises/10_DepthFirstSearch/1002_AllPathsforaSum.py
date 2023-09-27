@@ -25,7 +25,6 @@ class TreeNode:
         self.val = value
         self.left = None
         self.right = None
-        self.next = None
 
 class Solution:
     # Solution:
