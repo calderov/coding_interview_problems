@@ -6,7 +6,6 @@
 # doesn’t necessarily pass through the root. The path must contain at least
 # one node.
 #
-#
 # Example:
 #
 #   Input:
@@ -30,6 +29,8 @@
 #   Explanation: 10 + 8 + 5 + 3 + 6 + 9 + 11 = 52
 #
 
+import math
+
 class TreeNode:
     def __init__(self, value):
         self.val = value
@@ -42,19 +43,22 @@ class Solution:
     # Time complexity: O(n log(n))
     # Space complexity: O(n)
     def MaximumPathSum(self, root):
-        maxSumResult = [0]
-        self.ComputeMaximumPathSum(root, maxSumResult)
-        return maxSumResult[0]
+        self.maxSumResult = -math.inf
+        self.ComputeMaximumPathSum(root)
+        return self.maxSumResult
 
-    def ComputeMaximumPathSum(self, node, maxSumResult):
+    def ComputeMaximumPathSum(self, node):
         if not node:
             return 0
 
-        leftSum = self.ComputeMaximumPathSum(node.left, maxSumResult)
-        rightSum = self.ComputeMaximumPathSum(node.right, maxSumResult)
+        leftSum = self.ComputeMaximumPathSum(node.left)
+        rightSum = self.ComputeMaximumPathSum(node.right)
 
-        if leftSum and rightSum:
-            maxSumResult[0] = max(maxSumResult[0], leftSum + rightSum + node.val)
+        # Ignore paths with negative sums
+        leftSum = max(leftSum, 0)
+        rightSum = max(rightSum, 0)
+
+        self.maxSumResult = max(self.maxSumResult, leftSum + rightSum + node.val)
 
         return max(leftSum, rightSum) + node.val
 
@@ -74,6 +78,15 @@ if __name__ == "__main__":
     tree.right.right.right.right = TreeNode(11)
 
     expectedOutput = 52
+    output = solution.MaximumPathSum(tree)
+    
+    print(output, expectedOutput, output == expectedOutput)
+
+    # Example 2
+    tree = TreeNode(-1)
+    tree.left = TreeNode(-3)
+
+    expectedOutput = -1
     output = solution.MaximumPathSum(tree)
     
     print(output, expectedOutput, output == expectedOutput)
