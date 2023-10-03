@@ -42,7 +42,7 @@ from heapq import *
 #
 # From the example we can notice a couple of things. First, notice how the numbers in the
 # small numbers heap are now negative. This was made on purpose so we can reuse the code
-# for handling min-heaps to simulate the max-heap that we need. Just remember that whenever
+# for handling min-heaps to simulate the behavior of a max-heap. Just remember that whenever
 # a value needs to be inserted to self.smallNumbers it needs to be multiplied by -1 first, the
 # same goes for numbers retrieved from it, they need to be multiplied by -1 to restore their
 # original value.
@@ -50,7 +50,7 @@ from heapq import *
 # The second thing to notice is how self.smallNumbers is a bit longer than self.largeNumbers.
 # This is because the total amount of numbers is odd, so by convention we place the additional
 # number into self.smallNumbers when this is the case. The idea is that both heaps have roughly
-# the same amount of numbers, differing for at most one number, in which case it will always be
+# the same amount of numbers, differing by at most one number, in which case it will always be
 # placed in self.smallNumbers.
 #
 # Insertion:
@@ -70,7 +70,7 @@ from heapq import *
 #
 # Find median:
 # The inner balance between the heaps of large and small numbers make the procedure to find
-# the median, quite easy.
+# the median quite easy.
 # 
 # If the small numbers heap and the large numbers heap are the same size, the median will
 # be the average between the largest number in the small numbers heap and the smallest number
