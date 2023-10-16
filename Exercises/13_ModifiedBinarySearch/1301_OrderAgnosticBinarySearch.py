@@ -58,8 +58,8 @@ class Solution:
     #    array. If this is the case, return -1 and finish.
     # 
     # Solution complexity:
-    # Time complexity: 
-    # Space complexity: 
+    # Time complexity: O(log(n))
+    # Space complexity: O(1)
     def BinarySearch(self, nums, key):
         if not nums:
             return -1
