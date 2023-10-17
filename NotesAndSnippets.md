@@ -174,3 +174,25 @@ def CyclicSort(nums):
             continue
         i += 1
 ```
+
+## Binary search
+### Binary search example (assuming input array is sorted in ascending order)
+```python
+def BinarySearch(nums, key):
+    left = 0
+    right = len(nums) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if nums[mid] == key:
+            return mid
+        
+        if nums[mid] < key:
+            left = mid + 1
+
+        else: # nums[mid] > key
+            right = mid - 1
+    
+    return -1
+```
