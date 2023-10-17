@@ -20,7 +20,11 @@
 
 class Solution:
     # Solution:
-    # 
+    # Use binary search to find the first and last instances of the given key
+    # and return [first, last] as the output. Since binary search returns -1
+    # if a key is not present in the array, this procedure will return [-1, -1]
+    # if there is no range for the given key.
+    #
     # Solution complexity:
     # Time complexity: O(log(n))
     # Space complexity: O(1)
