@@ -56,7 +56,7 @@ class Solution:
         
             # Otherwise, we are in the descending section. Compare maxValue against nums['middle'] and update it if necessary
             # then move 'right' up to 'middle'
-            else: # nums[mid] > nums[mid + 1]
+            else: # nums[mid] >= nums[mid + 1]
                 maxValue = max(maxValue, nums[mid])
                 right = mid
 
