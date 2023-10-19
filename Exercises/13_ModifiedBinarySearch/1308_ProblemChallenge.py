@@ -22,14 +22,14 @@ class Solution:
     # 1. Compute the inflection point of the bitonic array (the point where the values in the array 
     #    stop ascending and start descending).
     #
-    # 2. Use the inflection point to split the input in two halfs, one going from zero to the inflection point,
+    # 2. Use the inflection point to split the input in two halves, one going from zero to the inflection point,
     #    and one going from the inflection point onwards.
     #
     # 3. Search the key on the first half. If the result from the search is successful (result != 1), return the
     #    result and finish.
     #
     # 4. Search the key on the second half of the array. If the result from the search is successful (result != 1)
-    #    return result + inflection point and finish.
+    #    return result + inflection + 1 and finish.
     #
     # 5. Otherwise, return -1.
     #
@@ -46,9 +46,9 @@ class Solution:
             return result
         
         # Search the key on the second half of the input array
-        result = self.BinarySearch(nums[inflectionPoint : len(nums)], key)
+        result = self.BinarySearch(nums[inflectionPoint + 1: len(nums)], key)
         if result != -1:
-            return result + inflectionPoint
+            return result + inflectionPoint + 1
 
         return result 
 
