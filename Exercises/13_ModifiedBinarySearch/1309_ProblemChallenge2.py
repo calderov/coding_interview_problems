@@ -30,12 +30,11 @@ class Solution:
     # 4. Return -1 as the key was not found in neither one of both halves.
     #
     # Solution complexity:
-    # Time complexity: O(n)   // Note: As it is implemented here, finding the rotation point takes O(n) steps.
-    #                                  Thus the overall complexity of this algorithm is O(n). This problem
-    #                                  can be solved in O(log(n)) but I due to time constraints I will leave
-    #                                  this solution as is.
+    # Time complexity: O(n)   // Note: As it is implemented here, finding the rotation point takes O(n) operations.
+    #                                  Thus the overall complexity of this algorithm is O(n). Perhaps this step
+    #                                  can be achieved in O(log(n))?
     # Space complexity: O(1)
-    def FindKeyInRotatedArray(self, nums, key):
+    def FindKeyInRotatedArrayV1(self, nums, key):
         # Find rotation point
         rotationPoint = self.FindRotationPosition(nums)
         
@@ -50,7 +49,6 @@ class Solution:
             return rotationPoint + result + 1
         
         return -1
-
 
     def FindRotationPosition(self, nums):
         for i in range(len(nums) - 1):
@@ -74,7 +72,61 @@ class Solution:
             else:
                 right = mid - 1
 
-        return -1 
+        return -1
+    
+    # Solution:
+    # The problem follows the Binary Search pattern. We can use a similar
+    # approach as discussed in Order-agnostic Binary Search and modify it similar
+    # to Search Bitonic Array to search for the ‘key’ in the rotated array.
+    # 
+    # After calculating the middle, we can compare the numbers at indices start
+    # and middle. This will give us two options:
+    # 
+    # 1. If arr[start] <= arr[middle], the numbers from start to middle are
+    #    sorted in ascending order.
+    # 
+    # 2. Else, the numbers from middle+1 to end are sorted in ascending order.
+    # 
+    # Once we know which part of the array is sorted, it is easy to adjust our
+    # ranges. For example, if option-1 is true, we have two choices:
+    # 
+    # 1. By comparing the ‘key’ with the numbers at index start and middle we
+    #    can easily find out if the ‘key’ lies between indices start and middle; if
+    #    it does, we can skip the second part => end = middle -1.
+    # 
+    # 2. Else, we can skip the first part => start = middle + 1.
+    # 
+    # Solution complexity:
+    # Time complexity: O(lon(n))
+    # Space complexity: O(1)
+    def FindKeyInRotatedArrayV2(self, nums, key):
+        start = 0
+        end = len(nums) - 1
+
+        while start <= end:
+            mid = (start + end) // 2
+
+            if nums[mid] == key:
+                return mid
+
+            ascending = nums[start] <= nums[mid]
+
+            if ascending:
+                if key >= nums[start] and key < nums[mid]:
+                    end = mid - 1
+                else:
+                    start = mid + 1
+
+            else:
+                if key > nums[mid] and key <= nums[end]:
+                    start = mid + 1
+                else:
+                    end = mid - 1
+
+        return -1
+
+    def FindKeyInRotatedArray(self, nums, key):
+        return self.FindKeyInRotatedArrayV2(nums, key)
 
 if __name__ == "__main__":
     solution = Solution()
