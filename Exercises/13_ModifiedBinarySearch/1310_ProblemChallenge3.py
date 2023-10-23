@@ -30,6 +30,31 @@ class Solution:
         return 0
     
     # Solution:
+    # 1. Initialize two pointers 'left' and 'right'.
+    #    left = 0
+    #    right = n + 1 where n is the length of the input array
+    #
+    # 2. While 'left' is less than 'right'.
+    #
+    #    2.1 Compute the 'middle' pointer (that between 'left' and 'right').
+    # 
+    #    2.2 If the number at 'left' is greater than that at 'left' + 1, we have found the
+    #        place where the tail of the originally sorted is. Thus, 'left' + 1 is the
+    #        number of rotations that where applied to the array. Return 'left' + 1 and finish.
+    #
+    #    2.3 If the number at 'left' equals the number at 'middle', move left to 'middle' + 1
+    #        and go back to step 2.
+    # 
+    #    2.4 If the number at 'left' is less than that at 'middle' move 'left' to 'middle'
+    #        and go back to step 2.
+    #
+    #    2.5 If the number at 'left' is greater than that at 'middle' move 'right' to middle'
+    #        and go back to step 2.
+    #
+    # 3. At this point 'left' and 'right' should have converged at the point where the rotations
+    #    left the tail of the originally sorted array. Return ('left' + 1) % n and finish.
+    #    The module operator is important here to account for scenarios where the original array
+    #    has rotated enough times for it to be in unaltered.
     #
     # Solution complexity:
     # Time complexity: O(log(n))
@@ -46,10 +71,15 @@ class Solution:
 
             if nums[left] == nums[mid]:
                 left = mid + 1
-            elif nums[left] < nums[mid]:
+                continue
+
+            if nums[left] < nums[mid]:
                 left = mid
-            else: # nums[left] > nums[mid]
+                continue
+
+            if nums[left] > nums[mid]:
                 right = mid
+                continue
 
         return (left + 1) % len(nums)
     
