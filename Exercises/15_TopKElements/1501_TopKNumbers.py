@@ -32,9 +32,9 @@ class Solution:
     # 5. Return the list with the top k elements.
     #
     # Solution complexity:
-    # Time complexity: 
-    # Space complexity: 
-    def foo(self, nums, k):
+    # Time complexity: O(n log(n))
+    # Space complexity: O(n)
+    def GetTopKV1(self, nums, k):
         maxHeap = []
 
         for num in nums:
@@ -46,6 +46,39 @@ class Solution:
         
         return topK
 
+    # Solution:
+    # 1. Initialize a min heap.
+    #    minHeap = []
+    #
+    # 2. Push the first k elements in the input array to the min heap.
+    #
+    # 3. Compare the rest of the elements in the input array with the
+    #    top element of the list (that with the minimum value in the heap). 
+    #    If an element is greater than the top of the heap, pop the heap to remove
+    #    the top, and push this element.
+    #  
+    # 4. Return the inner list of the heap.
+    #
+    # Solution complexity:
+    # Time complexity: O(n log(k))
+    # Space complexity: O(k)
+    def GetTopKV2(self, nums, k):
+        minHeap = []
+
+        for i in range(k):
+            heappush(minHeap, nums[i])
+
+        for i in range(k, len(nums)):
+            if nums[i] > minHeap[0]:
+                heappop(minHeap)
+                heappush(minHeap, nums[i])
+
+        minHeap.sort() # Optional
+        return minHeap
+
+    def GetTopK(self, nums, k):
+        return self.GetTopKV2(nums, k)
+
 if __name__ == "__main__":
     solution = Solution()
 
@@ -53,7 +86,7 @@ if __name__ == "__main__":
     nums = [3, 1, 5, 12, 2, 11]
     k = 3
     expectedOutput = [5, 11, 12]
-    output = solution.foo(nums, k)
+    output = solution.GetTopK(nums, k)
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
@@ -63,7 +96,7 @@ if __name__ == "__main__":
     nums = [5, 12, 11, -1, 12]
     k = 3
     expectedOutput = [11, 12, 12]
-    output = solution.foo(nums, k)
+    output = solution.GetTopK(nums, k)
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
