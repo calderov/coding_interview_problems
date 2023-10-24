@@ -14,7 +14,9 @@
 
 class Solution:
     # Solution:
-    # 
+    # Use a hash map to count the frequencies of each value
+    # and return a list of those values with just once instance.
+    #
     # Solution complexity:
     # Time complexity: O(n)
     # Space complexity: O(n)
