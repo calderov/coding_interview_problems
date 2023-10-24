@@ -19,25 +19,46 @@ from heapq import *
 
 class Solution:
     # Solution:
+    # 1. Use a hash map to track the frequency of each character in the input string.
     # 
+    # 2. For each character in the frequencies map, insert the character and its frequency into a max heap 
+    #    (the max heap should maximize based on the character frequency).
+    #
+    # 3. Initialize an empty list named result to store the characters from the input string in the desired order.
+    #    results = []
+    #
+    # 4. While there are items in the max heap
+    #
+    #    4.1 Pop the top item of the heap (a tuple) and split it into two values, one for a character (c) and one for its frequency (freq)
+    #
+    #    4.2 Append 'freq' copies of the character 'c' into the 'results' variable.
+    #
+    #    4.3 Go back to step 4.
+    #
+    # 5. Join the characters in the 'result' list, into a string and return it.
+    #
     # Solution complexity:
-    # Time complexity: 
-    # Space complexity: 
+    # Time complexity: O(n + n * log(n))
+    # Space complexity: O(n)
     def FrequencySort(self, inputString):
-        characters = [inputString[i] for i in range(len(inputString))]
-        
+        # Use a hash map to track the frequency of each character in the input string
         frequencies = {}
-
-        for c in characters:
+        for i in range(len(inputString)):
+            c = inputString[i]
             if c not in frequencies:
                 frequencies[c] = 0
             frequencies[c] += 1
         
+        # For each character in the frequencies map, insert the character and its frequency into a max heap 
+        # (the min heap should maximize based on the character frequency).
         maxHeap = []
         for num, freq in frequencies.items():
             heappush(maxHeap, (-freq, num))
 
+        # Initialize an empty list named result to store the characters from the input string in the desired order.
         result = []
+
+
         while maxHeap:
             freq, c = heappop(maxHeap)
             freq *= -1
