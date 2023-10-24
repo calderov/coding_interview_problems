@@ -53,7 +53,7 @@ class Solution:
     # 2. Push the first k elements in the input array to the min heap.
     #
     # 3. Compare the rest of the elements in the input array with the
-    #    top element of the list (that with the minimum value in the heap). 
+    #    top element of the heap (that with the minimum value). 
     #    If an element is greater than the top of the heap, pop the heap to remove
     #    the top, and push this element.
     #  
