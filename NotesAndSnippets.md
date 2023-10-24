@@ -196,3 +196,12 @@ def BinarySearch(nums, key):
     
     return -1
 ```
+
+## Bitwise XOR
+## XOR truth table
+| A | B | A xor B |
+|---|---|---------|
+| 0 | 0 | 0       |
+| 0 | 1 | 1       |
+| 1 | 0 | 1       |
+| 1 | 1 | 0       |
