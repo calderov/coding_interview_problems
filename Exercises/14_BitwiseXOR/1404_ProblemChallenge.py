@@ -36,8 +36,8 @@ class Solution:
     # 4. Return the result matrix and finish.
     #
     # Solution complexity:
-    # Time complexity: 
-    # Space complexity: 
+    # Time complexity: O(n) where n is the total number of cells in the matrix
+    # Space complexity: O(n) if a separate result matrix is used or O(1) if the transformation happens in place
     def FlipAndInvert(self, matrix):
         result = []
 
