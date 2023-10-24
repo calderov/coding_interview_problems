@@ -22,38 +22,30 @@ from heapq import *
 
 class Solution:
     # Solution:
-    # Use a max heap to store the stream of numbers.
+    # Use a min heap to store the stream of numbers.
     # 
-    # Each time a new number is added, pop k - 1 elements from the heap and store
-    # them into a temporary list. Then, copy the top item of the heap to a variable
-    # named kthlargest (as the top item of the heap is the kth largest item at the moment),
-    # and push all of the items in the temporary list back into the max heap.
-    # Finally, return kthLargest and finish.
-    #
+    # Each time a new number is added, push the number into the min heap.
+    # If the length min heap is greater than k, pop the top of the min heap and discard it.
+    # This will force the min heap to store at most k numbers. Return the top of the min heap (the kth
+    # largest item).
     #
     # Solution complexity:
-    # Time complexity: O(n log(k))
-    # Space complexity: O(n)
+    # Time complexity: O(log(k))
+    # Space complexity: O(k)
     def __init__(self, nums, k):
-        self.maxHeap = []
+        self.minHeap = []
         self.k = k
         
         for num in nums:
-            heappush(self.maxHeap, -num)
+            self.add(num)
 
     def add(self, num):
-        heappush(self.maxHeap, -num)
+        heappush(self.minHeap, num)
 
-        temp = []
-        for i in range(self.k - 1):
-            temp.append(heappop(self.maxHeap))
+        if len(self.minHeap) > k:
+            heappop(self.minHeap)
 
-        kthLargest = -self.maxHeap[0]
-
-        while temp:
-            heappush(self.maxHeap, temp.pop())
-
-        return kthLargest
+        return self.minHeap[0]
 
 if __name__ == "__main__":
     # Example 1
