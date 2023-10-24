@@ -13,7 +13,10 @@
 
 class Solution:
     # Solution:
-    # 
+    # XOR all the items in the input array, since each item in the array is repeated
+    # except for the singular number we are looking for, # those with repetitions will
+    # cancel out, leaving just the singular number as result.
+    #
     # Solution complexity:
     # Time complexity: O(n)
     # Space complexity: O(1)
