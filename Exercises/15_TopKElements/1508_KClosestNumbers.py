@@ -16,7 +16,11 @@ from heapq import *
 
 class Solution:
     # Solution:
-    # 
+    # Traverse the input array and store the numbers in it into a max heap where the maximization criteria
+    # is the distance from the given number x. Ensure this max heap keeps at most k elements at all times
+    # by popping elements until its length is at most k if it ever exeeds this limit.
+    # Make a list of the numbers in the max heap and return them in a sorted order.
+    #
     # Solution complexity:
     # Time complexity: O(n log(k))
     # Space complexity: O(n)
