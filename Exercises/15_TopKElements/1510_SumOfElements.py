@@ -14,25 +14,42 @@ from heapq import *
 
 class Solution:
     # Solution:
+    # 1. Insert numbers into a min heap.
+    #
+    # 2. Initialize a list of numbers in range (those between the k1th and k2nd smallest numbers).
+    #
+    # 3. Traverse the numbers of the input list.
+    #
+    #    3.1 If the index of the current number is greater than k1 - 1 and less than k2 - 1,
+    #        pop the top of the heap and append it to the list of numbers in range.
+    #
+    #    3.2 Otherwise, just pop the top of the list and discard that number.
+    #
+    # 4. Return the sum of the numbers in range and finish.
     #
     # Solution complexity:
-    # Time complexity:
-    # Space complexity:
+    # Time complexity: O(n log(n))
+    # Space complexity: O(k2 - k1)
     def SumOfElements(self, nums, k1, k2):
+        # Insert numbers into a min heap
         minHeap = []
-
         for num in nums:
             heappush(minHeap, num)
 
+        # Initialize a list of numbers in range (those between the k1th and k2nd smallest numbers)
         numbersInRange = []
 
+        # Traverse the numbers of the input list
         for i in range(len(nums)):
+            # If the index of the current number is greater than k1 - 1 and less than k2 - 1,
+            # pop the top of the heap and append it to the list of numbers in range
             if i > k1 - 1 and i < k2 - 1:
                 numbersInRange.append(heappop(minHeap))
                 continue
-
+            # Otherwise, just pop the top of the list and discard that number
             heappop(minHeap)
 
+        # Return the sum of the numbers in range
         return sum(numbersInRange)
 
 
