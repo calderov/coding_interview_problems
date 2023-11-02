@@ -42,7 +42,7 @@ class Solution:
     # Solution complexity:
     # Time complexity: O(m log(k))
     # Space complexity: O(k)
-    def foo(self, lists, k):
+    def KthSmallestNumberInMSortedLists(self, lists, k):
         # For each of the lists, save the first item or the list, the index of the list, 
         # and the index of the first item of the list (zero) into a min heap.
         # The min heap should minimize based on the first number on each list.
@@ -80,12 +80,12 @@ if __name__ == "__main__":
     lists = [[2, 6, 8], [3, 6, 7], [1, 3, 4]]
     k = 5
     expectedOutput = 4
-    output = solution.foo(lists, k)
+    output = solution.KthSmallestNumberInMSortedLists(lists, k)
     print(output, expectedOutput, output == expectedOutput)
  
     # Example 2:
     lists = [[5, 8, 9], [1, 7]]
     k = 3
     expectedOutput = 7
-    output = solution.foo(lists, k)
+    output = solution.KthSmallestNumberInMSortedLists(lists, k)
     print(output, expectedOutput, output == expectedOutput)
