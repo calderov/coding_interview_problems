@@ -50,7 +50,7 @@ class Solution:
         for listId in range(len(lists)):
             heappush(minHeap, (lists[listId][0], listId, 0))
 
-        # Set a variable to hold the kth smallest variable and initialize it to None
+        # Set a variable to hold the kth smallest number and initialize it to None
         kthSmallest = None
         
         # While k > 0
