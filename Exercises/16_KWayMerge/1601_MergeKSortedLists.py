@@ -26,7 +26,7 @@ class Solution:
     # Solution complexity:
     # Time complexity: O(m * n)
     # Space complexity: O(m * n)
-    def MergeKSortedLists(self, lists):
+    def MergeKSortedListsV1(self, lists):
         minHeap = []
         for head in lists:
             while head:
@@ -47,6 +47,49 @@ class Solution:
                 mergedTail = mergedTail.next
 
         return mergedHead
+
+    # Solution:
+    # 1. Insert the first element of each array in a Min Heap.
+    #
+    # 2. Then, take out the smallest (top) element from the heap and add it to the merged list.
+    #
+    # 3. After removing the smallest element from the heap, we can insert the next element of the
+    #    same list into the heap.
+    #
+    # 4. Repeat steps 2 and 3 to populate the merged list in sorted order.
+    #
+    # 5. Return the merged list and finish
+    #
+    # Solution complexity:
+    # Time complexity: O(n log(k)) where n is the total number of items in all of the lists, and k
+    #                  is the number of lists
+    # Space complexity: O(k)
+    def MergeKSortedListsV2(self, lists):
+        minHeap = []
+        for head in lists:
+            heappush(minHeap, head)
+
+        mergedHead = None
+        mergedTail = None
+
+        while minHeap:
+            node = heappop(minHeap)
+            
+            if mergedHead == None:
+                mergedHead = node
+                mergedTail = mergedHead
+            
+            else:
+                mergedTail.next = node
+                mergedTail = mergedTail.next
+
+            if node.next:
+                heappush(minHeap, node.next)
+
+        return mergedHead
+
+    def MergeKSortedLists(self, lists):
+        return self.MergeKSortedListsV2(lists)
 
 def ToLinkedList(nums):
     head = None
