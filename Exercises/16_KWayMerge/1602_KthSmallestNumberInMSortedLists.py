@@ -20,24 +20,55 @@ from heapq import *
 
 class Solution:
     # Solution:
+    # 1. For each of the lists, save the first item or the list, the index of the list,
+    #   and the index of the first item of the list (zero) into a min heap. The min heap
+    #   should minimize based on the first number on each list.
+    #
+    # 2. Set a variable to hold the kth smallest variable and initialize it to None.
+    #
+    # 3. While k > 0
+    #
+    #    3.1 Pop the item at the top of the min heap and extract the number, list of origin,
+    #        and index in that list. Save the number to the variable intended to store the
+    #        kth smallest number.
+    #
+    #    3.2 Take the next number form the origin list, and push it into the min heap with
+    #        its corresponding pointer to the origin list and index
     # 
+    #    3.3 Substract 1 from k and repeat step 3.
+    # 
+    # 5. Return the variable holding the kth smallest index and finish
+    #
     # Solution complexity:
-    # Time complexity: O(n log(k))
+    # Time complexity: O(m log(k))
     # Space complexity: O(k)
     def foo(self, lists, k):
+        # For each of the lists, save the first item or the list, the index of the list, 
+        # and the index of the first item of the list (zero) into a min heap.
+        # The min heap should minimize based on the first number on each list.
         minHeap = []
         for listId in range(len(lists)):
             heappush(minHeap, (lists[listId][0], listId, 0))
 
+        # Set a variable to hold the kth smallest variable and initialize it to None
         kthSmallest = None
+        
+        # While k > 0
         while k:
+            # Pop the item at the top of the min heap and extract the number, list of origin, 
+            # and index in that list. Save the number to the variable intended to store the
+            # kth smallest number
             kthSmallest, listId, index = heappop(minHeap)
 
+            # Take the next number form the origin list, and push it into the min heap 
+            # with its corresponding pointer to the origin list and index
             if index + 1 < len(lists[listId]):
                 heappush(minHeap, (lists[listId][index + 1], listId, index + 1))
 
+            # Substract 1 from k
             k -= 1
 
+        # Return the variable holding the kth smallest index and finish
         return kthSmallest
             
         
