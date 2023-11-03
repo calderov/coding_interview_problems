@@ -19,15 +19,23 @@ from heapq import *
 
 class Solution:
     # Solution:
-    # 
+    # 1. Let nums1 and nums2 be two sorted arrays.
+    #
+    # 2. Produce all the pairs (N_i, M_j) where i and j range from 0 to k, and store the 
+    #    sum of each pair N_i + M_j into a min heap, as well as the values for N_i and M_j.
+    #
+    # 3. Extract k pairs from the min heap (N_i, M_j) and save them into a list.
+    #
+    # 4. Return the list with the k pairs, as these are the k pairs with the largest sums.
+    #
     # Solution complexity:
-    # Time complexity: O(n * m * log(k)) where n and m are the number of elements in both arrays respectively
+    # Time complexity: O(k ^ 2 * log(k))
     # Space complexity: O(k)
-    def KPairsWithLargestSums(self, nums1, nums2, k):
+    def KPairsWithLargestSums(self, N, M, k):
         minHeap = []
 
-        for i in nums1[:k]:
-            for j in nums2[:k]:
+        for i in N[:k]:
+            for j in M[:k]:
                 heappush(minHeap, (-(i + j), i, j))
 
         kPairs = []
