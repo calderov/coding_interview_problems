@@ -19,6 +19,22 @@ from heapq import *
 class Solution:
     # Solution:
     # 
+    # 1. Start by inserting the first number from each of the given arrays into a min-heap. A min-heap is a data structure where the smallest element is always at the top.
+    # 
+    # 2. Simultaneously, keep track of the largest number inserted into the heap. Let's call this value currentMaxNumber.
+    #
+    # 3. While there are as many items in the heap as there are list:
+    #
+    #    3.1 Extract the smallest (top) element from the min-heap. This element is the current minimum among all the arrays.
+    #
+    #    3.2 Compare this smallest element with currentMaxNumber (the largest number inserted into the heap).
+    #
+    #    3.3 If the difference between the smallest element and currentMaxNumber is smaller than the current range, update the range.
+    #
+    #    3.4 Regardless of whether the range is updated or not, if the array from which the smallest element was extracted has more elements, insert the next element from that array into the min-heap.
+    #
+    # 4. The final result is the minimum range that includes at least one element from each array, found during the iterative process described above.
+    #
     # Solution complexity:
     # Time complexity: O(N log(M))
     # Space complexity: O(M)
