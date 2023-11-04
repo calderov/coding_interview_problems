@@ -12,7 +12,7 @@
 
 class Solution:
     # Solution:
-    # 1. Initialize a subsets list to serve as our result and ddd the empty set to it.
+    # 1. Initialize a subsets list to serve as our result and add the empty set to it.
     #      subsets = [[]]
     #
     # 2. For each num in nums. 
