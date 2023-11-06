@@ -33,10 +33,12 @@
 
 class Solution:
     # Solution:
+    # Generate subsets of items (those weights and profits) which aggregated weight is less than the given capacity.
+    # From those, keep track of the subset with the largest profit. Return the subset with the largest profit.
     #
     # Solution complexity:
-    # Time complexity: O(n * 2 ^ n)
-    # Space complexity: O(n * 2 ^ n)
+    # Time complexity: O(2 ^ n)
+    # Space complexity: O(2 ^ n)
     def GetMostProfitableCombination(self, weights, profits, capacity):
         subsets = [[]]
 
@@ -60,7 +62,7 @@ class Solution:
                     candidateWeight += weights[k]
                     candidateProfit += profits[k]
 
-                # If the candidate's weight is within the capacity
+                # If the candidate's weight is within the capacity,
                 # add it to the subsets list
                 if candidateWeight <= capacity:
                     subsets.append(candidate)
