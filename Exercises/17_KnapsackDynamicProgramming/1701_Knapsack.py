@@ -34,47 +34,34 @@
 class Solution:
     # Solution:
     # Generate subsets of items (those weights and profits) which aggregated weight is less than the given capacity.
-    # From those, keep track of the subset with the largest profit. Return the subset with the largest profit.
+    # From those, keep track of the subset with the largest profit, use a cache to speed up the computing of weight and profit
+    # of subsets that include previously known subsets in them. Return the subset with the largest profit.
     #
     # Solution complexity:
-    # Time complexity: O(2 ^ n)
-    # Space complexity: O(2 ^ n)
+    # Time complexity: O(n * c) where n is the number of items and c is the capacity
+    # Space complexity: O(n * c)
     def GetMostProfitableCombination(self, weights, profits, capacity):
-        subsets = [[]]
+        maxProfitSubset = tuple()
+        maxProfit = 0
 
-        bestSubset = []
-        bestSubsetProfit = 0
+        subsetsCache = {tuple(): {'weight': 0, 'profit': 0}}
 
-        # Generate subsets of indexes in the range (0, N] where N is the number of items in weights and profits
         for i in range(len(weights)):
-            n = len(subsets)
+            subsets = list(subsetsCache.keys())
 
-            for j in range(n):
-                # Each subset is called a candidate and it represents a set of items
-                # that can be picked from the inputs, this means that these items have
-                # weights and profits assigned to them
-                candidate = subsets[j] + [i]
+            for subset in subsets:
+                newSubset = tuple(list(subset) + [i])
+                newSubsetWeight = subsetsCache[subset]['weight'] + weights[i]
+                newSubsetProfit = subsetsCache[subset]['profit'] + profits[i]
+                
+                if newSubsetWeight <= capacity:
+                    subsetsCache[newSubset] = {'weight': newSubsetWeight, 'profit': newSubsetProfit}
 
-                # Compute candidate's weight and profit
-                candidateWeight = 0
-                candidateProfit = 0
-                for k in candidate:
-                    candidateWeight += weights[k]
-                    candidateProfit += profits[k]
-
-                # If the candidate's weight is within the capacity,
-                # add it to the subsets list
-                if candidateWeight <= capacity:
-                    subsets.append(candidate)
-
-                    # If the candidate's profit is better than that of our best subset,
-                    # update the best subset and the best subset profit
-                    if candidateProfit >= bestSubsetProfit:
-                        bestSubset = candidate
-                        bestSubsetProfit = candidateProfit
-
-        return bestSubset
-
+                    if newSubsetProfit > maxProfit:
+                        maxProfit = newSubsetProfit
+                        maxProfitSubset = newSubset
+        
+        return list(maxProfitSubset)
 
 if __name__ == "__main__":
     solution = Solution()
