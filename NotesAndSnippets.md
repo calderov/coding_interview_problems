@@ -205,3 +205,30 @@ def BinarySearch(nums, key):
 | 0 | 1 | 1       |
 | 1 | 0 | 1       |
 | 1 | 1 | 0       |
+
+## Dynamic programming
+Dynamic Programming (DP) is defined as a technique that solves some particular type of problems in Polynomial Time. Dynamic Programming solutions are faster than the exponential brute method and can be easily proved their correctness.
+
+There are two approaches to formulate a dynamic programming solution:
+
+1. Top-Down Approach:  This approach follows the memoization technique. It consists of recursion and caching. In computation, recursion represents the process of calling functions repeatedly, whereas cache refers to the process of storing intermediate results.
+
+2. Bottom-Up Approach: This approach uses the tabulation technique to implement the dynamic programming solution. It addresses the same problems as before, but without recursion. In this approach, iteration replaces recursion. Hence, there is no stack overflow error or overhead of recursive procedures.
+
+```python
+# Example of Dynamic Programming with tabulation to compute factorials
+class Factorial:
+    def __init__(self):
+        self.cache = [1, 1]
+    
+    def get(self, n):
+        if n < len(self.cache):
+            return self.cache[n]
+        
+        i = len(self.cache)
+        while i < n + 1:
+            self.cache.append(i * self.cache[i - 1])
+            i += 1
+
+        return self.cache[n]
+```
