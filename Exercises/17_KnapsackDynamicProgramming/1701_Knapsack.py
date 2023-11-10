@@ -79,13 +79,25 @@ class Solution:
 if __name__ == "__main__":
     solution = Solution()
 
-    # Example
+    # Example 1
     weights = [2, 3, 1, 4]
     profits = [4, 5, 3, 7]
     capacity = 5
     expectedOutput = [2, 3]
 
     output = solution.GetMostProfitableCombination(weights, profits, capacity)
-    print(output)
-    print(expectedOutput)
+    print(output, sum([profits[i] for i in output]))
+    print(expectedOutput, sum([profits[i] for i in expectedOutput]))
+    print(output == expectedOutput)
+    print()
+
+    # Example 2
+    weights = [1, 2, 3, 5]
+    profits = [1, 6, 10, 16]
+    capacity = 7
+    expectedOutput = [1, 3]
+
+    output = solution.GetMostProfitableCombination(weights, profits, capacity)
+    print(output, sum([profits[i] for i in output]))
+    print(expectedOutput, sum([profits[i] for i in expectedOutput]))
     print(output == expectedOutput)
