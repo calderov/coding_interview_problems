@@ -23,34 +23,47 @@
 #                Here are the two subsets: {1, 3, 4} and {100}.
 
 class Solution:
+    # Solution:
+    #
+    # Solution complexity:
+    # Time complexity: O(n * S / 2) where n is the number of items in the input array and S is their sum
+    # Space complexity: O(n * S / 2)
     def MinimumSubsetSumDifference(self, nums):
         totalSum = sum(nums)
         halfSum = totalSum // 2
 
+        # Initialize a 2D array dp
         dp = [[False for i in range(halfSum + 1)] for _ in range(len(nums) + 1)]
 
+        # Base case: an empty set has a sum of 0
         for row in range(len(nums) + 1):
             dp[row][0] = True
 
+        # Base case: the first element can be included in the subset
         if nums[0] <= halfSum:
             dp[0][nums[0]] = True
 
+        # Dynamic programming to fill the dp array
         for row in range(1, len(nums)):
             for col in range(1, halfSum + 1):
-                if dp[row - 1][col]:
-                    dp[row][col] = dp[row - 1][col]
-                    continue
+                # Case 1: Exclude the current element
+                dp[row][col] = dp[row - 1][col]
 
+                # Case 2: Include the current element if possible
                 if col >= nums[row]:
                     dp[row][col] = dp[row - 1][col - nums[row]]
-                
+            
+        # Find the maximum achievable subset sum
         subsetSum = 0
         for col in range(halfSum, -1, -1):
             if dp[len(nums) - 1][col]:
                 subsetSum = col
                 break
 
+        # Compute the complement sum
         complementSum = totalSum - subsetSum
+        
+        # Return the absolute difference between subsetSum and complementSum
         return abs(complementSum - subsetSum)
 
 if __name__ == "__main__":
