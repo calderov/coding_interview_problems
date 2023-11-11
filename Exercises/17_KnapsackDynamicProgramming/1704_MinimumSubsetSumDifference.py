@@ -24,6 +24,13 @@
 
 class Solution:
     # Solution:
+    # Use dynamic programming to set a table dp, where dp[i][j] is True if there is a subset 
+    # of the first i elements of the input that has a sum equal to j. Build this table iteratively
+    # based on whether an element is included in a subset or not.
+    #
+    # Once the table is populated, find the coordinates of the last True value on the table
+    # and return the index of the corresponding column, as this is the minimum possible difference
+    # between a subset of the input and its complement. 
     #
     # Solution complexity:
     # Time complexity: O(n * S / 2) where n is the number of items in the input array and S is their sum
