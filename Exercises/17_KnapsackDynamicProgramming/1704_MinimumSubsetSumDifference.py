@@ -33,10 +33,10 @@ class Solution:
         halfSum = totalSum // 2
 
         # Initialize a 2D array dp
-        dp = [[False for i in range(halfSum + 1)] for _ in range(len(nums) + 1)]
+        dp = [[False for i in range(halfSum + 1)] for _ in range(len(nums))]
 
         # Base case: an empty set has a sum of 0
-        for row in range(len(nums) + 1):
+        for row in range(len(nums)):
             dp[row][0] = True
 
         # Base case: the first element can be included in the subset
