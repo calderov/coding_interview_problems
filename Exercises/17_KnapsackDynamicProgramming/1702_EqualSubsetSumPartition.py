@@ -20,7 +20,7 @@
 
 class Solution:
     # Solution:
-    # Generate subsets of the input set until the sum of a subset S equals the sum
+    # Generate subsets of the input until the sum of a subset S equals the sum
     # of all the elements in the input divided by two, as S' should also add to the
     # same sum. Speed up the computation by caching the sum of each explored subset S.
     #
