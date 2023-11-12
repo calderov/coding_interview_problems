@@ -52,10 +52,12 @@ class Solution:
     # Time complexity:
     # Space complexity:
     def CanPartitionV2(self, nums):
+        # Return early if the problem cannot be solved
         totalSum = sum(nums)
         if totalSum % 2 != 0:
             return False
 
+        # Compute target sum
         targetSum = totalSum // 2
 
         rows = len(nums)
