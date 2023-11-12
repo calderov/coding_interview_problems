@@ -26,7 +26,7 @@ class Solution:
     #
     # Time complexity: O(n * T) where n is the number of elements in the input and T is the total sum of these elements
     # Space complexity: O(n * T)
-    def CanPartition(self, nums):
+    def CanPartitionV1(self, nums):
         if not nums:
             return True
 
@@ -46,6 +46,48 @@ class Solution:
                 subsetsSumsCache[tuple(newSubset)] = newSubsetSum
         
         return False
+    
+    # Solution complexity:
+    #
+    # Time complexity:
+    # Space complexity:
+    def CanPartitionV2(self, nums):
+        totalSum = sum(nums)
+        if totalSum % 2 != 0:
+            return False
+
+        targetSum = totalSum // 2
+
+        rows = len(nums)
+        cols = targetSum + 1
+        
+        # Initialize 2D dynamic programming table (dp)
+        dp = [[0 for col in range(cols)] for row in range(rows)]
+    
+        # Base case: There is always an empty subset for every set
+        for row in range(rows):
+            dp[row][0] = 1
+
+        # Base case: A set k with just the first element of the input can always produce a sum(k) = nums[0]
+        if nums[0] < cols:
+            dp[0][nums[0]] = 1
+
+        # For each cell in the dp table
+        for row in range(1, rows):
+            for col in range(1, cols):
+                element = nums[row]
+
+                # Case 1: Exclude element from count
+                dp[row][col] += dp[row - 1][col]
+
+                # Case 2: Include elemenet in count
+                if col >= element:
+                    dp[row][col] = dp[row - 1][col - element]
+
+        return dp[-1][-1] > 0
+
+    def CanPartition(self, nums):
+        return self.CanPartitionV2(nums)
 
 if __name__ == "__main__":
     solution = Solution()
