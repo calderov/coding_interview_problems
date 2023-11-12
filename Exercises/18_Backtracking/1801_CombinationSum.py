@@ -22,30 +22,11 @@
 
 class Solution:
     # Solution:
-    # Brute force approach, generate all the subsets of the input candidates set
-    # and pick those which match the target value. In the evaluation of subsets
-    # we can prune those which sum is greater than the target.
     #
-    # Time complexity: O(2 ^ n)
-    # Space complexity: O(2 ^ n)
+    # Time complexity: O()
+    # Space complexity: O()
     def CombinationSum(self, candidates, target):
-        visitedSubsets = [[]]
-        resultSubsets = []
-
-        for num in candidates:
-            subsets = visitedSubsets
-
-            for prevSubset in subsets:
-                subset = prevSubset + [num]
-                sumSubset = sum(subset)
-
-                if sumSubset == target:
-                    resultSubsets.append(subset)
-
-                elif sumSubset < target:
-                    visitedSubsets.append(subset)
-
-        return resultSubsets
+        pass
 
 def AreEqual(list1, list2):
     if len(list1) != len(list2):
