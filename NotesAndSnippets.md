@@ -232,3 +232,57 @@ class Factorial:
 
         return self.cache[n]
 ```
+
+Here es a complete example of a 0/1 knapsack problem, solved with dynamic programming
+
+```python
+# Problem:
+# Given a set of positive numbers, find the total number of subsets whose sum
+# is equal to a given number ‘S’.
+
+# Solution:
+# Use dynamic programming to set a table dp, where dp[i][j] keeps the number of
+# subsets of the first i elements of the input, that add up to the value j which
+# ranges from 0 to S. Build this table iteratively based on whether an element is
+# included in a subset or not.
+#
+# Once the table is populated, return the value stored in the last cell of the
+# table, as it contains how many subsets add to S.
+#
+# Solution complexity:
+# Time complexity: O(n * s)
+# Space complexity: O(n * s)
+def TotalNumberOfSubsetsWithSumS(self, nums, s):
+    rows = len(nums)
+    cols = s + 1
+
+    # Initialize the dynamic programming table (dp)
+    dp = [[0 for col in range(cols)] for row in range(rows)]
+
+    # Base case: Mark the fist colum as the every set has an empty set 
+    #            that adds up to zero.
+    for row in range(rows):
+        dp[row][0] = 1
+
+    # Base case: A set containing only the first element from nums
+    #            can add up to the value of the first element of nums,
+    #            mark its corresponding colum.
+    if nums[0] < cols:
+        dp[0][nums[0]] = 1
+
+    # For each cell on the dynamic programming table
+    for row in range(1, rows):
+        for col in range(1, cols):
+            element = nums[row]
+
+            # Case 1: Exclude the current element
+            dp[row][col] += dp[row - 1][col]
+            
+            # Case 2: Include the current element
+            if col >= element:
+                dp[row][col] += dp[row - 1][col - element]
+    
+    # The amount of subsets that add up to S is located
+    # in the last cell of the dynamic programming table
+    return dp[-1][-1]
+```
