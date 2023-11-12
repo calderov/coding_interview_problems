@@ -40,7 +40,7 @@ class Solution:
     # Solution complexity:
     # Time complexity: O(n * c) where n is the number of items and c is the capacity
     # Space complexity: O(n * c)
-    def GetMostProfitableCombination(self, weights, profits, capacity):
+    def GetMostProfitableCombinationV1(self, weights, profits, capacity):
         maxProfitSubset = tuple()
         maxProfit = 0
 
@@ -63,6 +63,41 @@ class Solution:
         
         return list(maxProfitSubset)
 
+    def GetMostProfitableCombinationV2(self, weights, profits, capacity):
+        rows = len(weights)
+        cols = capacity + 1
+
+        # Initialize dynamic programming table (dp).
+        dp = [[0 for col in range(cols)] for row in range(rows)]
+
+        # Base case: Set the profit gained from the first item in the input array into the dp table
+        #            for each capacity that is greater than or equal to the weight of the first item.
+        for col in range(cols):
+            if weights[0] <= col:
+                dp[0][col] = profits[0]
+
+        # For each cell in the dynamic programming table
+        for row in range(1, rows):
+            for col in range(1, cols):
+                profit1 = 0
+                profit2 = 0
+
+                # Case 1: Exclude the profits of the current element
+                profit1 = dp[row - 1][col]
+
+                # Case 2: Include the profits of the current element
+                if weights[row] <= col:
+                    profit2 = profits[row] + dp[row - 1][col - weights[row]]
+
+                # Take maximum profit and set it as the cell's value
+                dp[row][col] = max(profit1, profit2)
+
+        # The maximum profit value should be at the last cell of the dp table
+        return dp[-1][-1]
+
+    def GetMostProfitableCombination(self, weights, profits, capacity):
+        return self.GetMostProfitableCombinationV2(weights, profits, capacity)
+
 if __name__ == "__main__":
     solution = Solution()
 
@@ -70,21 +105,17 @@ if __name__ == "__main__":
     weights = [2, 3, 1, 4]
     profits = [4, 5, 3, 7]
     capacity = 5
-    expectedOutput = [2, 3]
+    expectedOutput = 10
 
     output = solution.GetMostProfitableCombination(weights, profits, capacity)
-    print(output, sum([profits[i] for i in output]))
-    print(expectedOutput, sum([profits[i] for i in expectedOutput]))
-    print(output == expectedOutput)
+    print(output, expectedOutput, output == expectedOutput)
     print()
 
     # Example 2
     weights = [1, 2, 3, 5]
     profits = [1, 6, 10, 16]
     capacity = 7
-    expectedOutput = [1, 3]
+    expectedOutput = 22
 
     output = solution.GetMostProfitableCombination(weights, profits, capacity)
-    print(output, sum([profits[i] for i in output]))
-    print(expectedOutput, sum([profits[i] for i in expectedOutput]))
-    print(output == expectedOutput)
+    print(output, expectedOutput, output == expectedOutput)
