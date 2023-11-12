@@ -47,10 +47,18 @@ class Solution:
         
         return False
     
-    # Solution complexity:
+    # Solution:
+    # Use dynamic programming to set a table dp, where dp[i][j] keeps the number of subsets of the first i elements of the input
+    # that add up to the value j which ranges from 0 to sum(nums) / 2.
     #
-    # Time complexity:
-    # Space complexity:
+    # Build this table iteratively based on whether an element is included in a subset or not.
+    #
+    # Once the table is populated, return True if the value stored in the last cell of the table is greater than zero, as it contains
+    # how many subsets add up to sum(nums) / 2.
+    #
+    # Solution complexity:
+    # Time complexity: O(n * s)
+    # Space complexity: O(n * s)
     def CanPartitionV2(self, nums):
         # Return early if the problem cannot be solved
         totalSum = sum(nums)

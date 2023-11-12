@@ -63,6 +63,17 @@ class Solution:
         
         return list(maxProfitSubset)
 
+    # Solution:
+    # Use dynamic programming to set a table dp, where dp[i][j] will represent the maximum knapsack profit for capacity j
+    # calculated from the first i items. Build this table iteratively based on whether an element is included in a subset
+    # or not.
+    #
+    # Once the table is populated, return the value stored in the last cell of the table, as it contains how the maximum
+    # possible profit for the given input.
+    #
+    # Solution complexity:
+    # Time complexity: O(n * s)
+    # Space complexity: O(n * s)
     def GetMostProfitableCombinationV2(self, weights, profits, capacity):
         rows = len(weights)
         cols = capacity + 1
