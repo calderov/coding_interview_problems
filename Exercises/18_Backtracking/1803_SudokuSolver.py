@@ -52,7 +52,7 @@ class Solution:
                         ((6, 9), (6, 9))]
         self.minPending = 100
 
-    def SudokuSolver(self, sudoku):
+    def SolveSudoku(self, sudoku):
         result = [[0 for i in range(9)] for j in range(9)]
         
         firstMissing = self.FindNextMissing(sudoku)
@@ -69,7 +69,7 @@ class Solution:
         
     def Backtrack(self, sudoku, row, col, pending, result):
         # Return early if there are no more pending substitutions
-        if pending == 1:
+        if pending == 0:
             for i in range(9):
                 for j in range(9):
                     result[i][j] = sudoku[i][j]
@@ -91,6 +91,8 @@ class Solution:
             if nextMissing:
                 newRow, newCol = nextMissing
                 self.Backtrack(sudoku, newRow, newCol, pending - 1, result)
+            elif pending == 1:
+                self.Backtrack(sudoku, -1, -1, pending - 1, result)
 
             sudoku[row][col] = old
 
@@ -161,7 +163,7 @@ if __name__ == "__main__":
                       ['2', '8', '7', '4', '1', '9', '6', '3', '5'],
                       ['3', '4', '5', '2', '8', '6', '1', '7', '9']]  
 
-    output = solution.SudokuSolver(sudoku)
+    output = solution.SolveSudoku(sudoku)
     
     # Print solution
     for row in range(9):
