@@ -37,8 +37,51 @@
 # Explanation: The given output is the only valid Sudoku solution.
 
 class Solution:
+    def __init__(self):
+        self.numbers = [str(i) for i in range(1, 10)]
+        pass
+
     def SudokuSolver(self, sudoku):
-        return sudoku
+        result = list(sudoku)
+    
+    def CheckRow(self, row, sudoku):
+        missingNumbers = set(self.numbers)
+        
+        for num in sudoku[row]:
+            if num in missingNumbers:
+                missingNumbers.remove(num)
+
+        return missingNumbers
+
+    def CheckCol(self, col, sudoku):
+        missingNumbers = set(self.numbers)
+
+        for row in range(len(sudoku)):
+            num = sudoku[row][col]
+            
+            if num in missingNumbers:
+                missingNumbers.remove(num)
+        
+        return missingNumbers
+
+    def CheckSector(self, row, col, sudoku):
+        numbers = set(self.numbers)
+        sectors = [((0, 3), (0, 3)),
+                   ((0, 3), (3, 6)),
+                   ((0, 3), (6, 9)),
+
+                   ((3, 6), (0, 3)),
+                   ((3, 6), (3, 6)),
+                   ((3, 6), (6, 9)),
+                  
+                   ((6, 9), (0, 3)),
+                   ((6, 9), (3, 6)),
+                   ((6, 9), (6, 9))]
+
+        # for rowRange, colRange in sectors:
+        #     minRow
+
+        
 
 if __name__ == "__main__":
     solution = Solution()
