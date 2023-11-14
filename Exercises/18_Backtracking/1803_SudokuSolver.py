@@ -38,50 +38,104 @@
 
 class Solution:
     def __init__(self):
-        self.numbers = [str(i) for i in range(1, 10)]
-        pass
+        self.numbers = set([str(i) for i in range(1, 10)])
+        self.sectors = [((0, 3), (0, 3)),
+                        ((0, 3), (3, 6)),
+                        ((0, 3), (6, 9)),
+
+                        ((3, 6), (0, 3)),
+                        ((3, 6), (3, 6)),
+                        ((3, 6), (6, 9)),
+                        
+                        ((6, 9), (0, 3)),
+                        ((6, 9), (3, 6)),
+                        ((6, 9), (6, 9))]
+        self.minPending = 100
 
     def SudokuSolver(self, sudoku):
-        result = list(sudoku)
+        result = [[0 for i in range(9)] for j in range(9)]
+        
+        firstMissing = self.FindNextMissing(sudoku)
+        if not firstMissing:
+            return result
+
+        row, col = firstMissing
+        pending = self.CountMissing(sudoku)
+        
+        self.Backtrack(sudoku, row, col, pending, result)
+
+        return result
+
+        
+    def Backtrack(self, sudoku, row, col, pending, result):
+        # Return early if there are no more pending substitutions
+        if pending == 1:
+            for i in range(9):
+                for j in range(9):
+                    result[i][j] = sudoku[i][j]
+            return
+
+        numbersInRow = self.GetNumbersInRow(row, sudoku)
+        numbersInCol = self.GetNumbersInCol(col, sudoku)
+        numbersInSector = self.GetNumbersInSector(row, col, sudoku)
+
+        candidates = set(self.numbers)
+        candidates = candidates.difference(numbersInRow)
+        candidates = candidates.difference(numbersInCol)
+        candidates = candidates.difference(numbersInSector)
+
+        for number in candidates:
+            old, sudoku[row][col] = sudoku[row][col], number
+
+            nextMissing = self.FindNextMissing(sudoku)
+            if nextMissing:
+                newRow, newCol = nextMissing
+                self.Backtrack(sudoku, newRow, newCol, pending - 1, result)
+
+            sudoku[row][col] = old
+
+    def GetNumbersInRow(self, row, sudoku):
+        return set(sudoku[row]).difference(set(['.']))
+
+    def GetNumbersInCol(self, col, sudoku):
+        numbersInCol = set()
+        for row in range(9):
+            numbersInCol.add(sudoku[row][col])
+        return numbersInCol.difference(['.'])
+
+    def GetNumbersInSector(self, row, col, sudoku):
+        minRow = -1
+        maxRow = -1
+        minCol = -1
+        maxCol = -1
+        for rowRange, colRange in self.sectors:
+            minRow, maxRow = rowRange
+            minCol, maxCol = colRange
+            if (minRow <= row < maxRow) and (minCol <= col < maxCol):
+                break
+
+        numbersInSector = set()
+
+        for row in range(minRow, maxRow):
+            for col in range(minCol, maxCol):
+                numbersInSector.add(sudoku[row][col])
+
+        return numbersInSector.difference(set(['.']))
+
+    def FindNextMissing(self, sudoku):
+        for row in range(9):
+            for col in range(9):
+                if sudoku[row][col] == '.':
+                    return (row, col)
+        return None
     
-    def CheckRow(self, row, sudoku):
-        missingNumbers = set(self.numbers)
-        
-        for num in sudoku[row]:
-            if num in missingNumbers:
-                missingNumbers.remove(num)
-
-        return missingNumbers
-
-    def CheckCol(self, col, sudoku):
-        missingNumbers = set(self.numbers)
-
-        for row in range(len(sudoku)):
-            num = sudoku[row][col]
-            
-            if num in missingNumbers:
-                missingNumbers.remove(num)
-        
-        return missingNumbers
-
-    def CheckSector(self, row, col, sudoku):
-        numbers = set(self.numbers)
-        sectors = [((0, 3), (0, 3)),
-                   ((0, 3), (3, 6)),
-                   ((0, 3), (6, 9)),
-
-                   ((3, 6), (0, 3)),
-                   ((3, 6), (3, 6)),
-                   ((3, 6), (6, 9)),
-                  
-                   ((6, 9), (0, 3)),
-                   ((6, 9), (3, 6)),
-                   ((6, 9), (6, 9))]
-
-        # for rowRange, colRange in sectors:
-        #     minRow
-
-        
+    def CountMissing(self, sudoku):
+        totalMissing = 0
+        for row in range(9):
+            for col in range(9):
+                if sudoku[row][col] == '.':
+                    totalMissing += 1
+        return totalMissing
 
 if __name__ == "__main__":
     solution = Solution()
@@ -108,8 +162,18 @@ if __name__ == "__main__":
                       ['3', '4', '5', '2', '8', '6', '1', '7', '9']]  
 
     output = solution.SudokuSolver(sudoku)
-    for row in range(len(sudoku)):
+    
+    # Print solution
+    for row in range(9):
         print(output[row])
-        print(expectedOutput[row])
-        print()
-    print(output == expectedOutput)
+
+    # Verify solution
+    solutionMatch = True
+    for row in range(9):
+        for col in range(9):
+            if output[row][col] != expectedOutput[row][col]:
+                print(output[row][col], expectedOutput[row][col])
+                solutionMatch = False
+                break
+
+    print(solutionMatch)
