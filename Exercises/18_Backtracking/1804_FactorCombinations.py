@@ -19,9 +19,35 @@
 
 class Solution:
     def FactorCombinations(self, n):
-        pass
+        results = []
+        self.FindFactors(n, [1], 1, results)
+        return results
         
+    def FindFactors(self, n, candidates, candidatesProduct, results):
+        i = 2
+        while i < n:
+            if n % i != 0:
+                i += 1
+                continue
 
+            candidatesProduct *= i
+            candidates.append(i)
+            
+            if candidatesProduct > n:
+                candidates.pop()
+                return
+
+            if candidatesProduct == n:
+                validCandidate = sorted(candidates[1:])
+                if validCandidate not in results:
+                    results.append(validCandidate)
+
+            self.FindFactors(n, candidates, candidatesProduct, results)
+
+            candidatesProduct //= i
+            candidates.pop()
+            
+            i += 1
 
 if __name__ == "__main__":
     solution = Solution()
@@ -38,6 +64,15 @@ if __name__ == "__main__":
     # Example 2:
     n = 20
     expectedOutput = [[2, 2, 5], [2, 10], [4, 5]]
+    output = solution.FactorCombinations(n)
+    print(output)
+    print(expectedOutput)
+    print(output == expectedOutput)
+    print()
+
+    # Example 3:
+    n = 9
+    expectedOutput = [[3, 3]]
     output = solution.FactorCombinations(n)
     print(output)
     print(expectedOutput)
