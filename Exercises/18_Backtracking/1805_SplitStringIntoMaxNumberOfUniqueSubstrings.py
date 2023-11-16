@@ -25,6 +25,28 @@
 # 'c'] & ['abc', 'a', 'b', 'c'], all have 4 substrings.
 
 class Solution:
+    # Solution:
+    # Let MaxUniqueSubstrings be a function that takes three parameters:
+    # the input string (inputString), the current start position (start), 
+    # and a set to record unique substrings (substrings).
+    # 
+    # This function establishes a base case where it returns the
+    # size of the set when the current start position equals the length of the
+    # input string, indicating that all substrings have been processed. The
+    # function then iterates through possible substrings, checking if each is
+    # already in the set. If not, the substring is added to the set, and the
+    # function is recursively called with the new start position set to the end
+    # of the current substring. This process continues until all substrings are
+    # processed.
+    # 
+    # After the recursive call, the substring is removed from the set to
+    # backtrack. The function keeps track of the maximum number of unique
+    # substrings found and returns this maximum count once all substrings have
+    # been processed.
+    #
+    # Solution complexity:
+    # Time complexity: O(2 ^ n)
+    # Space complexity: O(n)
     def MaxUniqueSubstrings(self, inputString, start=0, substrings=set()):
         # If we have reached the end of the input string, return the length
         # of the substrings set
