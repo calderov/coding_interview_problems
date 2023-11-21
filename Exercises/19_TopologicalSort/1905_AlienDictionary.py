@@ -20,6 +20,18 @@
 #
 
 class Solution():
+    # Solution:
+    # For each pair of consecutive words, compare the characters in both from left to right
+    # until a different char is found. This difference can be interpreted as an edge on a
+    # directed graph, such that a node 'v' representing the character from the first word
+    # connects to a node 'u' representing the character of the second word. This encodes the
+    # fact that 'u' comes after 'v' in our alien lexicographical order. Thus, to get the total
+    # order of characters, it would sufice to return the topoligical sort of the nodes representing
+    # all of the characters.
+    #  
+    # Solution complexity:
+    # Time complexity: O(V + E)
+    # Space complexity: O(V + E)
     def FindAlphabetOrder(self, words):
         if not words:
             return ""
