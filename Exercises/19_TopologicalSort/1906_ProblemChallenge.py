@@ -25,6 +25,15 @@
 #
 
 class Solution:
+    # Solution:
+    # Build a graph connecting all the numbers as they appear in the candidate subsequences
+    # and compute the topoligical order of this graph. If this topological order matches
+    # the target sequence, and at no poit we saw more than two simultaneous sources (nodes
+    # with 0 incident edges), then the subsequences can uniquely construct the target sequence.
+    # 
+    # Solution complexity:
+    # Time complexity: O(V + E)
+    # Space complexity: O(V + E)
     def CanSequenceBeConstructedBySubsequences(self, sequence, subsequences):
         # Initialize graph and in-degree tracker
         graph = {}
