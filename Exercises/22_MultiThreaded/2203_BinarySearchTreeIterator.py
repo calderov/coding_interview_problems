@@ -39,29 +39,22 @@ class TreeNode:
         self.right = None
 
 class Solution:
-    def __init__(self, tree):
-        self.inOrderList = []
-        self.nextPointer = 0
-        self.inOrderTraversal(tree, self.inOrderList)
+    def __init__(self, root):
+        self.inOrderStack = []
+        self.traverseLeft(root)
 
     def hasNext(self):
-        return self.nextPointer < len(self.inOrderList)
+        return len(self.inOrderStack) > 0
 
     def next(self):
-        result = None
-        if self.hasNext():
-            result = self.inOrderList[self.nextPointer]
-            self.nextPointer += 1
-        return result
+        nextNode = self.inOrderStack.pop()
+        self.traverseLeft(nextNode.right)
+        return nextNode.val
 
-    def inOrderTraversal(self, tree, inOrderList):
-        if tree.left:
-            self.inOrderTraversal(tree.left, inOrderList)
-
-        inOrderList.append(tree.val)
-
-        if tree.right:
-            self.inOrderTraversal(tree.right, inOrderList)
+    def traverseLeft(self, node):
+        while node:
+            self.inOrderStack.append(node)
+            node = node.left
 
 if __name__ == "__main__":
     # Example 1
