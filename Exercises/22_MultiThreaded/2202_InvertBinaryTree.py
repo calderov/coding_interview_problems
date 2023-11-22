@@ -61,6 +61,15 @@ class TreeNode:
         self.left = None
 
 class Solution:
+    # Single thread solution:
+    # Recursively traverse the tree from the root. At each step of recursion
+    # check if the root is null, if this is the case, just return. Otherwise,
+    # swap the left and right nodes and recursively call this same function
+    # on the left and right subtrees.
+    # 
+    # Solution complexity:
+    # Time complexity: O(n) where n is the number of nodes in the tree
+    # Space complexity: O(h) where h is the height of the tree (due to the recursion stack)
     def InvertTreeSingleThread(self, tree):
         if not tree:
             return
@@ -70,6 +79,17 @@ class Solution:
         self.InvertTreeSingleThread(tree.left)
         self.InvertTreeSingleThread(tree.right)
 
+    # Single thread solution:
+    # Recursively traverse the tree from the root. At each step of recursion
+    # check if the root is null, if this is the case, just return. Otherwise,
+    # swap the left and right nodes and recursively call this same function
+    # on the left and right subtrees. You can speed up the exploration of subtrees
+    # by spawning a new thread for the left subtrees, and using the current node for right
+    # subtrees.
+    # 
+    # Solution complexity:
+    # Time complexity: O(n) where n is the number of nodes in the tree
+    # Space complexity: O(h) where h is the height of the tree (due to the recursion stack)
     def InvertTreeMultiThread(self, tree, numThreads):
         if not tree:
             return
