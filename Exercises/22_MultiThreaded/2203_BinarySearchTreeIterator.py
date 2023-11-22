@@ -32,23 +32,39 @@
 # In order traversal: [1, 4, 10, 14, 15, 19, 20]
 #
 
+import multiprocessing
+
 class TreeNode:
     def __init__(self, value):
         self.val = value
         self.left = None
         self.right = None
 
+# Solution:
+# Traverse the tree on demand using a stack to store the in order traversal of the tree.
+# 
+# Solution complexity:
+# Time complexity: The hasNext function has a constant time complexity O(1), 
+#                  the next function has a time complexity of O(n) where n
+#                  is the number of nodes in the tree.
+#
+# Space complexity: The has next function has a constant time complexity O(1),
+#                   the next function has a time complexity of O(h) where h
+#                   is the height of the tree.
 class Solution:
     def __init__(self, root):
         self.inOrderStack = []
+        self.lock = multiprocessing.Lock()
         self.traverseLeft(root)
 
     def hasNext(self):
         return len(self.inOrderStack) > 0
 
     def next(self):
+        self.lock.acquire()
         nextNode = self.inOrderStack.pop()
         self.traverseLeft(nextNode.right)
+        self.lock.release()
         return nextNode.val
 
     def traverseLeft(self, node):
