@@ -25,13 +25,37 @@
 class Solution:
     # Time complexity: O(n)
     # Space complexity: O(1)
-    def IsPerfectSquare(self, num):
+    def IsPerfectSquareV1(self, num):
         if num < 1: return False
 
         for i in range(1, num // 2 + 2):
             if i * i == num:
                 return True
         return False
+    
+    def IsPerfectSquareV2(self, num):
+        if num < 1:
+            return False
+
+        left = 1
+        right = num // 2 
+
+        while left <= right:
+            midSquared = ((right - left) // 2) ** 2
+            
+            if midSquared == num:
+                return True
+            
+            if midSquared < num:
+                left += 1
+
+            else: # midSquared > num:
+                right -= 1
+
+        return False
+    
+    def IsPerfectSquare(self, num):
+        return self.IsPerfectSquareV2(num)
 
 if __name__ == "__main__":
     solution = Solution()
