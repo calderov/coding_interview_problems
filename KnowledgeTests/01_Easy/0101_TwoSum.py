@@ -25,7 +25,7 @@
 class Solution:
     # Time complexity: O(n ^ 2)
     # Space complexity: O(1) 
-    def FindSumIndexes(self, nums, target):
+    def FindSumIndexesV1(self, nums, target):
         n = len(nums)
 
         for i in range(n):
@@ -34,6 +34,25 @@ class Solution:
                     return [i, j]
 
         return None
+    
+    # Time complexity: O(n)
+    # Space complexity: O(n) 
+    def FindSumIndexesV2(self, nums, target):
+        indexMap = {}
+
+
+        for i, num in enumerate(nums):
+            complement = target - num
+
+            if complement in indexMap:
+                return [indexMap[complement], i]
+
+            indexMap[num] = i
+
+        return None
+    
+    def FindSumIndexes(self, nums, target):
+        return self.FindSumIndexesV2(nums, target)
 
 if __name__ == "__main__":
     solution = Solution()
@@ -55,6 +74,6 @@ if __name__ == "__main__":
     # Example 3:
     nums = [10, 15, 20, 25, 30]
     target = 45
-    expectedOutput = [1, 4]
+    expectedOutput = [2, 3]
     output = solution.FindSumIndexes(nums, target)
     print(output, expectedOutput, output == expectedOutput)
