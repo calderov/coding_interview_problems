@@ -26,7 +26,9 @@ class Solution:
     # Time complexity: O(n)
     # Space complexity: O(1)
     def IsPerfectSquare(self, num):
-        for i in range(num // 2 + 1):
+        if num < 1: return False
+
+        for i in range(1, num // 2 + 2):
             if i * i == num:
                 return True
         return False
