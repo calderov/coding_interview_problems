@@ -39,9 +39,21 @@ class Solution:
                 maxProfit = max(maxProfit, prices[j] - prices[i])
 
         return maxProfit
+    
+    # Time complexity: O(n)
+    # Space complexity: O(1)
+    def MaxProfitV2(self, prices):
+        minPrice = prices[0]
+        maxProfit = 0
+
+        for price in prices:
+            minPrice = min(minPrice, price)
+            maxProfit = max(maxProfit, price - minPrice)
+
+        return maxProfit
 
     def MaxProfit(self, prices):
-        return self.MaxProfitV1(prices)                
+        return self.MaxProfitV2(prices)                
 
 if __name__ == "__main__":
     solution = Solution()
