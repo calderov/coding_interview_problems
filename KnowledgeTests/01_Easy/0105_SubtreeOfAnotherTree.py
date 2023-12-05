@@ -37,24 +37,17 @@ class TreeNode:
 class Solution:
     # Time complexity:
     # Space complexity:
-    def IsSubTree(self, treeS, treeT):
-        roots = []
-        self.FindNodesWithValue(treeS, treeT.val, roots)
+    def IsSubTree(self, tree, subtree):
+        if not tree:
+            return False
 
-        for root in roots:
-            if self.IsSubTreeRootedAtRoot(root, treeT):
-                return True
-
-        return False
+        return self.IsSubTreeRootedAtRoot(tree, subtree) or self.IsSubTree(tree.left, subtree) or self.IsSubTree(tree.right, subtree)
 
     def IsSubTreeRootedAtRoot(self, tree, subtree):
         if not tree and not subtree:
             return True
 
-        if tree and not subtree:
-            return True
-
-        if subtree and not tree:
+        if not tree or not subtree:
             return False
 
         if tree.val != subtree.val:
@@ -62,31 +55,27 @@ class Solution:
 
         return self.IsSubTreeRootedAtRoot(tree.left, subtree.left) and self.IsSubTreeRootedAtRoot(tree.right, subtree.right)
 
-    def FindNodesWithValue(self, tree, value, roots=[]):
-        if not tree:
-            return
-
-        if tree.val == value:
-            roots.append(tree)
-
-        self.FindNodesWithValue(tree.left, value, roots)
-        self.FindNodesWithValue(tree.right, value, roots)
-
-
 if __name__ == "__main__":
     solution = Solution()
 
     # Example 1
-    treeS = TreeNode(3)
-    treeS.left = TreeNode(4)
-    treeS.right = TreeNode(5)
-    treeS.left.left = TreeNode(1)
-    treeS.left.right = TreeNode(2)
+    tree = TreeNode(3)
+    tree.left = TreeNode(4)
+    tree.right = TreeNode(5)
+    tree.left.left = TreeNode(1)
+    tree.left.right = TreeNode(2)
 
-    treeT = TreeNode(4)
-    treeT.left = TreeNode(1)
-    treeT.right = TreeNode(2)
+    subtree = TreeNode(4)
+    subtree.left = TreeNode(1)
+    subtree.right = TreeNode(2)
 
     expectedOutput = True
-    output = solution.IsSubTree(treeS, treeT)
+    output = solution.IsSubTree(tree, subtree)
+    print(output, expectedOutput, output == expectedOutput)
+
+    # Example 2 (based on Example 1)
+    tree.left.right.left = TreeNode(0)
+
+    expectedOutput = False
+    output = solution.IsSubTree(tree, subtree)
     print(output, expectedOutput, output == expectedOutput)
