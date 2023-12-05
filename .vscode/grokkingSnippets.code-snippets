@@ -1,0 +1,7 @@
+{
+    "Solution template": {
+      "prefix": ["solution template"],
+      "body": ["class Solution:\n\t# Solution:\n\t# \n\t# Solution complexity:\n\t# Time complexity: \n\t# Space complexity: \n\tdef foo(self):\n\t\tpass\n\nif __name__ == \"__main__\":\n\tsolution = Solution()\n\n\t"],
+      "description": "Solution template"
+    }
+  }
