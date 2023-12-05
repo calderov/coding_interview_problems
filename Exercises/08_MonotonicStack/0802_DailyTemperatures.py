@@ -44,15 +44,15 @@ class Solution:
     #   
     # 2. Iterate over the temperatures array. For each temperature:
     #   
-    # 3. While the stack is not empty and the current temperature is greater
-    #    than the temperature at the index on the top of the stack, set the value in
-    #    the result array at the top index of the stack to the difference between
-    #    the current index and the top index of the stack. Pop the index from the
-    #    stack.
+    #   2.1. While the stack is not empty and the current temperature is greater
+    #      than the temperature at the index on the top of the stack, set the value in
+    #      the result array at the top index of the stack to the difference between
+    #      the current index and the top index of the stack. Pop the index from the
+    #      stack.
+    #   
+    #   2.2. Push the current index onto the stack.
     # 
-    # 4. Push the current index onto the stack.
-    # 
-    # 6. Return the result array.
+    # 3. Return the result array.
     # 
     # Solution complexity:
     # Time complexity: O(n)
