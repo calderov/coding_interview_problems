@@ -1,12 +1,13 @@
 # Useful code snippets
 
-## Searches and traversals
+# Searches and Traversals
 Searching for values is a common operation on graphs, trees and matrices. There are well known algorithms to traverse these data structures which can be easily modified to accomplish search. 
 
-# Breadth First Ssearch (BFS) and Depth First Search (DFS)
+## Breadth First Search (BFS) and Depth First Search (DFS)
 BFS and DFS are two traversal algorithms. For a given graph, matrix or tree, BFS will explore the data structure level by level, starting with the closest neighbors from a starting point. DFS on the other hand will try to explore neighbors in a given direction until it can not go further.
 
 The implementations of both algorithms are quite simmilar, their main difference is their underliying data structure. DFS uses a stack to keep track of pending states and BFS uses a queue.
+Lets study how DFS and BFS traverse a binary tree implemented as follows:  
 
 ### Depth-First Search
 ```python
