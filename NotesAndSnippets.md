@@ -1,31 +1,80 @@
 # Useful code snippets
 
 ## Searches and traversals
-# Iterative BFS and DFS
-The iterative implementations of BFS and DFS are quite simmilar, their main difference is their underliying data structure. DFS uses a stack to keep track of pending states and BFS uses a queue.
+Searching for values is a common operation on graphs, trees and matrices. There are well known algorithms to traverse these data structures which can be easily modified to accomplish search. 
 
-### Depth-First Search (iterative)
+# Breadth First Ssearch (BFS) and Depth First Search (DFS)
+BFS and DFS are two traversal algorithms. For a given graph, matrix or tree, BFS will explore the data structure level by level, starting with the closest neighbors from a starting point. DFS on the other hand will try to explore neighbors in a given direction until it can not go further.
+
+The implementations of both algorithms are quite simmilar, their main difference is their underliying data structure. DFS uses a stack to keep track of pending states and BFS uses a queue.
+
+### Depth-First Search
 ```python
-def dfs(graph, start):
-    visited = set()
-    pending = [start] # Stack
+def dfs(head, visited):
+    if not head:
+        return
+    
+    # Add node to visited list
+    visited.append(head.val)
+    
+    # Recursively call dfs on neighbor subtrees
+    dfs(head.left, visited)
+    dfs(head.right, visited)
 
+def dfs_iterative(head):
+    visited = []
+    pending = [head] # Stack
+
+    # While there are nodes in the pending stack
     while pending:
+        # Fetch node from pending stack
         node = pending.pop()
-        print(node)
-        pending += filter(lambda x: x not in visited, reversed([neighbor for neighbor in graph[node]]))
+
+        # Add node to visited list
+        visited.append(node.val)
+
+        # Add neighbors to pending stack
+        if node.right: pending.append(node.right)
+        if node.left: pending.append(node.left)
+
+    return visited
 ```
 
-### Breadth-First Search (iterative)
+### Breadth-First Search
 ```python
-def bfs_iterative(graph, start):
-    visited = set()
-    pending = [start] # Queue
 
+def bfs(head, visited, pending=[]):
+    if not head:
+        return
+    
+    # Add node to visited list
+    visited.append(head.val)
+
+    # Add neighbor nodes to pending queue
+    pending.append(head.left)
+    pending.append(head.right)
+    
+    # Recursively call bfs if there are pending nodes
+    if pending:
+        bfs(pending.pop(0), visited, pending)
+
+def bfs_iterative(head):
+    visited = []
+    pending = [head] # Queue
+
+    # While there are nodes in the pending queue
     while pending:
+        # Fetch node from pending queue
         node = pending.pop(0)
-        print(node)
-        pending += filter(lambda x: x not in visited, [neighbor for neighbor in graph[node]])
+
+        # Add node to visited list
+        visited.append(node.val)
+
+        # Add neighbors to pending queue
+        if node.left: pending.append(node.left)
+        if node.right: pending.append(node.right)
+
+    return visited
 ```
 
 ## Linked lists
