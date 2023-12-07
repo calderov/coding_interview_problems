@@ -212,6 +212,10 @@ def IsOverlap(self, intervalA, intervalB):
 ```
 
 ## Cyclic Sort
+Cyclic sort is a special kind of sorting algorithm. It sorts arrays in linear time if the elements of such arrays can be enumerated from 1 to n,
+where n is the number of elements in the array. If there are duplicates in the array, cyclic sort will place them in substitution for those
+missing elements from the range 1 to n.
+
 ### Cyclic sort example
 ```python
 # Given an array of n numbers in the range 1 to n (inclusive) sorts the array
