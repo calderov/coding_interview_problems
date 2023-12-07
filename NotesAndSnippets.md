@@ -7,7 +7,16 @@ Searching for values is a common operation on graphs, trees and matrices. There 
 BFS and DFS are two traversal algorithms. For a given graph, matrix or tree, BFS will explore the data structure level by level, starting with the closest neighbors from a starting point. DFS on the other hand will try to explore neighbors in a given direction until it can not go further.
 
 The implementations of both algorithms are quite simmilar, their main difference is their underliying data structure. DFS uses a stack to keep track of pending states and BFS uses a queue.
-Lets study how DFS and BFS traverse a binary tree implemented as follows:  
+
+Lets study how DFS and BFS traverse a binary tree made of nodes implemented as follows:  
+
+```python
+class TreeNode:
+    def __init__(self, value):
+        self.val = value
+        self.left = None
+        self.right = None
+```
 
 ### Depth-First Search
 ```python
@@ -90,7 +99,7 @@ class Node:
 
 ### Python list to linked list
 ```python
-def ToLinkedList(nums):
+def PythonListToLinkedList(nums):
     head = None
     tail = None
 
@@ -110,7 +119,7 @@ def ToLinkedList(nums):
 
 ### Linked list to Python list
 ```python
-def ToPythonList(head):
+def LinkedListToPythonList(head):
     nums = []
     while head:
         nums.append(head.val)
