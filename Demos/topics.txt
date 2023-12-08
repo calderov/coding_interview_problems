@@ -1,0 +1,14 @@
+[OK] 1. Quicksort
+[OK] 2. Cyclic sort
+[--] 3. Binary search
+[OK] 4. Reverse list
+[--] 5. Top K emelents
+[--] 6. Fast and slow (cycle in linked list, middle of linked list)
+[OK] 7. DFS and BFS
+[OK] 8. All subsets
+[--] 9. All combinations
+[--] 10. All permutations
+[--] 11. Merge intervals
+[--] 12. Dynamic programming
+[--] 13. Backtracking
+[--] 14. Topological sort 
