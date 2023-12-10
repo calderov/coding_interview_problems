@@ -5,10 +5,11 @@
 [OK] 5. Top K emelents
 [OK] 6. Fast and slow (cycle in linked list)
 [OK] 7. Fast and slow (middle of linked list)
-[OK] 8. DFS and BFS
-[OK] 9. All subsets
-[OK] 10. All permutations
-[OK] 11. Merge intervals
-[OK] 12. Dynamic programming
-[OK] 13. Backtracking
-[OK] 14. Topological sort
+[OK] 8. DFS
+[OK] 9. BFS
+[OK] 10. All subsets
+[OK] 11. All permutations
+[OK] 12. Merge intervals
+[OK] 13. Dynamic programming
+[OK] 14. Backtracking
+[OK] 15. Topological sort
