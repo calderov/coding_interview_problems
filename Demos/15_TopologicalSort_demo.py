@@ -1,9 +1,3 @@
-# The Topological Sort of a directed graph (a graph with unidirectional edges) is
-# a linear ordering of its vertices such that for every directed edge (U, V) from
-# vertex U to vertex V, U comes before V in the ordering.
-#
-# Given the vertices and edges of a directed graph, find the topological ordering of
-# the vertices.
 def TopologicalSort(vertices, edges):
     graph = BuildGraph(vertices, edges)
     inDegree = BuildInDegreeTracker(graph)
