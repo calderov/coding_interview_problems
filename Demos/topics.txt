@@ -10,5 +10,5 @@
 [OK] 10. All permutations
 [OK] 11. Merge intervals
 [OK] 12. Dynamic programming
-[--] 13. Backtracking
+[OK] 13. Backtracking
 [--] 14. Topological sort
