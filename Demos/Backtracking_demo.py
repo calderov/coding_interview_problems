@@ -81,7 +81,7 @@ def MakeBoard(n, m):
     return [[0 for col in range(m)] for row in range(n)]
 
 if __name__ == "__main__":
-    n = 10 # Number of queens and board size (n x n)
+    n = 8 # Number of queens and board size (n x n)
     board = MakeBoard(n, n)
     if PlaceNQueens(board, n):
         PrintBoard(board)
