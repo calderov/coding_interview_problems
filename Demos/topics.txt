@@ -1,8 +1,8 @@
 [OK] 1. Quicksort
 [OK] 2. Cyclic sort
-[--] 3. Binary search
+[OK] 3. Binary search
 [OK] 4. Reverse list
-[--] 5. Top K emelents
+[OK] 5. Top K emelents
 [--] 6. Fast and slow (cycle in linked list, middle of linked list)
 [OK] 7. DFS and BFS
 [OK] 8. All subsets
