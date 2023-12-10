@@ -1,12 +1,12 @@
-[OK] 1. Quicksort
-[OK] 2. Cyclic sort
-[OK] 3. Binary search
-[OK] 4. Reverse list
-[OK] 5. Top K emelents
-[OK] 6. Fast and slow (cycle in linked list)
-[OK] 7. Fast and slow (middle of linked list)
-[OK] 8. DFS
-[OK] 9. BFS
+[OK] 01. Quicksort
+[OK] 02. Cyclic sort
+[OK] 03. Binary search
+[OK] 04. Reverse list
+[OK] 05. Top K emelents
+[OK] 06. Fast and slow (cycle in linked list)
+[OK] 07. Fast and slow (middle of linked list)
+[OK] 08. DFS
+[OK] 09. BFS
 [OK] 10. All subsets
 [OK] 11. All permutations
 [OK] 12. Merge intervals

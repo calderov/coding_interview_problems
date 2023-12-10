@@ -34,3 +34,4 @@ if __name__ == "__main__":
     output = HasCycle(head)
 
     print(output, expectedOutput, output == expectedOutput)
+
