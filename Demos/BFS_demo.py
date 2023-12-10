@@ -5,7 +5,7 @@ class TreeNode:
         self.left = None
         self.right = None
 
-def bfs(head, visited, pending=[]):
+def BFS(head, visited, pending=[]):
     if not head:
         return
     
@@ -18,9 +18,9 @@ def bfs(head, visited, pending=[]):
     
     # Recursively call bfs if there are pending nodes
     if pending:
-        bfs(pending.pop(0), visited, pending)
+        BFS(pending.pop(0), visited, pending)
 
-def bfs_iterative(head):
+def BFSIterative(head):
     visited = []
     pending = [head] # Queue
 
@@ -53,14 +53,14 @@ if __name__ == "__main__":
    
     print("BFS recursive")
     output = []
-    bfs(tree, output)
+    BFS(tree, output)
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
     print()
 
     print("BFS iterative")
-    output = bfs_iterative(tree)
+    output = BFSIterative(tree)
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)

@@ -5,7 +5,7 @@ class TreeNode:
         self.left = None
         self.right = None
 
-def dfs(head, visited):
+def DFS(head, visited):
     if not head:
         return
     
@@ -13,10 +13,10 @@ def dfs(head, visited):
     visited.append(head.val)
     
     # Recursively call dfs on neighbor subtrees
-    dfs(head.left, visited)
-    dfs(head.right, visited)
+    DFS(head.left, visited)
+    DFS(head.right, visited)
 
-def dfs_iterative(head):
+def DFSIterative(head):
     visited = []
     pending = [head] # Stack
 
@@ -49,14 +49,14 @@ if __name__ == "__main__":
    
     print("DFS recursive")
     output = []
-    dfs(tree, output)
+    DFS(tree, output)
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
     print()
 
     print("DFS iterative")
-    output = dfs_iterative(tree)
+    output = DFSIterative(tree)
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
