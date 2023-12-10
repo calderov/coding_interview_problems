@@ -1,11 +1,5 @@
 # Given a set of positive numbers, find the total number of subsets whose sum is equal to a given number ‘S’.
 #
-# Solution:
-# Use dynamic programming to set a table dp, where dp[i][j] keeps the number of subsets of the first i elements
-# of the input that add up to the value j which ranges from 0 to S. Build this table iteratively based on whether
-# an element is included in a subset or not. Once the table is populated, return the value stored in the last cell
-# of the table, as it contains how many subsets add to S.
-#
 # Time complexity: O(n * s)
 # Space complexity: O(n * s)
 def TotalNumberOfSubsetsWithSumS(nums, s):
@@ -15,14 +9,12 @@ def TotalNumberOfSubsetsWithSumS(nums, s):
     # Initialize the dynamic programming table (dp)
     dp = [[0 for col in range(cols)] for row in range(rows)]
 
-    # Base case: Mark the fist colum as the every set has an empty set 
-    #            that adds up to zero.
+    # Base case: Mark the fist colum as every set has an empty set that adds up to zero.
     for row in range(rows):
         dp[row][0] = 1
 
-    # Base case: A set containing only the first element from nums
-    #            can add up to the value of the first element of nums,
-    #            mark its corresponding colum.
+    # Base case: A set containing only the first element from nums can add up to the value
+    #            of the first element of nums, mark its corresponding colum.
     if nums[0] < cols:
         dp[0][nums[0]] = 1
 
