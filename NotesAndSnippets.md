@@ -238,20 +238,20 @@ def CyclicSort(nums):
 ## Binary search
 ### Binary search example (assuming input array is sorted in ascending order)
 ```python
-def BinarySearch(nums, key):
+def BinarySearch(nums, value):
     left = 0
     right = len(nums) - 1
 
     while left <= right:
         mid = (left + right) // 2
 
-        if nums[mid] == key:
+        if nums[mid] == value:
             return mid
         
-        if nums[mid] < key:
+        if nums[mid] < value:
             left = mid + 1
 
-        else: # nums[mid] > key
+        else: # nums[mid] > value
             right = mid - 1
     
     return -1
