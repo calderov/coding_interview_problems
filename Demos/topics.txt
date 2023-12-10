@@ -7,8 +7,7 @@
 [OK] 7. Fast and slow (middle of linked list)
 [OK] 8. DFS and BFS
 [OK] 9. All subsets
-[--] 10. All combinations
-[--] 11. All permutations
+[OK] 11. All permutations
 [--] 12. Merge intervals
 [--] 13. Dynamic programming
 [--] 14. Backtracking
