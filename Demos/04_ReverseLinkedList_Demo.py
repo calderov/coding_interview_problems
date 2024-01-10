@@ -13,8 +13,8 @@ def ReverseLinkedList(head):
         node.next = prevNode
         prevNode = node
         node = nextNode
-
-    return prevNode
+    head = prevNode
+    return head
 
 def PythonListToLinkedList(pythonList):
     head = None
