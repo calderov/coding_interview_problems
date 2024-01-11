@@ -8,18 +8,17 @@
 #
 # Given an integer n, return all possible combinations of its factors. You
 # may return the answer in any order.
-# Example 1:
+# Examples:
 #
-# Input: n = 8
-# Output: [[2, 2, 2], [2, 4]]
-# Example 2:
+#   Input: n = 8
+#   Output: [[2, 2, 2], [2, 4]]
+# 
+#   Input: n = 20
+#   Output: [[2, 2, 5], [2, 10], [4, 5]]
 #
-# Input: n = 20
-# Output: [[2, 2, 5], [2, 10], [4, 5]]
-
 class Solution:
     # Solution:
-    # 1. Given a target number to factor (n), a list of candidate factors (candidates), the current
+    # 1. Given a target number to factor n, a list of candidate factors (candidates), the current
     #    product of such candidates (candidatesProduct) and a list to hold the results (results).
     #    Pass them as arguments to the FindFactors function.
     #
