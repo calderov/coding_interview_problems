@@ -26,7 +26,7 @@ import math
 class Solution:
     # Solution:
     # Use a regular binary tree search, but instead of initializing the 'right' pointer to the
-    # last position of the array (which by definitio does not exist in this case), have it
+    # last position of the array (which by definition does not exist in this case), have it
     # point to a position with a value that is greater or equal than the given key.
     #
     # Solution complexity:
@@ -36,7 +36,7 @@ class Solution:
         left = 0
         right = 1
 
-        # Point the 'right' pointer to a position with a value greater or equal than the key
+        # Point the 'right' pointer to a position with a value greater than or equal to the key
         while numsReader.get(right) <= key:
             right *= 2
 
