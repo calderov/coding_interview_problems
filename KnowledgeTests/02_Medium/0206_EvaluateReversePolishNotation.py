@@ -47,40 +47,29 @@ class Solution:
     # Time complexity: O(n)
     # Space complexity: O(n)
     def EvaluateReversePolishExpression(self, tokens):
-        operators = ['+', '-', '*', '/']
-        tokens.reverse()
-        
-        for i in range(len(tokens)):
-            if tokens[i] not in operators:
-                tokens[i] = int(tokens[i])
-        
-        operands = []
-        while len(tokens) > 1 or tokens[0] in operators:
-            if tokens[-1] not in operators:
-                operands.append(tokens.pop())
+        stack = []
+
+        for t in tokens:
+            if t not in "+-*/":
+                stack.append(int(t))
                 continue
 
-            operandB = operands.pop()
-            operandA = operands.pop()
-            operator = tokens.pop()
+            b = stack.pop()
+            a = stack.pop()
+            
+            if t == "+":
+                stack.append(a + b)
 
-            if operator ==  '+':
-                tokens.append(operandA + operandB)
-                continue
+            elif t == "-":
+                stack.append(a - b)
 
-            if operator == '-':
-                tokens.append(operandA - operandB)
-                continue
+            elif t == "*":
+                stack.append(a * b)
 
-            if operator == '*':
-                tokens.append(operandA * operandB)
-                continue
+            elif t == "/":
+                stack.append(int(a / b))
 
-            if operator == '/':
-                tokens.append(int(operandA / operandB))
-                continue
-        
-        return tokens[0]
+        return stack[0]
 
 if __name__ == "__main__":
     solution = Solution()
