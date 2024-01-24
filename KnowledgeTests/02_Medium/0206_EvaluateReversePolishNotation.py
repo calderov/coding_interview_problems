@@ -44,8 +44,8 @@
 
 
 class Solution:
-    # Time complexity: 
-    # Space complexity: 
+    # Time complexity: O(n)
+    # Space complexity: O(n)
     def EvaluateReversePolishExpression(self, tokens):
         operators = ['+', '-', '*', '/']
         tokens.reverse()
