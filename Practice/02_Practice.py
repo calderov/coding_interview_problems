@@ -15,7 +15,9 @@
 from heapq import *
 
 class Solution:
-    def KthSmallestInSortedMatrix(self, matrix, k):
+    # Time complexity: O(n ^ 2)
+    # Space complexity: O(n ^ 2)
+    def KthSmallestInSortedMatrixBruteForce(self, matrix, k):
         minHeap = []
         rows = len(matrix)
         cols = len(matrix[0])
@@ -28,6 +30,27 @@ class Solution:
             heappop(minHeap)
         
         return heappop(minHeap)
+    
+    # Time complexity: O(k log(n))
+    # Space complexity: O(n)    
+    def KthSmallestInSortedMatrix(self, matrix, k):
+        n = len(matrix)
+
+        # Initialize min heap with the values and positions
+        # of the elementsat the start of each row
+        minHeap = [(matrix[i][0], i, 0) for i in range(n)]
+        heapify(minHeap)
+
+        # Loop k - 1 times extracting the smallest element on the heap (the one at the top)
+        # and replacing it by the element that follows it on the same row of the matrix
+        for i in range(k - 1):
+            val, row, col = heappop(minHeap)
+
+            if col < n - 1:
+                heappush(minHeap, (matrix[row][col + 1], row, col + 1))
+
+        # In the end, the element at the top of the matrix should be the kth largest element
+        return minHeap[0][0]
 
 if __name__ == "__main__":
     solution = Solution()
