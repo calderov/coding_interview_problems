@@ -1,56 +1,44 @@
-# Problem:
-# Given an integer array nums and an integer k, return true if there are two
-# distinct indices i and j in the array such that nums[i] == nums[j] and
-# abs(i - j) <= k.
-# 
-# Examples:
-# 
-#   Input: nums = [1,2,3,1], k = 3
-#   Output: true
-# 
-#   Input: nums = [1,0,1,1], k = 1
-#   Output: true
-# 
-#   Input: nums = [1,2,3,1,2,3], k = 2
-#   Output: false
-#  
+# Given the root of a binary tree check wether it is a mirror of itself
+#
+# Example input:
+#
+#       1
+#   2       2
+# 3   4   4   3
+#
+# Expected result: True
 
-class Solution:
-    # Time complexity: O(n)
-    # Space complexity: O(n)
-    def ContainsDuplicateAtMostKCharsAppart(self, nums, k):
-        indexMap = {}
-        n = len(nums)
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
 
-        for i in range(n):
-            if nums[i] in indexMap:
-                if i - indexMap[nums[i]] <= k:
-                    return True
+def MirrorCompare(left, right):
+    if not left and not right:
+        return True
 
-            indexMap[nums[i]] = i
-
+    if not left or not right:
         return False
 
-if __name__ == "__main__":
-    solution = Solution()
+    if left.value != right.value:
+        return False
+    
+    return MirrorCompare(left.left, right.right) and MirrorCompare(left.right, right.left)
 
-    # Example 1
-    nums = [1,2,3,1]
-    k = 3
-    expectedOutput = True
-    output = solution.ContainsDuplicateAtMostKCharsAppart(nums, k)
-    print(output, expectedOutput, output == expectedOutput)
+def IsMirror(root):
+    return MirrorCompare(root.left, root.right)
+
+if __name__ == "__main__":
+    tree = TreeNode(1)
     
-    # Example 2
-    nums = [1,0,1,1]
-    k = 1
-    expectedOutput = True
-    output = solution.ContainsDuplicateAtMostKCharsAppart(nums, k)
-    print(output, expectedOutput, output == expectedOutput)
-    
-    # Example 3
-    nums = [1,2,3,1,2,3]
-    k = 2
-    expectedOutput = False
-    output = solution.ContainsDuplicateAtMostKCharsAppart(nums, k)
-    print(output, expectedOutput, output == expectedOutput)
+    tree.left = TreeNode(2)
+    tree.right = TreeNode(2)
+
+    tree.left.left = TreeNode(3)
+    tree.left.right = TreeNode(4)
+
+    tree.right.right = TreeNode(3)
+    tree.right.left = TreeNode(4)
+
+    print(IsMirror(tree))

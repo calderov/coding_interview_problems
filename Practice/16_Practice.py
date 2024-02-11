@@ -1,43 +1,36 @@
-# Problem:
-# Given an array of sorted numbers, remove all duplicate number
-# instances from it (in-place), such that each element appears only
-# once. The relative order of the elements should be kept the same
-# and you should not use any extra space so that that the solution
-# have a space complexity of O(1).
-#
-# Move all the unique elements at the beginning of the array and after 
-# moving return the length of the subarray that has no duplicate in it.
+# Given an array of unsorted numbers return the second largest one
+def GetSecondLargest(nums):
+    if not nums or len(nums) < 2:
+        return None
+    
+    largest = []
 
-class Solution:
-    def RemoveDuplicates(self, nums):
-        slow = 0
-        fast = 1
+    for num in nums:
+        if not largest:
+            largest.append(num)
+            continue
 
-        while fast < len(nums):
-            if nums[slow] != nums[fast]:
-                slow += 1
-                nums[slow] = nums[fast]
-            fast += 1
+        if len(largest) == 1:
+            if num > largest[0]:
+                largest.append(num)
+            if num < largest[0]:
+                largest.insert(0, num)
+            continue
+        
+        if num > largest[-1]:
+            largest.pop(0)
+            largest.append(num)
 
-        return slow + 1
+    if len(largest) < 2:
+        return None
 
-if __name__ == "__main__":
-    solution = Solution()
+    return largest[0]
 
-    # Example 1
-    arr = [2, 3, 3, 3, 6, 9, 9]
-    expectedOutput = 4
-    print(arr)
-    output = solution.RemoveDuplicates(arr)
-    print(arr)
-    print(output == expectedOutput)
 
-    print()
-
-    # Example 2
-    arr = [2, 2, 2, 11]
-    expectedOutput = 2
-    print(arr)
-    output = solution.RemoveDuplicates(arr)
-    print(arr)
-    print(output == expectedOutput)
+print(GetSecondLargest([]), None)
+print(GetSecondLargest([1]), None)
+print(GetSecondLargest([1, 1]), None)
+print(GetSecondLargest([1, 1, 1]), None)
+print(GetSecondLargest([1,2,3,4]), 3)
+print(GetSecondLargest([4,3,2,1]), 3)
+print(GetSecondLargest([4,4,3,2,1]), 3)
