@@ -1,7 +1,11 @@
 
+# Given a list of 1 million numbers and a list of half a million numbers,
+# remove all the items in the second list from the first one in less than
+# one second.
+
 import time
 
-# Runtime 0.14 segundos
+# Runtime 0.14 seconds
 def RemoveElementsFromList(original, elements):
     return sorted(set(original).difference(set(elements)))
 

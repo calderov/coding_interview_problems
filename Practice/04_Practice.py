@@ -1,53 +1,65 @@
-# Given a Binary Tree and an input array. The task is to create an Iterator
-# that utilizes next() and hasNext() functions to perform Inorder traversal
-# on the binary tree.
+# Problem:
+# Given an array of numbers sorted in an ascending order, find the ceiling of
+# a given number ‘key’. The ceiling of the ‘key’ will be the smallest element
+# in the given array greater than or equal to the ‘key’.
+# 
+# Write a function to return the index of the ceiling of the ‘key’. If there
+# isn’t any ceiling return -1.
+# 
+# Examples:
+# 
+# Input: [4, 6, 10], key = 6
+# Output: 1
+# Explanation: The smallest number greater than or equal to '6' is '6' having
+# index '1'. 
+# 
+# Input: [4, 6, 10], key = 17
+# Output: -1
+# Explanation: There is no number greater than or equal to '17' in the given
+# array.
+# 
 
-class TreeNode:
-    def __init__(self, value):
-        self.val = value
-        self.left = None
-        self.right = None
-
-class InorderIterator:
-    def __init__(self, root):
-        self.stack = []
-        self.findLeftMost(root)
-
-    def findLeftMost(self, node):
-        while node:
-            self.stack.append(node)
-            node = node.left
-
-    def has_next(self):
-        if self.stack:
-            return True
-        return False
-    
-    def next(self):
-        if not self.has_next():
-            return None
+class Solution:
+    def GetCeiling(self, nums, key):
+        if not nums:
+            return -1
         
-        nextNode = self.stack.pop()
+        if nums[0] >= key:
+            return 0
 
-        if nextNode.right:
-            self.findLeftMost(nextNode.right)
-        
-        return nextNode
+        left = 0
+        right = len(nums) - 1
+
+        prevMid = -1
+
+        while left < right:
+            mid = left + right // 2
+
+            if nums[mid] == key:
+                return mid
+
+            if nums[mid] < key:
+                left = mid + 1
+            
+            else: # nums[mid] > key:
+                prevMid = mid
+                right = mid - 1
+
+        return prevMid
 
 if __name__ == "__main__":
-    root = TreeNode(8)
-    root.right = TreeNode(9)
-    root.left = TreeNode(3)
-    root.left.left = TreeNode(2)
-    root.left.right = TreeNode(4)
-    root.left.right.right = TreeNode(5)
+    solution = Solution()
+    
+    nums = [4, 6, 10]
+    key = 6
+    expectedOutput = 1
+    output = solution.GetCeiling(nums, key)
+    print(output, expectedOutput, output == expectedOutput)
+    
+    nums = [4, 6, 10]
+    key = 17
+    expectedOutput = -1
+    output = solution.GetCeiling(nums, key)
+    print(output, expectedOutput, output == expectedOutput)
 
-    iterator = InorderIterator(root)
-
-    print(iterator.has_next(), iterator.next().val)
-    print(iterator.has_next(), iterator.next().val)
-    print(iterator.has_next(), iterator.next().val)
-    print(iterator.has_next(), iterator.next().val)
-    print(iterator.has_next(), iterator.next().val)
-    print(iterator.has_next(), iterator.next().val)
-    print(iterator.has_next(), iterator.next())
+    

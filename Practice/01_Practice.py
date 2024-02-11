@@ -24,7 +24,7 @@ class TreeNode:
         self.val = value
         self.left = left
         self.right = right
-    
+
 class Solution:
     def MinimumDepth(self, root):
         if not root:
@@ -35,9 +35,9 @@ class Solution:
 
         while pending:
             minDepth += 1
-            levelSize = len(pending)
+            nodesInLevel = len(pending)
 
-            for _ in range(levelSize):
+            for _ in range(nodesInLevel):
                 node = pending.pop(0)
 
                 if not node.left and not node.right:

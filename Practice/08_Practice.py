@@ -20,5 +20,3 @@ if __name__ == "__main__":
     print(6, IsPowerOfThree(6))
     print(12, IsPowerOfThree(12))
     print(18, IsPowerOfThree(18))
-
-    

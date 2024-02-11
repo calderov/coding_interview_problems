@@ -8,28 +8,25 @@
 class Solution:
     def ReverseVowels(self, inputString):
         vowels = "aeiouAEIOU"
-        outputString = list(inputString)
+        output = list(inputString)
 
         left = 0
         right = len(inputString) - 1
 
         while left < right:
-            leftChar = inputString[left]
-            rightChar = inputString[right]
-
-            if leftChar in vowels and rightChar in vowels:
-                outputString[left], outputString[right] = outputString[right], outputString[left]
+            if output[left] in vowels and output[right] in vowels:
+                output[left], output[right] = output[right], output[left]
                 left += 1
                 right -= 1
                 continue
 
-            if leftChar not in vowels:
+            if output[left] not in vowels:
                 left += 1
 
-            if rightChar not in vowels:
+            if output[right] not in vowels:
                 right -= 1
 
-        return ''.join(outputString)
+        return ''.join(output)
 
 if __name__ == "__main__":
     solution = Solution()

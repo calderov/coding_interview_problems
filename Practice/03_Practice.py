@@ -20,7 +20,9 @@ class Solution:
         return True
 
     def IsOverlap(self, intervalA, intervalB):
-        return intervalA[0] < intervalB[1] and intervalA[1] > intervalB[0]
+        intervalAStart, intervalAEnd = intervalA
+        intervalBStart, intervalBEnd = intervalB
+        return intervalAStart < intervalBEnd and intervalAEnd > intervalBStart
 
 if __name__ == "__main__":
     solution = Solution()
