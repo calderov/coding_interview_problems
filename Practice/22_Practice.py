@@ -16,39 +16,24 @@
 # array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue
 # section) are being trapped.
 
-def IsAllZeros(nums):
-    for num in nums:
-        if num != 0:
-            return False
-    return True
+def WaterCapacity(elevation):
+    n = len(elevation)
 
-def GetNonZeroIndexes(nums):
-    indexes = []
+    maxLeft  = [0] * n # Largest elevation so far form the left
+    maxRight = [0] * n # Largest elevation so far form the right
+    water = [0] * n
 
-    for i in range(len(nums)):
-        if nums[i] != 0:
-            indexes.append(i)
+    for i in range(1, n):
+        maxLeft[i] = max(maxLeft[i - 1], elevation[i - 1])
 
-    return indexes
+        j = n - 1 - i
+        maxRight[j] = max(maxRight[j + 1], elevation[j + 1])
 
-def WaterCapacity(elevationArray):
-    water = 0
+    for i in range(n):
+        potential = min(maxLeft[i], maxRight[i])
+        water[i] = max(potential - elevation[i], 0)
 
-    while not IsAllZeros(elevationArray):
-        nonZeroIndexes = GetNonZeroIndexes(elevation)
-    
-        # Compute water at the bottom
-        for i in range(len(nonZeroIndexes) - 1):
-            left = nonZeroIndexes[i]
-            right = nonZeroIndexes[i + 1]
-
-            water += right - left - 1
-
-        # Reduce the elevation by one layer
-        for i in range(len(elevationArray)):
-            elevationArray[i] = max(elevationArray[i] - 1, 0)
-
-    return water
+    return sum(water)
 
 if __name__ == "__main__":
     elevation = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
