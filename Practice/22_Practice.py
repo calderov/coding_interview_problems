@@ -16,6 +16,26 @@
 # array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue
 # section) are being trapped.
 
+def WaterCapacityV2(elevation):
+    i = 0
+    j = len(elevation) - 1
+    
+    totalWater = 0
+    leftMax = elevation[i]
+    rightMax = elevation[j]
+    
+    while i < j:
+        if leftMax < rightMax:
+            i += 1
+            leftMax = max(leftMax, elevation[i])
+            totalWater += leftMax - elevation[i]
+        else:
+            j -= 1
+            rightMax = max(rightMax, elevation[j])
+            totalWater += rightMax - elevation[j]
+    
+    return totalWater
+
 def WaterCapacity(elevation):
     n = len(elevation)
 
@@ -38,5 +58,5 @@ def WaterCapacity(elevation):
 if __name__ == "__main__":
     elevation = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
     expectedOutput = 6
-    output = WaterCapacity(elevation)
+    output = WaterCapacityV2(elevation)
     print(output, expectedOutput, output == expectedOutput)
