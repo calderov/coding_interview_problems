@@ -12,6 +12,9 @@ class TreeNode:
 
 class Solution:
     def VerticalOrderV1(self, root):
+        if not root:
+            return []
+
         columns = {root: 0}
         groupedColumns = {0: [root.val]}
         pending = [root]
@@ -45,6 +48,9 @@ class Solution:
         return result
     
     def VerticalOrderV2(self, root):
+        if not root:
+            return []
+
         groupedColumns = {0: [root.val]}
         pending = [(root, 0)]
 
