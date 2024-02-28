@@ -50,8 +50,8 @@ class Solution:
         
         return depth
 
-    # Time complexity: 
-    # Space complexity: 
+    # Time complexity: O(n)
+    # Space complexity: O(1)
     def LowestCommonAncestor(self, nodeA, nodeB):
         # Get depths of nodes A and B
         depthA = self.GetDepth(nodeA)
