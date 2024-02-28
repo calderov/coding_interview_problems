@@ -58,13 +58,14 @@ class Solution:
         depthB = self.GetDepth(nodeB)
 
         # Move pointers A and B to the same level
-        while depthA < depthB:
-            nodeB = nodeB.parent
-            depthB -= 1
+        while depthA != depthB:
+            if depthA < depthB:
+                nodeB = nodeB.parent
+                depthB -= 1
 
-        while depthB < depthA:
-            nodeA = nodeA.parent
-            depthA -= 1
+            if depthB < depthA:
+                nodeA = nodeA.parent
+                depthA -= 1
 
         # Now that the pointers are at the same level
         # traverse their parents until the first common
