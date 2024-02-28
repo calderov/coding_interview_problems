@@ -346,3 +346,28 @@ def TotalNumberOfSubsetsWithSumS(self, nums, s):
     # in the last cell of the dynamic programming table
     return dp[-1][-1]
 ```
+
+
+## List to binary tree conversion
+```python
+def ListToTree(values, index=0, parent=None):
+    if not values:
+        return None
+    
+    if index > len(values):
+        raise Exception('Index out of range')
+    
+    root = Node(values[index])
+    root.parent = parent
+    
+    leftIndex = 2 * index + 1
+    rightIndex = 2 * index + 2
+
+    if leftIndex < len(values):
+        root.left = ListToTree(values, leftIndex, parent=root)
+    
+    if rightIndex < len(values):
+        root.right = ListToTree(values, rightIndex, parent=root)
+    
+    return root
+```
