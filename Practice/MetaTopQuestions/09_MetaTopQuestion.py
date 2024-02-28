@@ -16,10 +16,12 @@ class Solution:
     # Space complexity: 
     def __init__(self, w):
         sumW = sum(w)
-        self.w = [weight /sumW for weight in w]
+        self.w = list(w)
 
-        for i in range(1, len(self.w)):
-            self.w[i] += self.w[i - 1]
+        for i in range(len(self.w)):
+            self.w[i] = self.w[i] / sumW
+            if i > 0:
+                self.w[i] += self.w[i - 1]
         
     def PickIndex(self):
         n = random.uniform(0, 1)
