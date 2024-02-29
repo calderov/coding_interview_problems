@@ -28,7 +28,7 @@ class TreeNode:
 class Solution:
     # Time complexity: O(n)
     # Space complexity: O(n)
-    def RangeSumOfBST(self, root, low, high):
+    def RangeSumOfBSTV1(self, root, low, high):
         valuesInRange = []
         pending = [root]
         while pending:
@@ -46,6 +46,31 @@ class Solution:
                     pending.append(node.right)
 
         return sum(valuesInRange)
+    
+    # Time complexity: O(n)
+    # Space complexity: O(log(n))
+    def RangeSumOfBSTV2(self, root, low, high):
+        if not root:
+            return 0
+
+        result = 0
+        pending = [root]
+        while pending:
+            node = pending.pop()
+
+            if low <= node.val <= high:
+                result += node.val
+
+            if node.left and low <= node.val:
+                pending.append(node.left)
+
+            if node.right and node.val <= high:
+                pending.append(node.right)
+
+        return result
+
+    def RangeSumOfBST(self, root, low, high):
+        return self.RangeSumOfBSTV2(root, low, high)
 
 def ListToTree(values, index=0):
     if not values or not values[index]:
