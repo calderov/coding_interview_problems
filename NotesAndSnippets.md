@@ -351,7 +351,7 @@ def TotalNumberOfSubsetsWithSumS(self, nums, s):
 ## List to binary tree conversion
 ```python
 def ListToTree(values, index=0, parent=None):
-    if not values:
+    if not values or not values[index]:
         return None
     
     if index > len(values):
