@@ -40,16 +40,20 @@
 
 class Solution:
     # Time complexity: O(n)
-    # Space complexity: 
+    # Space complexity: O(n)
     def SimplifyPath(self, path):
         simpliedPath = [] # Stack
         path = path.split('/')
         
         for token in path:
-            
+            if token not in ['', '.', '..']:
+                simpliedPath.append(token)
+                continue
 
+            if token == ".." and simpliedPath:
+                simpliedPath.pop()
 
-
+        return '/' + '/'.join(simpliedPath)
 
 if __name__ == "__main__":
     solution = Solution()
