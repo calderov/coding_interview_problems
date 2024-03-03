@@ -47,8 +47,8 @@ class Solution:
         for num in nums:
             prefixSum += num
 
-            # If prefixSum - k in d is True, then prefixSum - (prefixSum - k) == k
-            # thus d[prefixSum - k] adds to the total number of times a sum has been equal to k
+            # If prefixSum - k in d is True, and prefixSum - (prefixSum - k) == k
+            # then d[prefixSum - k] adds to the total number of times a sum has been equal to k
             # in our traversal of the input array nums. 
             if prefixSum - k in d:
                 totalInstancesOfSumK = totalInstancesOfSumK + d[prefixSum - k]
