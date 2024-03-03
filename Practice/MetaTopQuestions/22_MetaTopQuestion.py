@@ -91,14 +91,10 @@ if __name__ == "__main__":
     root = [1,2,3]
     expectedOutput = 25
     output = solution.SumNumbers(solution.PythonListToTree(root))
-    print(output)
-    print(expectedOutput)
-    print(output == expectedOutput)
+    print(output, expectedOutput, output == expectedOutput)
 
     # Example 2:
     root = [4,9,0,5,1]
     expectedOutput = 1026
     output = solution.SumNumbers(solution.PythonListToTree(root))
-    print(output)
-    print(expectedOutput)
-    print(output == expectedOutput)
+    print(output, expectedOutput, output == expectedOutput)
