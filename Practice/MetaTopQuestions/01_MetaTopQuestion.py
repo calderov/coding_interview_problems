@@ -76,6 +76,29 @@ class Solution:
 
         return [groupedColumns[column] for column in sorted(groupedColumns.keys())]
 
+    def PythonListToTree(self, values, index=0):
+        if not values:
+            return None
+        
+        if index >= len(values):
+            raise Exception('Index out of range')
+        
+        if values[index] == None:
+            return None
+
+        root = TreeNode(values[index])
+
+        leftIndex = 2 * index + 1
+        rightIndex = 2 * index + 2
+
+        if leftIndex < len(values):
+            root.left = self.PythonListToTree(values, leftIndex)
+
+        if rightIndex < len(values):
+            root.right = self.PythonListToTree(values, rightIndex)
+
+        return root
+    
     def VerticalOrder(self, root):
         return self.VerticalOrderV2(root)
 
@@ -83,17 +106,27 @@ if __name__ == "__main__":
     solution = Solution()
 
     # Example 1
-    tree = TreeNode(3)
-    
-    tree.left = TreeNode(9)
-    tree.right = TreeNode(20)
-
-    tree.right.left = TreeNode(15)
-    tree.right.right = TreeNode(7)
-
+    tree = solution.PythonListToTree([3,9,20,None,None,15,7])
     expectedOutput = [[9],[3,15],[20],[7]]
     output = solution.VerticalOrder(tree)
-    
+    print(output)
+    print(expectedOutput)
+    print(output == expectedOutput)
+    print()
+
+    # Example 2
+    tree = solution.PythonListToTree([3,9,8,4,0,1,7])
+    expectedOutput = [[4],[9],[3,0,1],[8],[7]]
+    output = solution.VerticalOrder(tree)
+    print(output)
+    print(expectedOutput)
+    print(output == expectedOutput)
+    print()
+
+    # Example 3
+    tree = solution.PythonListToTree([3,9,8,4,0,1,7,None,None,None,2,5])
+    expectedOutput = [[4],[9,5],[3,0,1],[8,2],[7]]
+    output = solution.VerticalOrder(tree)
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
