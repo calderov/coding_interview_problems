@@ -30,7 +30,7 @@ def ComputeReviewScore(review, prohibitedWords):
             if review[i:].startswith(word):
                 intervals.append([i, i + len(word)])
 
-    # If there are no intervals, that means that no prohibited words were found
+    # If there are no intervals, that means that no prohibited words were found,
     # return early
     if not intervals:
         return len(review)
