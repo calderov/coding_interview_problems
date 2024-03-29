@@ -13,55 +13,46 @@
 #
 
 class Solution:
-    def AreAllUnique(self, entries):
-        return len(set(entries)) == len(entries)
+    def IsValidCollection(self, collection):
+        cleanCollection = [value for value in collection if value != '.']
+        return len(set(cleanCollection)) == len(cleanCollection)
+        
+    def AreValidRows(self, board):
+        for row in board:
+            if not self.IsValidCollection(row):
+                return False
+        return True
 
-    def IsValidRow(self, sudoku, row):
-        entries = [entry for entry in sudoku[row] if entry != "."]
-        return self.AreAllUnique(entries)
+    def AreValidCols(self, board):
+        cols = len(board[0])
+        for i in range(cols):
+            col = [row[i] for row in board]
+            if not self.IsValidCollection(col):
+                return False
+        return True
+
+    def AreValidSquares(self, board):
+        for startRow in (0, 3, 6):
+            for startCol in (0, 3, 6):
+                square = []
+                
+                for i in range(startRow, startRow + 3):
+                    for j in range(startCol, startCol + 3):
+                        square.append(board[i][j])
+                
+                if not self.IsValidCollection(square):
+                    return False
+
+        return True
     
-    def IsValidCol(self, sudoku, col):
-        rows = 9
-        entries = [sudoku[row][col] for row in range(rows) if sudoku[row][col] != "."]
-        return self.AreAllUnique(entries)
-    
-    def IsValidQuadrant(self, sudoku, quadrant):
-        startRow = (quadrant // 3) * 3
-        startCol = (quadrant % 3) * 3
-
-        entries = []
-
-        for row in range(startRow, startRow + 3):
-            for col in range(startCol, startCol + 3):
-                if sudoku[row][col] != ".":
-                    entries.append(sudoku[row][col])
-
-        return self.AreAllUnique(entries)
 
     # Solution complexity:
     # Time complexity: O(1) as we only iterate through the 9x9 board once
     # Space complexity: O(1) as we use at most 9 memory registers for entries
-    def IsValidSudoku(self, sudoku):
-        rows = 9
-        cols = 9
-        quadrants = 9
-
-        # Verify rows
-        for row in range(rows):
-            if not self.IsValidRow(sudoku, row):
-                return False
-
-        # Verify cols
-        for col in range(cols):
-            if not self.IsValidCol(sudoku, col):
-                return False
-            
-        # Verify quadrants
-        for quadrant in range(quadrants):
-            if not self.IsValidQuadrant(sudoku, quadrant):
-                return False
-
-        return True
+    def IsValidSudoku(self, board):
+        return self.AreValidRows(board) and \
+               self.AreValidCols(board) and \
+               self.AreValidSquares(board)
 
 if __name__ == "__main__":
     solution = Solution()
