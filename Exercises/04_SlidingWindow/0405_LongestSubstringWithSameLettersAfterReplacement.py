@@ -17,121 +17,36 @@
 # 
 
 class Solution:
-    # Solution 1:
-    #
-    # 1. Initialize a variable to keep track of the length of the longest substring
-    #    that matches our criteria maxLengthAfterReplace = 0.
-    # 
-    # 2. Initialize a couple of pointers to mark the start and the end of a sliding window.
-    #    start = 0
-    #    end = 0
-    #
-    # 3. While the end of the sliding window is within the limits of the input string,
-    #    check how many characters in the substring between start and + 1 are different
-    #    from the first character in that substring. In other words count how many
-    #    replacements are needed in the substring for all of its characters to be the
-    #    the same as the first. Lets call this number potentialReplacements.
-    #
-    # 4. If the number of potentialReplacements is less than or equal than k, the
-    #    current substring meets our criteria. Check if the substring is longer than
-    #    the value at maxLengthAfterReplace, if so, replace maxLengthAfterReplace with
-    #    the length of the substring.
-    #
-    # 5. If the number of potentialReplacements is greater than k, move the start of
-    #    the substring until a different character is found.
-    #
-    # 6. Move the end of the substring one position to the right. If end < len(inputString)
-    #    go back to step 3. Otherwise, return maxLengthAfterReplace and finish.
-    # 
-    # Solution complexity:
-    # Time complexity: O(n ^ 2)
-    # Space complexity: O(n) as the support structure to count the potential replacements can be as long as the input string
-    def MaxLengthAfterReplaceV1(self, inputString, k):
-        maxLengthAfterReplace = 0
+    # Time complexity: O(n) where n is the number of characters in the input S
+    # Space complexity: O(n)
+    def MaxLengthAfterReplace(self, s, k):
+        longest_substring_length = 0
+
+        frequency_map = {}
+        max_frequency = 0
+
         start = 0
-        end = 0
-        
-        while end < len(inputString):
-            if inputString[start] == inputString[end] or self.potentialReplacements(inputString[start: end + 1]) <= k:
-                maxLengthAfterReplace = max(maxLengthAfterReplace, end - start + 1)
-            else:
-                c = inputString[start]
-                while inputString[start] == c:
-                    start += 1            
-            end += 1
-        
-        return maxLengthAfterReplace
+        for end in range(len(s)):
+            frequency_map[s[end]] = frequency_map.get(s[end], 0) + 1
 
-    def potentialReplacements(self, substring):
-        return len([i for i in substring if i != substring[0]])
-    
+            # Update the maximum frequency we have seen in any window yet
+            max_frequency = max(max_frequency, frequency_map[s[end]])
 
-    # Solution 2:
-    #
-    # 1. Initialize a variable to keep track of the length of the longest substring
-    #    that matches our criteria maxLengthAfterReplace = 0.
-    # 
-    # 2. Initialize a couple of pointers to mark the start and the end of the sliding
-    #    window that delimits our explored substrings.
-    #    start = 0
-    #    end = 0
-    # 
-    # 3. Initialize a dictionary of characters. This will keep track how many times
-    #    a given character appears in the substring induced by the sliding window.
-    #    characters = {}
-    #
-    # 3. While the end of the sliding window is within the limits of the input string,
-    #    check if the character at inputString[end] is in the characters dictionary.
-    #    If not, add it to the dictionary and map it to a value of 1. Othewise,
-    #    add 1 to its mapped value.
-    #
-    # 4. Compute the number of replacements needed in the substring for all of its
-    #    characters to be the same as the first. This can be easily be done by this
-    #    expresion:
-    #    requiredReplacements = (end - start + 1) - characters[inputString[start]]
-    #
-    # 5. If the number of requiredReplacements is less than or equal than k, the
-    #    current substring meets our criteria. Check if the substring is longer than
-    #    the value at maxLengthAfterReplace, if so, replace maxLengthAfterReplace with
-    #    the length of the substring.
-    #
-    # 6. If the number of requiredReplacements is greater than k, move the start of
-    #    the substring until a different character is found. Remember decrease
-    #    the count of characters accordingly.
-    #
-    # 7. Move the end of the substring one position to the right. If end < len(inputString)
-    #    go back to step 3. Otherwise, return maxLengthAfterReplace and finish.
-    #
-    # Solution complexity:
-    # Time complexity: O(n)
-    # Space complexity: O(1) as the characters dictionary has at most 26 entries, one for every character
-    def MaxLengthAfterReplaceV2(self, inputString, k):
-        maxLengthAfterReplace = 0
-        characters = {}
-        start = 0
-        end = 0
-        
-        while end < len(inputString):
-            if inputString[end] not in characters:
-                characters[inputString[end]] = 0
-            characters[inputString[end]] += 1
-            
-            requiredReplacements = (end - start + 1) - characters[inputString[start]]
-            
-            if requiredReplacements <= k:
-                maxLengthAfterReplace = max(maxLengthAfterReplace, end - start + 1)
-            else:
-                c = inputString[start]
-                while inputString[start] == c:
-                    characters[c] -= 1
-                    start += 1
-            end += 1
-        
-        return maxLengthAfterReplace
-    
+            # Compute the min number of required replacements
+            replacements = end - start + 1 - max_frequency
 
-    def MaxLengthAfterReplace(self, inputString, k):
-        return self.MaxLengthAfterReplaceV2(inputString, k)
+            # If the number of required replacements exceeds k
+            # decrease the frequency of the character at the start
+            # and move the start pointer one step to the right
+            if replacements > k:
+                frequency_map[s[start]] -= 1
+                start += 1
+
+            # The window is valid at this point, store length
+            # size of the window never decreases
+            longest_substring_length = end - start + 1
+
+        return longest_substring_length
 
 if __name__ == "__main__":
     solution = Solution()
@@ -161,5 +76,12 @@ if __name__ == "__main__":
     inputString = "aabbaabbaabb"
     k = 2
     expectedOutput = 6
+    output = solution.MaxLengthAfterReplace(inputString, k)
+    print(output, expectedOutput, output == expectedOutput)
+
+    # Example 5
+    inputString = "baaab"
+    k = 2
+    expectedOutput = 5
     output = solution.MaxLengthAfterReplace(inputString, k)
     print(output, expectedOutput, output == expectedOutput)
