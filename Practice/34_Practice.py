@@ -120,3 +120,27 @@ class Solution:
         # endpointer is still infinite, if this is the case, return an empty string
         # as this means that no substring of s contains all the characters in t
         return s[start:end + 1] if end != float('inf') else ""
+
+if __name__ == "__main__":
+    solution = Solution()
+
+    # Example 1:
+    s = "ADOBECODEBANC"
+    t = "ABC"
+    expectedOutput = "BANC"
+    output = solution.minWindow(s, t)
+    print(output, expectedOutput, output == expectedOutput)
+
+    # Example 2:
+    s = "a"
+    t = "a"
+    expectedOutput = "a"
+    output = solution.minWindow(s, t)
+    print(output, expectedOutput, output == expectedOutput)
+
+    # Example 3:
+    s = "a"
+    t = "aa"
+    expectedOutput = ""
+    output = solution.minWindow(s, t)
+    print(output, expectedOutput, output == expectedOutput)
