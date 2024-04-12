@@ -16,7 +16,7 @@
 # 
 # Example 1:
 # 
-# Input: String="oidbcaf", Pattern="ABC"   
+# Input: String="oidbcaf", Pattern="abc"   
 # Output: true   
 # Explanation: The string contains "bca" which is a permutation of the given
 # pattern.
@@ -35,7 +35,6 @@
 # Explanation: Both the string and the pattern are a permutation of each other.
 # 
 # Example 4:
-# 
 # Input: String="aaacb", Pattern="abc"  
 # Output: true  
 # Explanation: The string contains "acb" which is a permutation of the given
