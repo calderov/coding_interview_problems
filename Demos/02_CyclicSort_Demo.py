@@ -24,8 +24,15 @@ def CyclicSortExtended(self, nums):
         i += 1
 
 if __name__ == "__main__":
+    # Example 1
     nums = [2, 1, 4, 5, 3]
     print(nums)
+    CyclicSort(nums)
+    print(nums)
+    print()
 
+    # Example 2
+    nums = [1, 3, 4, 2, 2]
+    print(nums)
     CyclicSort(nums)
     print(nums)
