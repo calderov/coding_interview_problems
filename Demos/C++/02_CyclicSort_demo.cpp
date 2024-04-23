@@ -23,6 +23,28 @@ void CyclicSort(std::vector<int> &nums)
     }
 }
 
+// This version of the algorithm allows numbers outside the [1, n] range (negatives, 
+// zero and numbers greater than n).
+//
+// Time complexity: O(n)
+// Space complexity: O(1)
+void CyclicSortExtended(std::vector<int> &nums)
+{
+    int i = 0;
+    while (i < nums.size())
+    {
+        if (nums[i] > 0 &&
+            nums[i] < nums.size() &&
+            nums[i] != nums[nums[i] - 1])
+        {
+            int j = nums[i] - 1;
+            Swap(nums, i, j);
+            continue;
+        }
+        i++;
+    }
+}
+
 void PrintVector(std::vector<int> nums)
 {
     for (int num : nums) {
