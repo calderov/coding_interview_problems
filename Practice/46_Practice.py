@@ -1,55 +1,46 @@
+# Course Schedule II 
+# https://leetcode.com/problems/course-schedule-ii/description/
 class Solution:
     def findOrder(self, numCourses: int, prerequisites):
-        graph = {}
-        for node in range(numCourses):
-            graph[node] = {"predecessors": set(), "successors": set()}
+        return list(reversed(self.topologicalSort(numCourses, prerequisites)))
+    
+    def topologicalSort(self, vertices, edges):
+        graph = {v:[] for v in range(vertices)}
+        for u, v in edges:
+            graph[u].append(v)
 
-        for node, predecessor in prerequisites:
-            graph[node]["predecessors"].add(predecessor)
-            graph[predecessor]["successors"].add(node)
-
-        pending = []
-        for node in graph:
-            if len(graph[node]["predecessors"]) == 0:
-                pending.append(node)
-
+        inDegree = {v:0 for v in range(vertices)}
+        for u, v in edges:
+            inDegree[v] += 1
+        
+        sources = []
+        for v in inDegree:
+            if inDegree[v] == 0:
+                sources.append(v)
+        
         validOrdering = []
-        visited = set()
-        while pending:
-            node = pending.pop()
+        while sources:
+            u = sources.pop()
 
-            areDependenciesMet = True
-            for predecessor in graph[node]["predecessors"]:
-                if predecessor not in visited:
-                    areDependenciesMet = False
-                    break
+            validOrdering.append(u)
 
-            if not areDependenciesMet:
-                continue
+            for v in graph[u]:
+                inDegree[v] -= 1
+                if inDegree[v] == 0:
+                    sources.append(v)
 
-            if node in visited:
-                return []
+        if len(validOrdering) != len(graph):
+            return []
 
-            visited.add(node)
-            validOrdering.append(node)
-            pending = list(filter(lambda x: x != node, pending))
-
-            for successor in graph[node]["successors"]:
-                pending.append(successor)
-
-        if len(validOrdering) == len(graph.keys()):
-            return validOrdering
-        return []
-
-
-
+        return validOrdering
+            
 if __name__ == "__main__":
     solution = Solution()
 
     # Example 1
     numCourses = 3
     prerequisites = [[1, 0]]
-    expectedOutput = [2, 0, 1]
+    expectedOutput = [0, 1, 2]
     output = solution.findOrder(numCourses, prerequisites)
     print(output)
     print(expectedOutput)
