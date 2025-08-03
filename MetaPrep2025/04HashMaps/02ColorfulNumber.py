@@ -17,37 +17,24 @@
 #   Output: False
 #   326 is not a colorful number as it generates 3 2 6 (3*2)=6 (2*6)=12.
 
-def getProduct(s):
-    product = 1
-    for x in s:
-        product *= x
-    return product
-
-def getSubsets(nums):
-    subsets = [[]]
-
-    for num in nums:
-        n = len(subsets)
-        for i in range(n):
-            subset = subsets[i] + [num]
-            subsets.append(subset)
-
-    return subsets   
-
+# Complexity:
+# Time: O(n^2) where n is the lenght of the number in digits
+# Space: O(n^2)
 def isColorful(number):
-    digits = [int(d) for d in str(number)]
-    
-    combinations = getSubsets(digits)
-    combinations.pop(0)
+    digits = str(number)
     products = set()
+    n = len(digits)
 
-    for c in combinations:
-        product = getProduct(c)
-        if product in products:
-            return False
-        products.add(product)
+    for i in range(n):
+        product = 1
+        for j in range(i, n):
+            product *= int(digits[j])
+            if product in products:
+                return False
+            products.add(product)
 
     return True
+
 
 if __name__ == "__main__":
     # Example 1
