@@ -36,7 +36,9 @@ class Node:
         self.right = None
         self.parent = None
 
-def LowestCommonAncestor(p, q):
+# Time complexity: O(log(n))
+# Space complexity: O(n)
+def LowestCommonAncestorV1(p, q):
     pAncestors = []
     qAncestors = []
 
@@ -60,6 +62,45 @@ def LowestCommonAncestor(p, q):
             break
     
     return lowestAncestor
+
+def getDepth(p):
+    if p.parent == None:
+        return 0
+    p = p.parent
+    return 1 + getDepth(p)
+
+# Time complexity: O(log n)
+# Space complexity: O(1)
+def LowestCommonAncestorV2(p, q):
+    pDepth = getDepth(p)
+    qDepth = getDepth(q)
+
+    pprime = p
+    qprime = q
+
+    while pDepth != qDepth:
+        if pDepth > qDepth:
+            pprime = pprime.parent
+            pDepth -= 1
+
+        if pDepth < qDepth:
+            qprime = qprime.parent
+            qDepth -= 1
+
+    commonDepth = pDepth
+
+    while commonDepth >= 0:
+        if pprime == qprime:
+            return pprime.val
+
+        pprime = pprime.parent
+        qprime = qprime.parent
+        commonDepth -= 1
+
+    return None
+
+def LowestCommonAncestor(p, q):
+    return LowestCommonAncestorV2(p, q)
 
 def FindNodeInTree(root, val):
     if not root:
