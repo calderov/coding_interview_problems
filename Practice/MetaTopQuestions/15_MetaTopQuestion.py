@@ -38,30 +38,24 @@
 #   Explanation: In the canonical path, multiple consecutive slashes are
 #   replaced by a single one.
 
-class Solution:
-    # Time complexity: O(n)
-    # Space complexity: O(n)
-    def SimplifyPath(self, path):
-        simpliedPath = [] # Stack
-        path = path.split('/')
+def simplifyPath(path):
+    items = []
+
+    for item in path.split("/"):
+        if item not in ["", ".", ".."]:
+            items.append(item)
+            continue
         
-        for token in path:
-            if token not in ['', '.', '..']:
-                simpliedPath.append(token)
-                continue
+        if items and item == "..":
+            items.pop()
 
-            if token == ".." and simpliedPath:
-                simpliedPath.pop()
-
-        return '/' + '/'.join(simpliedPath)
+    return "/" + "/".join(items)
 
 if __name__ == "__main__":
-    solution = Solution()
-
     # Example 1
     path = "/home/"
     expectedOutput = "/home"
-    output = solution.SimplifyPath(path)
+    output = simplifyPath(path)
     print(path)
     print(output)
     print(expectedOutput)
@@ -71,7 +65,7 @@ if __name__ == "__main__":
     # Example 2
     path = "/../"
     expectedOutput = "/"
-    output = solution.SimplifyPath(path)
+    output = simplifyPath(path)
     print(path)
     print(output)
     print(expectedOutput)
@@ -81,7 +75,7 @@ if __name__ == "__main__":
     # Example 3
     path = "/home//foo/"
     expectedOutput = "/home/foo"
-    output = solution.SimplifyPath(path)
+    output = simplifyPath(path)
     print(path)
     print(output)
     print(expectedOutput)
@@ -91,7 +85,7 @@ if __name__ == "__main__":
     # Example 4
     path = "/a/./b/../../c/"
     expectedOutput = "/c"
-    output = solution.SimplifyPath(path)
+    output = simplifyPath(path)
     print(path)
     print(output)
     print(expectedOutput)
@@ -101,7 +95,7 @@ if __name__ == "__main__":
     # Example 5
     path = "/a/../../b/../c//.//"
     expectedOutput = "/c"
-    output = solution.SimplifyPath(path)
+    output = simplifyPath(path)
     print(path)
     print(output)
     print(expectedOutput)
