@@ -36,24 +36,25 @@ class Solution:
         return result
     
     # Time complexity: O(log(n))
-    # Space complexity: O(n)
-    def powBetter(self, x, n):
+    # Space complexity: O(n)   
+    def exponentiationBySquaringRecursive(self, x, n):
         if n == 0:
             return 1
 
         if n < 0:
-            return 1 / self.powBetter(x, -n)
-        
-        if n % 2 == 0:
-            result = self.powBetter(x, n // 2)
-            return result * result
-        else:
-            result = self.powBetter(x, (n - 1) // 2)
-            return result * result * x
+            return self.exponentiationBySquaringRecursive(1 / x, n - 1)
     
+        if n % 2 == 0:
+            temp = self.exponentiationBySquaringRecursive(x, n // 2)
+            return temp * temp
+
+        if n % 2 == 1:
+            temp = self.exponentiationBySquaringRecursive(x, n - 1)
+            return x * temp
+        
     # Time complexity: O(lon(n))
     # Space complexity: O(1)
-    def powBest(self, x, n):
+    def exponentiationBySquaringIterative(self, x, n):
         if n < 0:
             x = 1 / x
             n = -n
@@ -69,7 +70,7 @@ class Solution:
         return result
    
     def pow(self, x, n):
-        return self.powBest(x, n)
+        return self.exponentiationBySquaringIterative(x, n)
 
 if __name__ == "__main__":
     solution = Solution()
