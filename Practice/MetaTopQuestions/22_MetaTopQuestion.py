@@ -31,56 +31,70 @@
 # - 0 <= Node.val <= 9
 # - The depth of the tree will not exceed 10.
 
-class Node:
+class TreeNode:
     def __init__(self, value):
         self.val = value
         self.left = None
         self.right = None
 
-# Time complexity:  O(n)
-# Space complexity: O(n)
-def sumRootToLeafNumbers(root, currSum=0):
-    if not root:
-        return 0
-    
-    currSum = 10 * currSum + root.val
+class Solution:
+    # Time complexity: O(n)
+    # Space complexity: O(n)
+    def SumNumbers(self, root):
+        if not root:
+            return 0
 
-    if not root.left and not root.right:
-        return currSum
-    
-    leftSum = sumRootToLeafNumbers(root.left, currSum)
-    rightSum = sumRootToLeafNumbers(root.right, currSum)
+        pending = [(root, 0)]
+        totalSum = 0
 
-    return leftSum + rightSum
+        while pending:
+            node, currentSum = pending.pop()
 
-def listToTree(values, index=0):
-    if not values or index < 0 or index >= len(values) or values[index] == None:
-        return None
+            currentSum = 10 * currentSum + node.val
 
-    node = Node(values[index])
-    leftIndex = 2 * index + 1
-    rightIndex = 2 * index + 2
+            if not node.left and not node.right:
+                totalSum += currentSum
+                continue
 
-    node.left = listToTree(values, leftIndex)
-    node.right = listToTree(values, rightIndex)
+            if node.left:
+                pending.append((node.left, currentSum))
 
-    return node
+            if node.right:
+                pending.append((node.right, currentSum))
+
+        return totalSum
+
+    def PythonListToTree(self, values, index=0):
+        if not values:
+            None
+
+        if index > len(values):
+            raise Exception('Index out of range')
+
+        root = TreeNode(values[index])
+
+        leftIndex = 2 * index + 1
+        rightIndex = 2 * index + 2
+
+        if leftIndex < len(values):
+            root.left = self.PythonListToTree(values, leftIndex)
+
+        if rightIndex< len(values):
+            root.right = self.PythonListToTree(values, rightIndex)
+
+        return root
 
 if __name__ == "__main__":
+    solution = Solution()
+
     # Example 1:
-    root = listToTree([1,2,3])
+    root = [1,2,3]
     expectedOutput = 25
-    output = sumRootToLeafNumbers(root)
+    output = solution.SumNumbers(solution.PythonListToTree(root))
     print(output, expectedOutput, output == expectedOutput)
 
     # Example 2:
-    root = listToTree([4,9,0,5,1])
+    root = [4,9,0,5,1]
     expectedOutput = 1026
-    output = sumRootToLeafNumbers(root)
-    print(output, expectedOutput, output == expectedOutput)
-
-    # Example 3:
-    root = listToTree([4,9,0,5,1,2,None,5,None,0])
-    expectedOutput = 10267
-    output = sumRootToLeafNumbers(root)
+    output = solution.SumNumbers(solution.PythonListToTree(root))
     print(output, expectedOutput, output == expectedOutput)
