@@ -62,6 +62,8 @@ def nextPermutationNaive(permutation):
 # Time complexity: O(n)
 # Space complexity: O(1)
 def nextPermutationBetter(permutation):
+    permutation = permutation.copy() # Remove this to run in place
+
     # 1. Find pivot index (right most element smaller than its right element).
     pivot = None
     i = len(permutation) - 2
