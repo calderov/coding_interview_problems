@@ -91,7 +91,7 @@ def LowestCommonAncestorV2(p, q):
 
     while commonDepth >= 0:
         if pprime == qprime:
-            return pprime.val
+            return pprime
 
         pprime = pprime.parent
         qprime = qprime.parent
@@ -145,7 +145,7 @@ if __name__ == "__main__":
     p = FindNodeInTree(root, 5)
     q = FindNodeInTree(root, 1)
     expectedOutput = 3
-    output = LowestCommonAncestor(p, q)
+    output = LowestCommonAncestor(p, q).val
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
@@ -156,7 +156,7 @@ if __name__ == "__main__":
     p = FindNodeInTree(root, 5)
     q = FindNodeInTree(root, 4)
     expectedOutput = 5
-    output = LowestCommonAncestor(p, q)
+    output = LowestCommonAncestor(p, q).val
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
@@ -167,7 +167,7 @@ if __name__ == "__main__":
     p = FindNodeInTree(root, 1)
     q = FindNodeInTree(root, 2)
     expectedOutput = 1
-    output = LowestCommonAncestor(p, q)
+    output = LowestCommonAncestor(p, q).val
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
@@ -178,7 +178,7 @@ if __name__ == "__main__":
     p = FindNodeInTree(root, 7)
     q = FindNodeInTree(root, 4)
     expectedOutput = 2
-    output = LowestCommonAncestor(p, q)
+    output = LowestCommonAncestor(p, q).val
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)

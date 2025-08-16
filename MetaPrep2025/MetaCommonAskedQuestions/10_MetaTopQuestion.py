@@ -46,6 +46,9 @@ def calculate(s):
     op = "+"
 
     for c in s:
+        if c == " ":
+            continue
+
         if c.isdigit():
             num = num * 10 + int(c)
             continue

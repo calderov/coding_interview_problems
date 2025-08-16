@@ -20,12 +20,32 @@ class Solution:
             p += w[i] / sumW
             self.cumP.append(p)
 
-    def pickIndex(self):
+    # Time complexity: O(n)
+    def pickIndexNaive(self):
         x = random.random()
         for i in range(len(self.cumP)):
             if x < self.cumP[i]:
                 return i
         return None
+
+    # Time complexity: O(log(n))
+    def pickIndexBinarySearch(self):
+        x = random.random()
+
+        left = 0
+        right = len(self.cumP) - 1
+
+        while left < right:
+            mid = (left + right) // 2
+            if x <= self.cumP[mid]:
+                right = mid
+            else:
+                left = mid + 1
+        
+        return left
+    
+    def pickIndex(self):
+        return self.pickIndexBinarySearch()
         
 if __name__ == "__main__":
     # Initialize sample

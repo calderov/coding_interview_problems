@@ -31,8 +31,9 @@ def getBuildingsWithOceanView(heights):
     maxH = 0
     for i in range(len(heights) - 1, -1, -1):
         if heights[i] > maxH:
-            oceanViews.insert(0, i)
+            oceanViews.append(i)
             maxH = heights[i]
+    oceanViews.reverse()
     return oceanViews
 
 if __name__ == "__main__":

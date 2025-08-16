@@ -37,7 +37,7 @@
 #  
 
 def isValidAbbreviation(word, abbr):
-    if len(abbr) >= len(word):
+    if len(abbr) > len(word):
         return False
     
     i = 0
@@ -95,6 +95,34 @@ if __name__ == "__main__":
     # Example 3
     word = "substitution"
     abbr = "sub4u4"
+    expected = True
+    output = isValidAbbreviation(word, abbr)
+    
+    print(word)
+    print(abbr)
+    print(expected)
+    print(output)
+    print(output == expected)
+
+    print()
+
+    # Example 4
+    word = "apple"
+    abbr = "5"
+    expected = True
+    output = isValidAbbreviation(word, abbr)
+    
+    print(word)
+    print(abbr)
+    print(expected)
+    print(output)
+    print(output == expected)
+
+    print()
+
+    # Example 5
+    word = "a"
+    abbr = "1"
     expected = True
     output = isValidAbbreviation(word, abbr)
     

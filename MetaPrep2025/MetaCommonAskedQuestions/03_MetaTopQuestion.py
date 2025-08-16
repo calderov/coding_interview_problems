@@ -30,7 +30,7 @@
 
 def fixParentheses(inputString):
     output = list(inputString)
-    stack = []
+    stack = [] # Tracks the indexes of open parentheses
 
     for i in range(len(inputString)):
         c = inputString[i]
@@ -38,18 +38,15 @@ def fixParentheses(inputString):
         if c.isalpha():
             continue
 
-        if not stack:
-            stack.append((c, i))
+        if c == "(":
+            stack.append(i)
         else:
-            if c == "(":
-                stack.append(("(", i))
+            if stack:
+                stack.pop()
             else:
-                if stack[-1][0] == "(":
-                    stack.pop()
-                else:
-                    stack.append((")", i))
+                output[i] = ""
 
-    for _, i in stack:
+    for i in stack:
         output[i] = ""
     
     return "".join(output)

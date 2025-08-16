@@ -5,7 +5,7 @@
 # If two nodes are in the same row and column, the order should be from left
 # to right.
 
-# from collections import deque
+from collections import deque
 
 class Node:
     def __init__(self, val):
@@ -14,11 +14,14 @@ class Node:
         self.right = None
 
 def verticalOrder(root):
+    if not root:
+        return []
+
     columns = {}
-    pending = [(root, 0)]
+    pending = deque([(root, 0)])
 
     while pending:
-        node, col = pending.pop(0)
+        node, col = pending.popleft()
 
         if col not in columns:
             columns[col] = []
@@ -35,9 +38,9 @@ def verticalOrder(root):
 def treeToList(root):
     values = []
 
-    pending = [root]
+    pending = deque([root])
     while pending:
-        node = pending.pop(0)
+        node = pending.popleft()
 
         if node == None:
             values.append(None)
