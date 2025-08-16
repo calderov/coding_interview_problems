@@ -42,7 +42,7 @@ class Solution:
             return 1
 
         if n < 0:
-            return self.exponentiationBySquaringRecursive(1 / x, n - 1)
+            return self.exponentiationBySquaringRecursive(1 / x, -n)
     
         if n % 2 == 0:
             temp = self.exponentiationBySquaringRecursive(x, n // 2)
@@ -52,7 +52,7 @@ class Solution:
             temp = self.exponentiationBySquaringRecursive(x, n - 1)
             return x * temp
         
-    # Time complexity: O(lon(n))
+    # Time complexity: O(log(n))
     # Space complexity: O(1)
     def exponentiationBySquaringIterative(self, x, n):
         if n < 0:

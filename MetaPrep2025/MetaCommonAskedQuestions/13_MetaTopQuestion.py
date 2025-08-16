@@ -34,53 +34,50 @@ class Node:
         self.left = None
         self.right = None
 
-
-class DoubleLinkedList:
-    def __init__(self):
-        self.head = None
-        self.tail = None
+# Time complexity: O(n)
+# Space complexity: O(n) worst case, O(log(n)) best case
+def treeToDoubleLinkedList(root):
+    if not root:
+        return None
     
-    def append(self, val):
-        node = Node(val)
-
-        if not self.head:
-            node.left = node
-            node.right = node
-            self.head = node
-            self.tail = node
+    def inOrderLink(node):
+        if not node:
             return
         
-        node.left = self.tail
-        node.right = self.head
+        nonlocal first
+        nonlocal last
         
-        self.tail.right = node
-        self.head.left = node
-
-        self.tail = node
-
-    def toPythonList(self):
-        if not self.head:
-            return []
+        inOrderLink(node.left)
         
-        values = [self.head.val]
-        node = self.head.right
+        if not last:
+            first = node
+        else:
+            node.left = last
+            last.right = node
+        last = node
 
-        while node != self.head:
-            values.append(node.val)
-            node = node.right
+        inOrderLink(node.right)
 
-        return values
-
-def treeToDoubleLinkedList(root, doubleLinkedList=None):
-    if not doubleLinkedList:
-        doubleLinkedList = DoubleLinkedList()
+    first = None
+    last = None
+    inOrderLink(root)
+    first.left = last
+    last.right = first
     
-    if root:
-        treeToDoubleLinkedList(root.left, doubleLinkedList)
-        doubleLinkedList.append(root.val)
-        treeToDoubleLinkedList(root.right, doubleLinkedList)
+    return first
 
-    return doubleLinkedList
+def doubleLinkedListToPythonList(head):
+    if not head:
+        return []
+    
+    values = [head.val]
+    node = head.right
+
+    while node != head:
+        values.append(node.val)
+        node = node.right
+    
+    return values
 
 def pythonListToTree(values, index=0):
     if not values or index < 0 or index >= len(values) or values[index] == None:
@@ -99,7 +96,7 @@ if __name__ == "__main__":
     # Example 1
     root = pythonListToTree([4,2,5,1,3])
     expectedOutput = [1,2,3,4,5]
-    output = treeToDoubleLinkedList(root).toPythonList()
+    output = doubleLinkedListToPythonList(treeToDoubleLinkedList(root))
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
@@ -108,7 +105,7 @@ if __name__ == "__main__":
     # Example 2
     root = pythonListToTree([2,1,3])
     expectedOutput = [1,2,3]
-    output = treeToDoubleLinkedList(root).toPythonList()
+    output = doubleLinkedListToPythonList(treeToDoubleLinkedList(root))
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)

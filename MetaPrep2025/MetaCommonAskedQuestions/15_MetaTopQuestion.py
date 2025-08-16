@@ -1,4 +1,5 @@
 # 121. Best Time to Buy and Sell Stock
+# https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 #
 # You are given an array prices where prices[i] is the price of a given stock
 # on the ith day.
@@ -40,6 +41,9 @@ def getMaxProfitV1(prices):
 # Time complexity: O(n)
 # Space complexity: O(1)
 def getMaxProfitV2(prices):
+    if not prices:
+        return 0
+
     minPrice = prices[0]
     maxProfit = 0
 

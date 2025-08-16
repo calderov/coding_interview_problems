@@ -35,7 +35,7 @@
 # - 1 <= target.length <= 15
 # - stickers[i] and target consist of lowercase English letters.
 
-import copy
+from collections import deque
 
 def canBeSpelled(stickers, target):
     alphabet = set(list("".join(stickers)))
@@ -56,27 +56,30 @@ def getStickerMaps(stickers):
     return stickerMaps
 
 def applySticker(target, stickerMap):
-    stickerMap = copy.deepcopy(stickerMap)
+    seen = {}
     remaining = []
 
     for c in target:
-        if c not in stickerMap or stickerMap[c] == 0:
+        if c not in stickerMap or stickerMap[c] <= seen.get(c, 0):
             remaining.append(c)
         else:
-            stickerMap[c] -= 1
+            seen[c] = seen.get(c, 0) + 1
     
     return "".join(remaining)
 
 def stickersToSpellWord(stickers, target):
-    if not target or not canBeSpelled(stickers, target):
+    if not target:
+        return 0
+
+    if not canBeSpelled(stickers, target):
         return -1
     
     stickerMaps = getStickerMaps(stickers)
-    pending = [(target, 0)]
+    pending = deque([(target, 0)])
     visited = set()
 
     while pending:
-        remaining, level = pending.pop(0)
+        remaining, level = pending.popleft()
         visited.add(remaining)
 
         if remaining == "":

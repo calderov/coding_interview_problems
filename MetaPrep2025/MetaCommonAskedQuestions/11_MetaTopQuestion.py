@@ -17,8 +17,10 @@
 
 from heapq import *
 
-def findKthLargest(nums, k):
-    if not nums or k < 0 or k > len(nums):
+# Time complexity: O(n log(n))
+# Space complexity: O(n)
+def findKthLargestV1(nums, k):
+    if not nums or k < 1 or k > len(nums):
         return None
     
     maxHeap = [-n for n in nums]
@@ -30,6 +32,24 @@ def findKthLargest(nums, k):
 
     return result
 
+# Time complexity: O(n log(k))
+# Space complexity: O(k)
+def findKthLargestV2(nums, k):
+    if not nums or k < 1 or k > len(nums):
+        return None
+    
+    minHeap = []
+    for num in nums:
+        if len(minHeap) < k:
+            heappush(minHeap, num)
+        else:
+            heappush(minHeap, num)
+            heappop(minHeap)
+
+    return minHeap[0]
+
+def findKthLargest(nums, k):
+    return findKthLargestV2(nums, k)
         
 if __name__ == "__main__":
     # Example 1

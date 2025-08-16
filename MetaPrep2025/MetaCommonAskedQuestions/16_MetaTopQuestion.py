@@ -45,49 +45,6 @@ def lowestCommonAncestor(root, p, q):
         return None
     
     # Find node parents and levels using BFS
-    parents = {}
-    pending = deque([(root, None, 1)])
-
-    while pending:
-        node, parent, level = pending.popleft()
-
-        parents[node.val] = (node, parent, level)
-        
-        if node.left:
-            pending.append((node.left, node, level + 1))
-
-        if node.right:
-            pending.append((node.right, node, level + 1))
-    
-    if p not in parents or q not in parents:
-        return None
-    
-    # Find lowest common ancestor
-    pNode, pParent, pLevel = parents[p]
-    qNode, qParent, qLevel = parents[q]
-
-    while pLevel != qLevel:
-        if pLevel > qLevel:
-            pNode, pParent, pLevel = parents[pParent.val]
-            continue
-
-        if qLevel > pLevel:
-            qNode, qParent, qLevel = parents[qParent.val]
-            continue
-    
-    while pNode and qNode:
-        if pNode == qNode:
-            return pNode.val
-        pNode, pParent, _ = parents[pParent.val]
-        qNode, qParent, _ = parents[qParent.val]
-
-    return None
-
-def lowestCommonAncestorAlt(root, p, q):
-    if not root:
-        return None
-    
-    # Find node parents and levels using BFS
     pNode = None
     qNode = None
     pLevel = 0
@@ -132,7 +89,7 @@ def lowestCommonAncestorAlt(root, p, q):
 
     while pNode and qNode:
         if pNode == qNode:
-            return pNode.val
+            return pNode
         
         pNode = parents[pNode]
         qNode = parents[qNode]
@@ -158,7 +115,7 @@ if __name__ == "__main__":
     p = 5
     q = 1
     expectedOutput = 3
-    output = lowestCommonAncestor(root, p, q)
+    output = lowestCommonAncestor(root, p, q).val
     print(output, expectedOutput, output == expectedOutput)
 
     # Example 2
@@ -166,7 +123,7 @@ if __name__ == "__main__":
     p = 5
     q = 4
     expectedOutput = 5
-    output = lowestCommonAncestor(root, p, q)
+    output = lowestCommonAncestor(root, p, q).val
     print(output, expectedOutput, output == expectedOutput)
 
     # Example 3
@@ -174,5 +131,5 @@ if __name__ == "__main__":
     p = 1
     q = 2
     expectedOutput = 1
-    output = lowestCommonAncestor(root, p, q)
+    output = lowestCommonAncestor(root, p, q).val
     print(output, expectedOutput, output == expectedOutput)
