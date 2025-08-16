@@ -36,7 +36,7 @@ class Solution:
         return result
     
     # Time complexity: O(log(n))
-    # Space complexity: O(n)   
+    # Space complexity: O(log(n))   
     def exponentiationBySquaringRecursive(self, x, n):
         if n == 0:
             return 1
