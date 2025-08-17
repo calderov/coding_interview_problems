@@ -31,27 +31,26 @@ def toLinkedList(nums):
     
     return head
 
+# Time complexity: O(n)
+# Space complexity: O(1)
 def insertNodeAtPosition(head, val, position):
-    if not head:
-        return head
-    
-    newNode = Node(val)
-
     if position == 0:
+        newNode = Node(val)
         newNode.next = head
-        head = newNode
+        return newNode
+
+    if not head or position < 0:
         return head
 
-    node = head
-    position -= 1
-    while node.next and position:
-        node = node.next
-        position -= 1
-
-    if position == 0:
-        newNode.next = node.next
-        node.next = newNode
-        node = newNode
+    prevNode = head
+    for i in range(1, position):
+        if prevNode:
+            prevNode = prevNode.next
+    
+    if prevNode:
+        newNode = Node(val)
+        newNode.next = prevNode.next
+        prevNode.next = newNode
 
     return head
 
