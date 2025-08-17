@@ -75,8 +75,9 @@ def nextPermutationBetter(permutation):
 
     # 2. If there was no pivot, this is the last permutation in lexicographical order,
     #    reverse it and return.
-    if not pivot:
-        return permutation[::-1]
+    if pivot is None:
+        permutation.reverse()
+        return permutation
 
     # 3. Find target index (right most element greater than the pivot).
     target = None

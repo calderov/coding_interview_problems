@@ -38,7 +38,7 @@ class Node:
         self.right = None
 
 # Time complexity:  O(n)
-# Space complexity: O(n)
+# Space complexity: O(h)
 def sumRootToLeafNumbers(root, currSum=0):
     if not root:
         return 0
