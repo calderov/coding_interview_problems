@@ -1,18 +1,8 @@
 # Insertion Sort - Part 2
 # https://www.hackerrank.com/challenges/insertionsort2/problem
 
-def insertionSort2(n, nums):
-    for i in range(1, n):
-        key = nums[i]
-        j = i - 1
-        while j >= 0 and key < nums[j]:
-            nums[j + 1] = nums[j]
-            j -= 1          
-        nums[j + 1] = key
-        print(" ".join([str(d) for d in nums]))
-
 def insertionSort(nums):
-    # Remove this to run in place
+    # Remove next line to run in place
     nums = [d for d in nums]
 
     n = len(nums)

@@ -21,14 +21,14 @@
 # Time: O(n^2) where n is the lenght of the number in digits
 # Space: O(n^2)
 def isColorful(number):
-    digits = str(number)
+    digits = [int(d) for d in str(number)]
     products = set()
     n = len(digits)
 
     for i in range(n):
         product = 1
         for j in range(i, n):
-            product *= int(digits[j])
+            product *= digits[j]
             if product in products:
                 return False
             products.add(product)
