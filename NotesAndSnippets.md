@@ -350,24 +350,31 @@ def TotalNumberOfSubsetsWithSumS(self, nums, s):
 
 ## List to binary tree conversion
 ```python
-def ListToTree(values, index=0, parent=None):
-    if not values or not values[index]:
+def ListToTree(values, index=0):
+    if not values or index < 0 or index > len(values) or values[index] == None:
         return None
-    
-    if index > len(values):
-        raise Exception('Index out of range')
-    
-    root = Node(values[index])
-    root.parent = parent
-    
+
+    node = TreeNode(values[index])
+   
     leftIndex = 2 * index + 1
     rightIndex = 2 * index + 2
 
-    if leftIndex < len(values):
-        root.left = ListToTree(values, leftIndex, parent=root)
-    
-    if rightIndex < len(values):
-        root.right = ListToTree(values, rightIndex, parent=root)
-    
-    return root
+    node.left = ListToTree(values, leftIndex)
+    node.right = ListToTree(values, rightIndex)
+
+    return node
+```
+
+## Tree to list conversion (BFS traversal)
+``` python
+from collections import deque
+
+def TreeToList(root):
+    values = []
+    pending = deque([root])
+    while pending:
+        node = pending.popleft()
+        values.append(node.val)
+        if node.left: pending.append(node.left)
+        if node.right: pending.append(node.right)
 ```
