@@ -63,17 +63,21 @@ def LowestCommonAncestorV1(p, q):
     
     return lowestAncestor
 
-def getDepth(p):
-    if p.parent == None:
-        return 0
-    p = p.parent
-    return 1 + getDepth(p)
+def GetDepth(node):
+    if not node:
+        return -1
+    depth = 0
+    while node:
+        if node.parent == None:
+            return depth
+        node = node.parent
+        depth += 1
 
 # Time complexity: O(log n)
 # Space complexity: O(1)
 def LowestCommonAncestorV2(p, q):
-    pDepth = getDepth(p)
-    qDepth = getDepth(q)
+    pDepth = GetDepth(p)
+    qDepth = GetDepth(q)
 
     pprime = p
     qprime = q
