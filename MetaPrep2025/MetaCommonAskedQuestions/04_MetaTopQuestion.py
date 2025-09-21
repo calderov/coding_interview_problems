@@ -24,22 +24,21 @@
 # Input: nestedList = [0]
 # Output: 0
 
+# Time complexity: O(n) where n is the number of int items in the input
+# Space complexity: O(n)
 def nestedWeightSum(items, level=1):
     if not items:
         return 0
     
-    nestedItems = []
-    levelSum = 0
+    weightedSum = 0
 
     for item in items:
-        if type(item) == list:
-            nestedItems += item
+        if type(item) == int:
+            weightedSum += item * level
         else:
-            levelSum += item * level
-
-    levelSum += nestedWeightSum(nestedItems, level + 1)
-
-    return levelSum
+            weightedSum += nestedWeightSum(item, level + 1)
+    
+    return weightedSum
 
 if __name__ == "__main__":
     # Example 1:
