@@ -15,17 +15,12 @@
 # Input: s = "abc"
 # Output: false
 
-def isValidPalindrome(s, left=None, right=None):
-    if left == None or right == None:
-        left = 0
-        right = len(s) - 1
-    
+def isValidPalindrome(s, left, right):  
     while left < right:
         if s[left] != s[right]:
             return False
         left += 1
         right -= 1
-    
     return True
 
 # Time complexity: O(n)
@@ -33,28 +28,14 @@ def isValidPalindrome(s, left=None, right=None):
 def canBecomeValidPalindrome(s):
     left = 0
     right = len(s) - 1
-    editsLeft = 1
 
     while left < right:
         if s[left] == s[right]:
             left += 1
             right -= 1
             continue
-
-        if not editsLeft:
-            return False
-
-        editsLeft -= 1
-
-        # Skip left character and see if the resulting substring is a palindrome
-        if isValidPalindrome(s, left + 1, right):
-            left += 1
-            continue
-
-        # Skip right character and see if the resulting substring is a palindrome
-        if isValidPalindrome(s, left, right - 1):
-            right -= 1
-            continue
+       
+        return isValidPalindrome(s, left + 1, right) or isValidPalindrome(s, left, right - 1)
 
     return True
 
