@@ -36,41 +36,42 @@ class Solution:
         return result
     
     # Time complexity: O(log(n))
-    # Space complexity: O(log(n))   
-    def exponentiationBySquaringRecursive(self, x, n):
+    # Space complexity: O(log(n))
+    def powRecursive(self, x, n):
+        if n < 0:
+            return self.powRecursive(1 / x, -n)
+
         if n == 0:
             return 1
 
-        if n < 0:
-            return self.exponentiationBySquaringRecursive(1 / x, -n)
-    
-        if n % 2 == 0:
-            temp = self.exponentiationBySquaringRecursive(x, n // 2)
-            return temp * temp
+        if n == 1:
+            return x
 
-        if n % 2 == 1:
-            temp = self.exponentiationBySquaringRecursive(x, n - 1)
-            return x * temp
-        
+        if n % 2 == 0:
+            return pow(x * x, n // 2)
+        else:
+            return x * pow(x, n - 1)
+
     # Time complexity: O(log(n))
     # Space complexity: O(1)
-    def exponentiationBySquaringIterative(self, x, n):
+    def powIterative(self, x, n):
         if n < 0:
             x = 1 / x
             n = -n
 
         result = 1
         while n:
-            if n % 2 == 1:
+            if n % 2 == 0:
+                x *= x
+                n //= 2
+            else:
                 result *= x
                 n -= 1
-            x *= x
-            n //= 2
 
         return result
-   
+
     def pow(self, x, n):
-        return self.exponentiationBySquaringIterative(x, n)
+        return self.powIterative(x, n)
 
 if __name__ == "__main__":
     solution = Solution()

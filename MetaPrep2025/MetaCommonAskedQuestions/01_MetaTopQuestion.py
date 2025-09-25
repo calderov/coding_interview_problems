@@ -18,59 +18,51 @@ def verticalOrder(root):
         return []
 
     columns = {}
-    pending = deque([(root, 0)])
+    pending = deque([(0, root)])
 
     while pending:
-        node, col = pending.popleft()
+        col, node = pending.popleft()
 
         if col not in columns:
             columns[col] = []
 
         columns[col].append(node.val)
-        
-        if node.left:
-            pending.append((node.left, col - 1))
-        if node.right:
-            pending.append((node.right, col + 1))
 
-    return [columns[col] for col in sorted(columns)]
+        if node.left:
+            pending.append((col - 1, node.left))
+        if node.right:
+            pending.append((col + 1, node.right))
+
+    return [columns[i] for i in range(min(columns), max(columns)+1)]
 
 def treeToList(root):
+    if not root:
+        return []
+    
     values = []
-
     pending = deque([root])
+
     while pending:
         node = pending.popleft()
-
-        if node == None:
-            values.append(None)
-            continue
-
         values.append(node.val)
-        pending.append(node.left)
-        pending.append(node.right)
 
-    while values and values[-1] == None:
-        values.pop()
+        if node.left:
+            pending.append(node.left)
+        if node.right:
+            pending.append(node.right)
 
     return values
 
 def listToTree(values, index=0):
-    if not values:
+    if not values or index < 0 or index >= len(values) or values[index] == None:
         return None
-    
-    if index < 0 or index >= len(values):
-        return None
-    
-    if values[index] == None:
-        return None
-    
-    node = Node(values[index])
-    indexLeft = 2 * index + 1
-    indexRight = 2 * index + 2
 
-    node.left = listToTree(values, indexLeft)
-    node.right = listToTree(values, indexRight)
+    node = Node(values[index])
+    leftIndex = 2 * index + 1
+    rightIndex = 2 * index + 2
+
+    node.left = listToTree(values, leftIndex)
+    node.right = listToTree(values, rightIndex)
 
     return node
 
@@ -101,3 +93,5 @@ if __name__ == "__main__":
     print(expectedOutput)
     print(output == expectedOutput)
     print()
+
+    

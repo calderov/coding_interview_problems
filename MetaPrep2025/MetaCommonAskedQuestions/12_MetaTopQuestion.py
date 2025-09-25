@@ -29,19 +29,13 @@ def rangeSumOfBST(root, low, high):
     if not root:
         return 0
     
-    result = 0
-    if low <= root.val and root.val <= high:
-        result += root.val
-        result += rangeSumOfBST(root.left, low, high)
-        result += rangeSumOfBST(root.right, low, high)
-    
     if root.val < low:
-        result += rangeSumOfBST(root.right, low, high)
+        return rangeSumOfBST(root.right, low, high)
 
     if root.val > high:
-        result += rangeSumOfBST(root.left, low, high)
+        return rangeSumOfBST(root.left, low, high)
 
-    return result
+    return root.val + rangeSumOfBST(root.left, low, high) + rangeSumOfBST(root.right, low, high)
 
 def listToTree(values, index=0):
     if not values or index < 0 or index >= len(values) or values[index] == None:
