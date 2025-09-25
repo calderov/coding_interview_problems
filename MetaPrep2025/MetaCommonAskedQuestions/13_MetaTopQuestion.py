@@ -36,50 +36,50 @@ class Node:
 
 # Time complexity: O(n)
 # Space complexity: O(n) worst case, O(log(n)) best case
-def treeToDoubleLinkedList(root):
+def treeToCircularDoubleLinkedList(root):
     if not root:
         return None
-    
-    def inOrderLink(node):
+
+    def inorder(node):
         if not node:
             return
-        
+
         nonlocal first
         nonlocal last
+
+        inorder(node.left)
         
-        inOrderLink(node.left)
-        
-        if not last:
+        if not first:
             first = node
+            last = node
         else:
             node.left = last
             last.right = node
-        last = node
+            last = node
 
-        inOrderLink(node.right)
+        inorder(node.right)
 
     first = None
     last = None
-    inOrderLink(root)
+    inorder(root)
+
     first.left = last
     last.right = first
-    
+
     return first
 
-def doubleLinkedListToPythonList(head):
+def circularDoubleLinkedListToPythonList(head):
     if not head:
         return []
     
     values = [head.val]
     node = head.right
-
     while node != head:
         values.append(node.val)
         node = node.right
-    
     return values
 
-def pythonListToTree(values, index=0):
+def listToTree(values, index=0):
     if not values or index < 0 or index >= len(values) or values[index] == None:
         return None
     
@@ -87,25 +87,25 @@ def pythonListToTree(values, index=0):
     leftIndex = 2 * index + 1
     rightIndex = 2 * index + 2
 
-    node.left = pythonListToTree(values, leftIndex)
-    node.right = pythonListToTree(values, rightIndex)
+    node.left = listToTree(values, leftIndex)
+    node.right = listToTree(values, rightIndex)
 
     return node
 
 if __name__ == "__main__":
     # Example 1
-    root = pythonListToTree([4,2,5,1,3])
+    root = listToTree([4,2,5,1,3])
     expectedOutput = [1,2,3,4,5]
-    output = doubleLinkedListToPythonList(treeToDoubleLinkedList(root))
+    output = circularDoubleLinkedListToPythonList(treeToCircularDoubleLinkedList(root))
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
     print()
     
     # Example 2
-    root = pythonListToTree([2,1,3])
+    root = listToTree([2,1,3])
     expectedOutput = [1,2,3]
-    output = doubleLinkedListToPythonList(treeToDoubleLinkedList(root))
+    output = circularDoubleLinkedListToPythonList(treeToCircularDoubleLinkedList(root))
     print(output)
     print(expectedOutput)
     print(output == expectedOutput)
