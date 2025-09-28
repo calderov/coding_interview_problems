@@ -25,19 +25,20 @@ from collections import deque
 
 class MovingAverage:
     def __init__(self, size):
+        self.maxSize = size
         self.window = deque()
         self.windowSum = 0
-        self.size = size
 
     def next(self, val):
-        self.window.append(val)
-        self.windowSum += val
-
-        while len(self.window) > self.size:
+        if len(self.window) < self.maxSize:
+            self.window.append(val)
+            self.windowSum += val
+        else:
+            self.window.append(val)
             self.windowSum -= self.window.popleft()
-
-        return self.windowSum / (min(len(self.window), self.size))
-
+            self.windowSum += val
+        return self.windowSum / len(self.window)
+        
 if __name__ == "__main__":
     movingAverage = MovingAverage(3)
     print("%.2f %.2f" % (movingAverage.next(1), 1.0))

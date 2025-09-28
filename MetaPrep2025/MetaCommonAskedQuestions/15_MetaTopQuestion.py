@@ -53,8 +53,28 @@ def getMaxProfitV2(prices):
     
     return maxProfit
 
+# Time complexity: O(n)
+# Space complexity: O(1)
+# Note: Easier to read and beats 96% of leetcode answers
+def getMaxProfitV3(prices):
+    if len(prices) < 2:
+        return 0
+
+    minPrice = prices[0]
+    bestProfit = 0
+
+    for price in prices:
+        if price < minPrice:
+            minPrice = price
+        
+        profit = price - minPrice
+        if profit > bestProfit:
+            bestProfit = profit
+        
+    return bestProfit
+
 def getMaxProfit(prices):
-    return getMaxProfitV2(prices)
+    return getMaxProfitV3(prices)
 
 if __name__ == "__main__":
     prices = [3, 2, 6, 5, 0, 3]
