@@ -37,35 +37,30 @@
 
 from collections import deque
 
-def canBeSpelled(stickers, target):
+def canBeSpelled(stickers, s):
     alphabet = set(list("".join(stickers)))
-    targetSet = set(list(target))
-    return len(targetSet.difference(alphabet)) == 0
+    targetChars = set(list(s))
+    return len(targetChars.difference(alphabet)) == 0
 
 def getStickerMaps(stickers):
     stickerMaps = []
-
     for sticker in stickers:
         stickerMap = {}
         for c in sticker:
-            if c not in stickerMap:
-                stickerMap[c] = 0
-            stickerMap[c] += 1
+            stickerMap[c] = stickerMap.get(c, 0) + 1
         stickerMaps.append(stickerMap)
-
     return stickerMaps
 
-def applySticker(target, stickerMap):
+def applyStickerMap(stickerMap, s):
     seen = {}
-    remaining = []
+    nextS = []
 
-    for c in target:
-        if c not in stickerMap or stickerMap[c] <= seen.get(c, 0):
-            remaining.append(c)
-        else:
-            seen[c] = seen.get(c, 0) + 1
+    for c in s:
+        if c not in stickerMap or seen.get(c, 0) >= stickerMap[c]:
+            nextS.append(c)
+        seen[c] = seen.get(c, 0) + 1
     
-    return "".join(remaining)
+    return "".join(nextS)
 
 def stickersToSpellWord(stickers, target):
     if not target:
@@ -79,18 +74,18 @@ def stickersToSpellWord(stickers, target):
     visited = set()
 
     while pending:
-        remaining, level = pending.popleft()
-        visited.add(remaining)
+        s, usedStickers = pending.popleft()
+        visited.add(s)
 
-        if remaining == "":
-            return level
+        if s == "":
+            return usedStickers
 
         for stickerMap in stickerMaps:
-            newRemaining = applySticker(remaining, stickerMap)
-            if newRemaining not in visited:
-                pending.append((newRemaining, level + 1))
-
-    return None
+            nextS = applyStickerMap(stickerMap, s)
+            if nextS not in visited:
+                pending.append((nextS, usedStickers + 1))
+    
+    return -1
 
 if __name__ == "__main__":
     # Example 1
