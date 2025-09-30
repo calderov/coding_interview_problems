@@ -28,6 +28,8 @@
 #   elements in the array arr[] is [1, 4, 2, 3, 5].
 # 
 
+# Time complexity: O(n!)
+# Space complexity: O(n!)
 def getAllPermutations(nums):
     allPermutations = []
     prevPermutations = [[]]
@@ -43,7 +45,7 @@ def getAllPermutations(nums):
     
     return allPermutations
 
-# Time complexity: O(n!*n*log(n))
+# Time complexity: O(n!*n!*log(n!))
 # Space complexity: O(n!)
 def nextPermutationNaive(permutation):
     allPermutations = getAllPermutations(permutation)
@@ -60,46 +62,41 @@ def nextPermutationNaive(permutation):
     return nextPermutation
 
 # Time complexity: O(n)
-# Space complexity: O(1)
+# Space complexity: O(1) if run in place, otherwise O(n)
 def nextPermutationBetter(permutation):
-    permutation = permutation.copy() # Remove this to run in place
+    p = permutation.copy() # Remove this to run in place
+    n = len(p)
 
-    # 1. Find pivot index (right most element smaller than its right element).
+    # 1. Find pivot, the largest index i such that p[i] < p[i + 1]. If there is no pivot, reverse and return p
     pivot = None
-    i = len(permutation) - 2
-    while i >= 0:
-        if permutation[i] < permutation[i + 1]:
+    for i in range(n - 2, -1, -1):
+        if p[i] < p[i + 1]:
             pivot = i
             break
-        i -= 1
+    
+    if not pivot:
+        p.reverse()
+        return p
 
-    # 2. If there was no pivot, this is the last permutation in lexicographical order,
-    #    reverse it and return.
-    if pivot is None:
-        permutation.reverse()
-        return permutation
+    # 2. Find successor, the largest index j such that j > i and p[j] > p[i]
+    successor = None
+    for j in range(n - 1, i, -1):
+        if p[j] > p[i]:
+            successor = j
+            break
 
-    # 3. Find target index (right most element greater than the pivot).
-    target = None
+    # 3. Swap p[pivot] and p[successor]
+    p[pivot], p[successor] = p[successor], p[pivot]
+
+    # 4. Reverse p[pivot + 1:] and return p
     i = pivot + 1
-    while i < len(permutation):
-        if permutation[i] > permutation[pivot]:
-            target = i
-        i += 1
-
-    # 4. Swap values at pivot and target indexes.
-    permutation[pivot], permutation[target] = permutation[target], permutation[pivot]
-
-    # 5. Reverse elements at the right of the pivot index and return. This is the next lexicographical
-    #    permutation.
-    i = pivot + 1
-    j = len(permutation) - 1
+    j = n - 1
     while i < j:
-        permutation[i], permutation[j] = permutation[j], permutation[i]
+        p[i], p[j] = p[j], p[i]
         i += 1
         j -= 1
 
-    return permutation    
+    return p
 
 def nextPermutation(permutation):
     return nextPermutationBetter(permutation)
