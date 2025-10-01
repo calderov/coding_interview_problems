@@ -36,13 +36,10 @@
 
 def customSortString(order, s):
     orderMap = {order[i]:i for i in range(len(order))}
-
-    permutation = [c for c in s if c in orderMap]
-    remaining   = [c for c in s if c not in orderMap]
-
-    permutation.sort(key=lambda x: orderMap[x])
-
-    return "".join(permutation + remaining)
+    present   = [c for c in s if c in orderMap]
+    remaining = [c for c in s if c not in orderMap]
+    present.sort(key=lambda x: orderMap[x])
+    return "".join(present + remaining)
 
 if __name__ == "__main__":
     # Example 1
