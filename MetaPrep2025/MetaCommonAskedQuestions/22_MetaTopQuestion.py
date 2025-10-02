@@ -39,19 +39,16 @@ class Node:
 
 # Time complexity:  O(n)
 # Space complexity: O(h)
-def sumRootToLeafNumbers(root, currNum=0):
-    if not root:
+def sumRootToLeafNumbers(node, currNum=0):
+    if not node:
         return 0
     
-    currNum = 10 * currNum + root.val
-
-    if not root.left and not root.right:
+    currNum = 10 * currNum + node.val
+    if not node.left and not node.right:
         return currNum
     
-    leftSum = sumRootToLeafNumbers(root.left, currNum)
-    rightSum = sumRootToLeafNumbers(root.right, currNum)
-
-    return leftSum + rightSum
+    return sumRootToLeafNumbers(node.left, currNum) + \
+           sumRootToLeafNumbers(node.right, currNum)
 
 def listToTree(values, index=0):
     if not values or index < 0 or index >= len(values) or values[index] == None:
