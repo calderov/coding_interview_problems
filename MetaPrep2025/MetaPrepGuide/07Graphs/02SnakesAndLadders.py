@@ -1,6 +1,8 @@
 # Snakes and Ladders: The Quickest Way Up
 # https://www.hackerrank.com/challenges/the-quickest-way-up/problem
 
+from collections import deque
+
 def quickestWayUp(ladders, snakes):
     goto = {}
 
@@ -9,15 +11,15 @@ def quickestWayUp(ladders, snakes):
     
     for source, dest in snakes:
         goto[source] = dest
-        
-    pending = [1]
+
+    pending = deque([1])
     visited = set()
     level = 0
-    
+
     while pending:
         n = len(pending)
         for _ in range(n):
-            node = pending.pop(0)
+            node = pending.popleft()
 
             if node == 100:
                 return level
@@ -42,8 +44,6 @@ def quickestWayUp(ladders, snakes):
     
     # Goal unreachable
     return -1
-
-
 
 if __name__ == "__main__":
     # Example 1
