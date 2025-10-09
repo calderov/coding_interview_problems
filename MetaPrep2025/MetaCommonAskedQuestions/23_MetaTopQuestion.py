@@ -78,11 +78,11 @@ def nextPermutationBetter(permutation):
         p.reverse()
         return p
 
-    # 2. Find successor, the largest index j such that j > i and p[j] > p[i]
+    # 2. Find successor, the largest index i such that i > pivot and p[i] > p[pivot]
     successor = None
-    for j in range(n - 1, i, -1):
-        if p[j] > p[i]:
-            successor = j
+    for i in range(n - 1, i, -1):
+        if p[i] > p[pivot]:
+            successor = i
             break
 
     # 3. Swap p[pivot] and p[successor]
