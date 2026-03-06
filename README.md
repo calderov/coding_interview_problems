@@ -15,7 +15,7 @@ I've included code for the proposed solutions, notes and references for the foll
 
 1. Pattern: Two Pointers
 1. Pattern: Fast & Slow Pointers
-1. Pattern: Islands (or Matrix Traversal) (*NEW*)
+1. Pattern: Islands (or Matrix Traversal)
 1. Pattern: Sliding Window
 1. Pattern: Merge Intervals
 1. Pattern: Cyclic Sort
@@ -29,7 +29,7 @@ I've included code for the proposed solutions, notes and references for the foll
 1. Pattern: Top 'K' Elements
 1. Pattern: K-way Merge
 1. Pattern: Topological Sort (Graph)
-1. Pattern: Multi-threaded (*NEW*)
+1. Pattern: Multi-threaded
 
 The included code is written in Python, although a C++ version of the solutions may come in the future.
 
