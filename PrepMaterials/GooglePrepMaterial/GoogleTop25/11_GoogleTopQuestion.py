@@ -20,6 +20,8 @@
 #     1 <= haystack.length, needle.length <= 104
 #     haystack and needle consist of only lowercase English characters.
 
+# Time: O(m * n)
+# Space: O(m)
 def FindNeedleInHaystack(needle, haystack):
     m = len(needle)
     n = len(haystack)
