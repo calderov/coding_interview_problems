@@ -43,14 +43,14 @@ def TrappedWaterV1(height):
     # Compute max heights from left to right
     maxH = 0
     for i in range(n):
-        maxH = max(maxH, height[i])
         leftToRight[i] = maxH
+        maxH = max(maxH, height[i])
 
     # Compute max heights from right to left
     maxH = 0
     for i in range(n - 1, -1, -1):
-        maxH = max(maxH, height[i])
         rightToLeft[i] = maxH
+        maxH = max(maxH, height[i])
 
     water = 0
     for i in range(1, n - 1):
@@ -58,35 +58,32 @@ def TrappedWaterV1(height):
     
     return water
 
+# Time: O(n)
+# Space: O(1)
 def TrappedWaterV2(height):
     if not height:
         return 0
-    
+
     n = len(height)
-    
+
     left = 0
     right = n - 1
 
-    maxLeft = 0
-    maxRight = 0
+    maxLeft = height[left]
+    maxRight = height[right]
 
     water = 0
 
     while left < right:
-        if height[left] < height[right]:
-            if height[left] >= maxLeft:
-                maxLeft = height[left]
-            else:
-                water += maxLeft - height[left]
+        if maxLeft < maxRight:
             left += 1
-        
+            maxLeft = max(maxLeft, height[left])
+            water += maxLeft - height[left]
         else:
-            if height[right] >= maxRight:
-                maxRight = height[right]
-            else:
-                water += maxRight - height[right]
             right -= 1
-    
+            maxRight = max(maxRight, height[right])
+            water += maxRight - height[right]
+
     return water
 
 def TrappedWater(height):
@@ -106,6 +103,69 @@ if __name__ == "__main__":
     # Example 2:
     height = [4,2,0,3,2,5]
     expected = 9
+    output = TrappedWater(height)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+
+    # Example 3: Simple two-bar trap
+    height = [3,0,2]
+    expected = 2
+    output = TrappedWater(height)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+
+    # Example 4: Ascending (no water trapped)
+    height = [1,2,3,4,5]
+    expected = 0
+    output = TrappedWater(height)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+
+    # Example 5: Descending (no water trapped)
+    height = [5,4,3,2,1]
+    expected = 0
+    output = TrappedWater(height)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+
+    # Example 6: Single bar
+    height = [1]
+    expected = 0
+    output = TrappedWater(height)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+
+    # Example 7: All zeros
+    height = [0,0,0]
+    expected = 0
+    output = TrappedWater(height)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+
+    # Example 8: Mountain shape
+    height = [3,2,1,2,3]
+    expected = 4
+    output = TrappedWater(height)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+
+    # Example 9: Multiple valleys
+    height = [3,0,0,2,0,4]
+    expected = 10
     output = TrappedWater(height)
     print(expected)
     print(output)
