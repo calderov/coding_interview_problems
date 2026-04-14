@@ -44,22 +44,22 @@ def FirstMissingPositiveHashSet(nums):
 # Time: O(n)
 # Space: O(1)
 def FirstMissingPositiveCyclicSort(nums):
-    # Cyclic sort in-place with O(1) auxiliary space
-    i = 0
     n = len(nums)
+
+    # Cyclic sort
+    i = 0
     while i < n:
-        correct_index = nums[i] - 1
-        if 1 <= nums[i] <= n and nums[i] != nums[correct_index]:
-            nums[i], nums[correct_index] = nums[correct_index], nums[i]
+        correctIndex = nums[i] - 1
+        if 1 <= nums[i] and nums[i] <= n and nums[i] != nums[correctIndex]:
+            nums[i], nums[correctIndex] = nums[correctIndex], nums[i]
             continue
         i += 1
     
-    # Traverse rearranged nums from 1 to n checking if each number is in its correct position
+    # Find first missing
     for i in range(n):
         if nums[i] != i + 1:
             return i + 1
     
-    # Since all numbers in nums are in their correct position, the answer is the next number after n
     return n + 1
 
 def FirstMissingPositive(nums):
