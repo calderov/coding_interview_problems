@@ -32,49 +32,33 @@
 #     nums is an ascending array that is possibly rotated.
 #     -104 <= target <= 104
 
-def BinarySearch(nums, target, low=None, high=None):
-    if low == None:
-        low = 0
-        high = len(nums) - 1
-    
-    if low > high or target < nums[low] or target > nums[high]:
-        return -1
-
-    mid = low + (high - low) // 2
-    if nums[mid] == target:
-        return mid
-    
-    left = BinarySearch(nums, target, low, mid)
-    if left != -1:
-        return left
-    
-    right = BinarySearch(nums, target, mid + 1, high)
-    return right
-
+# Time: O(log(n))
+# Space: O(1)
 def SearchInRotated(nums, target, low=None, high=None):
-    if low == None:
-        low = 0
-        high = len(nums) - 1
+    low = 0
+    high = len(nums) - 1
 
-    if low > high:
-        return -1
+    while low <= high:
+        mid = low + (high - low) // 2
 
-    mid = low + (high - low) // 2
-    
-    if nums[mid] == target:
-        return mid
+        if nums[mid] == target:
+            return mid
 
-    # Detect rotation
-    if nums[low] > nums[high]:
-        left = SearchInRotated(nums, target, low, mid)
-        if left != -1:
-            return left
+        # If left part is softed
+        if nums[low] <= nums[mid]:
+            if nums[low] <= target and target < nums[mid]:
+                high = mid - 1
+            else:
+                low = mid + 1
+
+        # If right side is sorted
+        else:
+            if nums[mid] < target and target <= nums[high]:
+                low = mid + 1
+            else:
+                high = mid - 1
         
-        right = SearchInRotated(nums, target, mid + 1, high)
-        return right
-    
-    # No rotation, use binary search
-    return BinarySearch(nums, target, low, high)
+    return -1
 
 if __name__ == "__main__":
     # Example 1:
