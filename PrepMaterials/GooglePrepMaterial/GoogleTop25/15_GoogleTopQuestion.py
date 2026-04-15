@@ -29,11 +29,10 @@
 #     s contains only lowercase English letters.
 #     p contains only lowercase English letters, '?' or '*'.
 
-def PatternMatch(s, p):
-    hasCache = [[False] * len(p) for _ in range(len(s))]
+def IsMatch(s, p):
     cache = [[None] * len(p) for _ in range(len(s))]
     
-    def isMatch(indexS, indexP):
+    def PatternMatch(indexS, indexP):
         if indexS == len(s) and indexP == len(p):
             return True
         
@@ -42,34 +41,31 @@ def PatternMatch(s, p):
         
         if indexS == len(s):
             if p[indexP] == '*':
-                return isMatch(indexS, indexP + 1)
+                return PatternMatch(indexS, indexP + 1)
             return False
         
-        if hasCache[indexS][indexP]:
+        if cache[indexS][indexP] is not None:
             return cache[indexS][indexP]
 
         if s[indexS] == p[indexP] or p[indexP] == '?':
-            cache[indexS][indexP] = isMatch(indexS + 1, indexP + 1)
-            hasCache[indexS][indexP] = True
+            cache[indexS][indexP] = PatternMatch(indexS + 1, indexP + 1)
             return cache[indexS][indexP]
         
         if p[indexP] == '*':
-            cache[indexS][indexP] = isMatch(indexS + 1, indexP) or isMatch(indexS, indexP + 1)
-            hasCache[indexS][indexP] = True
+            cache[indexS][indexP] = PatternMatch(indexS + 1, indexP) or PatternMatch(indexS, indexP + 1)
             return cache[indexS][indexP]
 
         cache[indexS][indexP] = False
-        hasCache[indexS][indexP] = True
         return cache[indexS][indexP]
 
-    return isMatch(0, 0)
+    return PatternMatch(0, 0)
 
 if __name__ == "__main__":
     # Example 1:
     s = "aa"
     p = "a"
     expected = False
-    output = PatternMatch(s, p)
+    output = IsMatch(s, p)
     print(expected)
     print(output)
     print(expected == output)
@@ -79,7 +75,7 @@ if __name__ == "__main__":
     s = "aa"
     p = "*"
     expected = True
-    output = PatternMatch(s, p)
+    output = IsMatch(s, p)
     print(expected)
     print(output)
     print(expected == output)
@@ -89,7 +85,7 @@ if __name__ == "__main__":
     s = "cb"
     p = "?a"
     expected = False
-    output = PatternMatch(s, p)
+    output = IsMatch(s, p)
     print(expected)
     print(output)
     print(expected == output)
