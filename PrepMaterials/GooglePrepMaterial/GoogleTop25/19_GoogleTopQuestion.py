@@ -35,6 +35,8 @@ class Solution:
         self.count = 0
         self.queens = set()
 
+    # Time: O(n!)
+    # Space: O(n)
     def totalNQueens(self, n):
         self.n = n
         self.count = 0
@@ -61,6 +63,8 @@ class Solution:
         
         return
 
+    # Time: O(n) where n is the number of queens
+    # Space: O(n) where n is the number of queens
     def IsValid(self, queens):
         cols = set()
         diag1 = set()
@@ -73,56 +77,6 @@ class Solution:
             diag1.add(row - col)
             diag2.add(row + col)
     
-        return True
-
-    def IsValidOld(self, n, queens):
-        # Verify rows and cols
-        seenRows = set()
-        seenCols = set()
-        for row, col in queens:
-            if row in seenRows or col in seenCols:
-                return False
-            seenRows.add(row)
-            seenCols.add(col)
-
-        # Verify diagonals for each queen
-        for queenRow, queenCol in queens:
-            # Verify top-left
-            row = queenRow - 1
-            col = queenCol - 1
-            while row >= 0 and col >= 0:
-                if (row, col) in queens:
-                    return False
-                row -= 1
-                col -= 1
-
-            # Verify top-right
-            row = queenRow - 1
-            col = queenCol + 1
-            while row >= 0 and col < n:
-                if (row, col) in queens:
-                    return False
-                row -= 1
-                col += 1
-
-            # Verify bottom-left
-            row = queenRow + 1
-            col = queenCol - 1
-            while row < n and col >= 0:
-                if (row, col) in queens:
-                    return False
-                row += 1
-                col -= 1
-                        
-            # Verify bottom-right
-            row = queenRow + 1
-            col = queenCol + 1
-            while row < n and col < n:
-                if (row, col) in queens:
-                    return False
-                row += 1
-                col += 1
-
         return True
    
 if __name__=="__main__":
