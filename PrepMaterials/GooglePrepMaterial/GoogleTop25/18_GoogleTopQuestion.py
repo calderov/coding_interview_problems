@@ -28,13 +28,13 @@
 # Time: O(n * k * log(k)) where k is the lenght of the longest word in words
 # Space: O(n * k)
 def GroupAnagrams(words):
-    anagramsMap = {}
+    anagrams = {}
     for word in words:
         wordKey = "".join(sorted([c for c in word]))
-        if wordKey not in anagramsMap:
-            anagramsMap[wordKey] = []
-        anagramsMap[wordKey].append(word)
-    return([anagramsMap[k] for k in anagramsMap])
+        if wordKey not in anagrams:
+            anagrams[wordKey] = []
+        anagrams[wordKey].append(word)
+    return anagrams.values()
 
 if __name__ == "__main__":
     # Example 1:
