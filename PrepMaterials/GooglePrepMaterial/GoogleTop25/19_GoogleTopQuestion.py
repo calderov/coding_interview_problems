@@ -14,11 +14,13 @@
 # ■ □ ■ ♔
 # ♔ ■ □ ■
 # ■ □ ♔ □
+# {(0, 1), (2, 0), (3, 2), (1, 3)}
 
 # □ ■ ♔ ■
 # ♔ □ ■ □
 # □ ■ □ ♔
 # ■ ♔ ■ □
+# {(3, 1), (2, 3), (0, 2), (1, 0)}
 
 # Example 2:
 # Input: n = 1
@@ -28,19 +30,37 @@
 #     1 <= n <= 9
 
 class Solution:
-
     def __init__(self):
         self.n = 0
         self.count = 0
-        self.queens = []
+        self.queens = set()
 
     def totalNQueens(self, n):
         self.n = n
         self.count = 0
-        self.queens = []
+        self.queens = set()
         self.backtrack(0)
         return self.count
-    
+
+    def backtrack(self, row):
+        if row == self.n:
+            self.count += 1
+            # print(self.queens)
+            return
+
+        for col in range(self.n):
+            # Place queen
+            self.queens.add((row, col))
+
+            # Recurse for the next row
+            if self.IsValid(self.n, self.queens):
+                self.backtrack(row + 1)
+
+            # Backtrack (remove queen)
+            self.queens.remove((row, col))
+        
+        return
+
     def IsValid(self, n, queens):
         # Verify rows and cols
         seenRows = set()
@@ -90,27 +110,24 @@ class Solution:
                 col += 1
 
         return True
-
-    def backtrack(self, row):
-        if row == self.n and self.IsValid(self.n, self.queens):
-            self.count += 1
-            print(self.queens)
-            return
-
-        for col in range(self.n):
-            if not self.IsValid(self.n, self.queens):
-                continue
-
-            # Place queen
-            self.queens.append((row, col))
-
-            # Recurse for the next row
-            self.backtrack(row + 1)
-
-            # Backtrack (remove queen)
-            self.queens.pop()
-        
-        return
+   
+if __name__=="__main__":
+    app = Solution()
     
-app = Solution()
-print(app.totalNQueens(4))
+    # Example 1:
+    n = 4
+    expected = 2
+    output = app.totalNQueens(n)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+    
+    # Example 2:
+    n = 1
+    expected = 1
+    output = app.totalNQueens(n)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
