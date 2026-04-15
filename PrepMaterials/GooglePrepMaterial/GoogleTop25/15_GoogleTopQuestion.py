@@ -92,3 +92,43 @@ if __name__ == "__main__":
     print(output)
     print(expected == output)
     print()
+
+    # Example 4: empty string with empty pattern
+    s = ""
+    p = ""
+    expected = True
+    output = IsMatch(s, p)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+
+    # Example 5: empty string with star pattern
+    s = ""
+    p = "*"
+    expected = True
+    output = IsMatch(s, p)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+
+    # Example 6: complex star matching
+    s = "adceb"
+    p = "*a*b"
+    expected = True
+    output = IsMatch(s, p)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+
+    # Example 7: mismatch with question mark and star
+    s = "acdcb"
+    p = "a*c?b"
+    expected = False
+    output = IsMatch(s, p)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
