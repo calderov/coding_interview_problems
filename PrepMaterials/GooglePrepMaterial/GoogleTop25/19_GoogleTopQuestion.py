@@ -53,7 +53,7 @@ class Solution:
             self.queens.add((row, col))
 
             # Recurse for the next row
-            if self.IsValid(self.n, self.queens):
+            if self.IsValid(self.queens):
                 self.backtrack(row + 1)
 
             # Backtrack (remove queen)
@@ -61,7 +61,21 @@ class Solution:
         
         return
 
-    def IsValid(self, n, queens):
+    def IsValid(self, queens):
+        cols = set()
+        diag1 = set()
+        diag2 = set()
+
+        for row, col in queens:
+            if col in cols or (row - col) in diag1 or (row + col) in diag2:
+                return False
+            cols.add(col)
+            diag1.add(row - col)
+            diag2.add(row + col)
+    
+        return True
+
+    def IsValidOld(self, n, queens):
         # Verify rows and cols
         seenRows = set()
         seenCols = set()
@@ -126,6 +140,15 @@ if __name__=="__main__":
     # Example 2:
     n = 1
     expected = 1
+    output = app.totalNQueens(n)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+
+    # Example 3:
+    n = 5
+    expected = 10
     output = app.totalNQueens(n)
     print(expected)
     print(output)
