@@ -29,6 +29,8 @@
 #     s contains only lowercase English letters.
 #     p contains only lowercase English letters, '?' or '*'.
 
+# Time: O(m * n) where m = |s| and n = |p|
+# Space: O(m * n) for the cache + O(m + n) for the recursion stack
 def IsMatch(s, p):
     cache = [[None] * len(p) for _ in range(len(s))]
     
