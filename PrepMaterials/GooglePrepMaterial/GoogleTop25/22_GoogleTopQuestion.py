@@ -85,3 +85,43 @@ if __name__ == "__main__":
     print(output)
     print(expected == output)
     print()
+
+     # Example 3
+    intervals = [[1,3], [5,7], [8,12]]
+    newInterval = [4,6]
+    expected = [[1,3], [4,7], [8,12]]
+    output = InsertInterval(intervals, newInterval)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+    
+    # Example 4
+    intervals = [[1,3], [5,7], [8,12]]
+    newInterval = [4,10]
+    expected = [[1,3], [4,12]]
+    output = InsertInterval(intervals, newInterval)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+    
+    # Example 5
+    intervals = [[2,3],[5,7]]
+    newInterval = [1,4]
+    expected = [[1,4], [5,7]]
+    output = InsertInterval(intervals, newInterval)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
+
+    # Example 3
+    intervals = [[1,2], [3,4], [5,6]]
+    newInterval = [2,5]
+    expected = [[1,6]]
+    output = InsertInterval(intervals, newInterval)
+    print(expected)
+    print(output)
+    print(expected == output)
+    print()
