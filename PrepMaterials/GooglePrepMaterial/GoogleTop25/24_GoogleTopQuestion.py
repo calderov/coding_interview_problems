@@ -64,8 +64,29 @@ def MinPathSumMemoized(grid):
 
     return compute(0, 0)
 
+# Time: O(m * n)
+# Space: O(1)
+def MinPathSumInPlaceDP(grid):
+    rows = len(grid)
+    cols = len(grid[0])
+
+    # Update first row
+    for col in range(1, cols):
+        grid[0][col] += grid[0][col - 1]
+
+    # Update first col
+    for row in range(1, rows):
+        grid[row][0] += grid[row - 1][0]
+
+    # Update the rest of the grid
+    for row in range(1, rows):
+        for col in range(1, cols):
+            grid[row][col] += min(grid[row - 1][col], grid[row][col - 1])
+
+    return grid[rows - 1][cols - 1]
+
 def MinPathSum(grid):
-    return MinPathSumMemoized(grid)
+    return MinPathSumInPlaceDP(grid)
 
 if __name__ == "__main__":
     # Example 1:
