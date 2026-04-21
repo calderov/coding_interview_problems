@@ -43,7 +43,7 @@ def SpiralMatrix(n):
         i -= 1
         j -= 1
 
-        # Fill right
+        # Fill left
         while j >= 0 and M[i][j] == 0:
             M[i][j] = val
             val += 1
