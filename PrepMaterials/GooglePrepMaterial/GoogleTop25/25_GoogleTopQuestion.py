@@ -55,40 +55,37 @@ def ValidNumber(s):
     for i in range(len(s)):
         c = s[i].lower()
 
-        if i == 0:
-            if c in digits:
-                hasDigits = True
-                continue
-
-            if c == ".":
-                hasDecimal = True
-                continue
-
-            if c == "-" or c == "+":
-                continue
-            
-            return False
-
         if c in digits:
             hasDigits = True
             continue
-        
+
         if c == ".":
             if hasDecimal:
                 return False
             hasDecimal = True
+            continue
 
+        if c == "-" or c == "+":
+            if i == 0 or s[i - 1].lower() == "e":
+                continue
+        
         if c == "e":
-            if hasExponential:
+            if hasExponential or not hasDigits:
                 return False
             hasExponential = True
             hasDecimal = True
             hasDigits = False
+            continue
+
+        return False
 
     return hasDigits
 
 
 if __name__ == "__main__":
+    passedTests = 0
+    totalTests = 0
+
     # Example 1:
     s = "0"
     expected = True
@@ -97,6 +94,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 2:
@@ -107,6 +106,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 3:
@@ -117,6 +118,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 4
@@ -127,6 +130,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 5
@@ -137,6 +142,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 6
@@ -147,6 +154,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 7
@@ -157,6 +166,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 8
@@ -167,6 +178,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 9
@@ -177,6 +190,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 10
@@ -187,6 +202,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 11
@@ -197,6 +214,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 12
@@ -207,6 +226,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 13
@@ -217,6 +238,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 14
@@ -227,6 +250,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 15
@@ -237,6 +262,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 16
@@ -247,6 +274,8 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
 
     # Example 17
@@ -257,4 +286,105 @@ if __name__ == "__main__":
     print(expected)
     print(output)
     print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
     print()
+
+    # Example 18
+    s = "abc"
+    expected = False
+    output = ValidNumber(s)
+    print("Example 18")
+    print(expected)
+    print(output)
+    print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
+    print()
+
+    # Example 19
+    s = "1a"
+    expected = False
+    output = ValidNumber(s)
+    print("Example 19")
+    print(expected)
+    print(output)
+    print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
+    print()
+
+    # Example 20
+    s = "1e"
+    expected = False
+    output = ValidNumber(s)
+    print("Example 20")
+    print(expected)
+    print(output)
+    print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
+    print()
+
+    # Example 21
+    s = "e3"
+    expected = False
+    output = ValidNumber(s)
+    print("Example 21")
+    print(expected)
+    print(output)
+    print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
+    print()
+
+    # Example 22
+    s = "99e2.5"
+    expected = False
+    output = ValidNumber(s)
+    print("Example 22")
+    print(expected)
+    print(output)
+    print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
+    print()
+
+    # Example 23
+    s = "--6"
+    expected = False
+    output = ValidNumber(s)
+    print("Example 23")
+    print(expected)
+    print(output)
+    print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
+    print()
+
+    # Example 24
+    s = "-+3"
+    expected = False
+    output = ValidNumber(s)
+    print("Example 24")
+    print(expected)
+    print(output)
+    print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
+    print()
+
+    # Example 25
+    s = "95a54e53"
+    expected = False
+    output = ValidNumber(s)
+    print("Example 25")
+    print(expected)
+    print(output)
+    print(expected == output)
+    totalTests += 1
+    passedTests += 1 if expected == output else 0
+    print()
+
+    print("Total tests:", totalTests)
+    print("Passed tests:", passedTests)
