@@ -68,6 +68,7 @@ def ValidNumber(s):
         if c == "-" or c == "+":
             if i == 0 or s[i - 1].lower() == "e":
                 continue
+            return False
         
         if c == "e":
             if hasExponential or not hasDigits:
