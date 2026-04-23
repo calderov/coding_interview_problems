@@ -102,8 +102,6 @@ def JustifyLeft(line, maxWidth):
     line.append(" " * rightPadding)
     return "".join(line)
     
-# Time: O(n * maxWidth)
-# Space: O(n * maxWidth)
 def JustifyRight(line, maxWidth):
     spaceIndexes = [[i, 1] for i in range(len(line)) if line[i] == " "]
 
@@ -127,7 +125,8 @@ def JustifyRight(line, maxWidth):
 
     return "".join(line)
 
-
+# Time: O(n * maxWidth)
+# Space: O(n * maxWidth)
 def JustifyText(words, maxWidth):
     lines = SplitLines(words, maxWidth)
 
