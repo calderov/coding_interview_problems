@@ -25,6 +25,8 @@
 #     1 <= m, n <= 100
 #     -10**4 <= matrix[i][j], target <= 10**4
 
+# Time: O(log(m) + log(n)) -> O(log(m * n))
+# Space: O(1)
 def ValueInMatrix(matrix, target):
     rows = len(matrix)
     cols = len(matrix[0])
@@ -33,13 +35,13 @@ def ValueInMatrix(matrix, target):
     low = 0
     high = rows - 1
     
-    candidateRow = -1
+    candidate = -1
 
     while low <= high:
         mid = low + (high - low) // 2
 
         if matrix[mid][0] <= target and target <= matrix[mid][cols - 1]:
-            candidateRow = mid
+            candidate = mid
             break
 
         if target < matrix[mid][0]:
@@ -48,7 +50,7 @@ def ValueInMatrix(matrix, target):
             low = mid + 1
 
     # Return early if no candidate row was found
-    if candidateRow == -1:
+    if candidate == -1:
         return False
 
     # Use binary search again to find target in candidate row
@@ -58,10 +60,10 @@ def ValueInMatrix(matrix, target):
     while low <= high:
         mid = low + (high - low) // 2
 
-        if matrix[candidateRow][mid] == target:
+        if matrix[candidate][mid] == target:
             return True
         
-        if target < matrix[candidateRow][mid]:
+        if target < matrix[candidate][mid]:
             high = mid - 1
         else:
             low = mid + 1
