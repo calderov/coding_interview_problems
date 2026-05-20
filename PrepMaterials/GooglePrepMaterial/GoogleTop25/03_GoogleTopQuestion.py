@@ -25,6 +25,8 @@
 #     0 <= s.length <= 5 * 104
 #     s consists of English letters, digits, symbols and spaces.
 
+# Time: O(n)
+# Space: O(n)
 def LongestSubstringWithoutRepeatingCharacters(s):
     seen = {}
     maxLen = 0

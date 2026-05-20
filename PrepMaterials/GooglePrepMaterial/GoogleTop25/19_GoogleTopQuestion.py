@@ -33,14 +33,14 @@ class Solution:
     def __init__(self):
         self.n = 0
         self.count = 0
-        self.queens = set()
+        self.queens = []
 
     # Time: O(n!)
     # Space: O(n)
     def totalNQueens(self, n):
         self.n = n
         self.count = 0
-        self.queens = set()
+        self.queens = []
         self.backtrack(0)
         return self.count
 
@@ -52,14 +52,14 @@ class Solution:
 
         for col in range(self.n):
             # Place queen
-            self.queens.add((row, col))
+            self.queens.append((row, col))
 
             # Recurse for the next row
             if self.IsValid(self.queens):
                 self.backtrack(row + 1)
 
             # Backtrack (remove queen)
-            self.queens.remove((row, col))
+            self.queens.pop()
         
         return
 

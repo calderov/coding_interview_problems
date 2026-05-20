@@ -8,7 +8,7 @@
 #     Whitespace: Ignore any leading whitespace (" ").
 #     Signedness: Determine the sign by checking if the next character is '-' or '+', assuming positivity if neither present.
 #     Conversion: Read the integer by skipping leading zeros until a non-digit character is encountered or the end of the string is reached. If no digits were read, then the result is 0.
-#     Rounding: If the integer is out of the 32-bit signed integer range [-231, 231 - 1], then round the integer to remain in the range. Specifically, integers less than -231 should be rounded to -231, and integers greater than 231 - 1 should be rounded to 231 - 1.
+#     Rounding: If the integer is out of the 32-bit signed integer range [-2**31, 2**31 - 1], then round the integer to remain in the range. Specifically, integers less than -231 should be rounded to -231, and integers greater than 231 - 1 should be rounded to 231 - 1.
 
 # Return the integer as the final result.
 
@@ -71,6 +71,9 @@ def myAtoi(s):
     if not s:
         return 0
 
+    minValue = -2 ** 31
+    maxValue = 2 ** 31 - 1
+
     digits = {str(i):i for i in range(10)}
     isNegative = False
     number = 0
@@ -102,7 +105,15 @@ def myAtoi(s):
             continue
         break
 
-    return number if not isNegative else -number
+    number = number if not isNegative else -number
+
+    if number < minValue:
+        return minValue
+    
+    if number > maxValue:
+        return maxValue
+    
+    return number
 
 
 if __name__ == "__main__":

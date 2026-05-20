@@ -52,6 +52,8 @@ def LinkedListToPythonList(head):
         head = head.next
     return nums
 
+# Time: O(1)
+# Space: O(1)
 def AppendToList(head, tail, val):
     node = Node(val)
     if not head:
@@ -62,6 +64,8 @@ def AppendToList(head, tail, val):
         tail = node
     return head, tail
 
+# Time: O(max(m, n))
+# Space: O(max(m, n)) for recursion stack, not acounting for the result list
 def AddTwoNumbersRecursive(node1, node2, resultHead=None, resultTail=None, carry=0):
     if node1 and node2:
         valSum = node1.val + node2.val + carry
@@ -93,6 +97,8 @@ def AddTwoNumbersRecursive(node1, node2, resultHead=None, resultTail=None, carry
             resultHead, resultTail = AppendToList(resultHead, resultTail, val)
         return resultHead
 
+# Time: O(max(m, n))
+# Space: O(1) not accounting for the result list
 def AddTwoNumbersIterative(head1, head2):
     resultHead = None
     resultTail = None

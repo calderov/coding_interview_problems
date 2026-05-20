@@ -20,6 +20,8 @@
 # Input: nums = [3,3], target = 6
 # Output: [0,1]
 
+# Time: O(n)
+# Space: O(n)
 def TwoSum(nums):
     n = len(nums)
     seen = {}

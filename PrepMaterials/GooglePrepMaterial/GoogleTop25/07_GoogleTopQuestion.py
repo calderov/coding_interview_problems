@@ -20,6 +20,8 @@
 #     0 <= strings[i].length <= 200
 #     strings[i] consists of only lowercase English letters if it is non-empty.
 
+# Time: O(n * m) where n = |strings| and m = min(strings, key=len)
+# Space: O(1)
 def LongestCommonPrefix(strings):
     smallestS = min(strings, key=len)
    

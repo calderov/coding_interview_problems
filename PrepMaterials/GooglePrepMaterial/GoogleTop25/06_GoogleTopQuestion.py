@@ -92,7 +92,6 @@ def IntToRomanLookup(num):
 
     return "".join(result)
 
-
 def IntToRoman(num):
     return IntToRomanLookup(num)
 
