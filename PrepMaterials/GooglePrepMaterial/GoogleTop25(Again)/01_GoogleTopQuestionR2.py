@@ -20,8 +20,6 @@
 # Input: nums = [3,3], target = 6
 # Output: [0,1]
 
-# Time: O(n)
-# Space: O(n)
 def TwoSum(nums, target):
     n = len(nums)
     seen = {}
@@ -32,9 +30,8 @@ def TwoSum(nums, target):
         if complement in seen:
             return [seen[complement], i]
         seen[num] = i
-
+    
     return []
-        
 
 if __name__ == "__main__":
     # Example 1:
