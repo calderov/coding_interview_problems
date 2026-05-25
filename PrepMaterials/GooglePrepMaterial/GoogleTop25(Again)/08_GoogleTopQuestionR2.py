@@ -20,23 +20,24 @@
 # Constraints:
 #     3 <= nums.length <= 500
 #     -1000 <= nums[i] <= 1000
-#     -104 <= target <= 104
+#     -10**4 <= target <= 10**4
 
 # Time: O(n ** 3)
 # Space: O(1)
 def threeSumBruteForce(nums, target):
     n = len(nums)
     closestSum = float("inf")
+    closestDistance = float("inf")
 
     for i in range(n):
         for j in range(i + 1, n):
             for k in range(j + 1, n):
-                currSum = nums[i] + nums[j] + nums[k]
-                if currSum == target:
-                    return target
-                if abs(target - currSum) < abs(target - closestSum):
-                    closestSum = currSum
-    
+                currentSum = nums[i] + nums[j] + nums[k]
+                distance = abs(target - currentSum)
+                if distance < closestDistance:
+                    closestSum = currentSum
+                    closestDistance = distance
+
     return closestSum
 
 # Time: O(n log(n)) + O(n ** 2) -> O(n ** 2)
@@ -46,29 +47,32 @@ def threeSumBetter(nums, target):
     nums.sort()
 
     closestSum = nums[0] + nums[1] + nums[2]
+    closestDistance = abs(target - closestSum)
 
     for i in range(n):
-        left = i + 1
-        right = n - 1
-        while left < right:
-            currentSum = nums[i] + nums[left] + nums[right]
-
-            if currentSum == target:
-                return target
+        lo = i + 1
+        hi = n - 1
+        while lo < hi:
+            currentSum = nums[i] + nums[lo] + nums[hi]
             
-            if abs(target - currentSum) < abs(target - closestSum):
+            if currentSum == target:
+                return currentSum
+            
+            distance = abs(target - currentSum)
+            if distance < closestDistance:
                 closestSum = currentSum
+                closestDistance = distance
 
-            if currentSum < target:
-                left += 1
+            if currentSum > target:
+                hi -= 1
             else:
-                right -= 1
+                lo += 1
     
     return closestSum
 
-
 def threeSum(nums, target):
     return threeSumBetter(nums, target)
+
 
 if __name__ == "__main__":
     # Example 1:
