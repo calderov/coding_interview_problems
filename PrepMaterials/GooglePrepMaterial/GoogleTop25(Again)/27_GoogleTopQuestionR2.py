@@ -63,86 +63,72 @@ def SplitLines(words, maxWidth):
     currentLine = []
     currentLineWidth = 0
 
-    # For each word
     for word in words:
-        # If the current line plus the current word is still shorter than the max width, append word to the current line
         if currentLineWidth + len(word) <= maxWidth:
             currentLine.append(word)
             currentLineWidth += len(word)
-       
-        # Otherwise remove the trailing space at the end of the current line if present,
-        # append the current line to the lines list, and use the current word to redefine
-        # a new current line and current line width.
         else:
             if currentLine[-1] == " ":
                 currentLine.pop()
-            
+
             lines.append(currentLine)
             currentLine = [word]
             currentLineWidth = len(word)
 
-        # If a space can be appended to the current line, do it
         if currentLineWidth + 1 <= maxWidth:
             currentLine.append(" ")
             currentLineWidth += 1
 
-    # If there is still a current line under construction after traversing all the words, append it
-    # to the lines list, just make sure of removing any trailing space.
     if currentLine:
         if currentLine[-1] == " ":
             currentLine.pop()
-
         lines.append(currentLine)
 
     return lines
 
 def JustifyLeft(line, maxWidth):
-    characters = sum([len(word) for word in line])
-    rightPadding = maxWidth - characters
+    lineWidth = sum(len(word) for word in line)
+    rightPadding = maxWidth - lineWidth
     line.append(" " * rightPadding)
     return "".join(line)
-    
+
 def JustifyRight(line, maxWidth):
     spaceIndexes = [[i, 1] for i in range(len(line)) if line[i] == " "]
-
-    spaces = len(spaceIndexes)
-    characters = sum([len(word) for word in line if word != " "])
-
-    lineWidth = characters + spaces
+    lineWidth = sum([len(word) for word in line])
 
     i = 0
     while lineWidth < maxWidth:
-        index, count = spaceIndexes[i]
-        spaceIndexes[i] = [index, count + 1]
+        spaceIndexes[i][1] += 1
         lineWidth += 1
         i += 1
 
         if i == len(spaceIndexes):
             i = 0
 
-    for index, count in spaceIndexes:
-        line[index] = " " * count
+    for index, padding in spaceIndexes:
+        line[index] = " " * padding
 
     return "".join(line)
 
 # Time: O(n * maxWidth)
 # Space: O(n * maxWidth)
 def JustifyText(words, maxWidth):
+    # Split words into lines of at most maxWidht (including single space separation between words)
     lines = SplitLines(words, maxWidth)
 
     for i in range(len(lines)):
-        currentLine = lines[i]
+        line = lines[i]
 
-        # Case 1: If this is the last line or the line only has one word, justify left
-        if i == len(lines) - 1 or len(currentLine) == 1:
-            currentLine = JustifyLeft(currentLine, maxWidth)
-        
-        # Case 2: This is a regular line, justify right
+        # If the current line is the last line in lines or contains a single word, justify left
+        if i == len(lines) - 1 or len(line) == 1:
+            line = JustifyLeft(line, maxWidth)
+
+        # Otherwise, justify right
         else:
-            currentLine = JustifyRight(currentLine, maxWidth)
+            line = JustifyRight(line, maxWidth)
 
-        lines[i] = currentLine
-    
+        lines[i] = line
+
     return lines
 
 if __name__ == "__main__":
