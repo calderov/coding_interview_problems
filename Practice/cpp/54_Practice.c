@@ -3,6 +3,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "time.h"
+#include "string.h"
 
 #define bool char
 #define false 0
@@ -10,41 +11,34 @@
 
 int randInt(int low, int high) {
     if (low > high) {
-        return randInt(high, low);
+        int temp = low;
+        low = high;
+        high = temp;
     }
     return rand() % (high - low + 1) + low;
 }
 
-bool isComplete(int* collection, int size) {
-    for (int i = 0; i < size; i++) {
-        if (collection[i] == 0) {
-            return false;
-        }
-    }
-    return true;
-}
-
 void clearCollection(int* collection, int size) {
-    for(int i = 0; i < size; i++) {
-        collection[i] = 0;
-    }
-    return;
+    memset(collection, 0, size * sizeof(int));
 }
 
 void montecarloIteration(int total_cards, int cards_per_pack, int price_per_pack, int* collection, double *result) {
     double total_cost = 0;
     double packs_count = 0;
     double repeated = 0;
+    int unique_cards = 0;
 
     clearCollection(collection, total_cards);
 
-    while (!isComplete(collection, total_cards)) {
+    while (unique_cards < total_cards) {
         packs_count = packs_count + 1;
         total_cost = total_cost + price_per_pack;
 
         for(int i = 0; i < cards_per_pack; i++) {
             int cardIndex = randInt(1, total_cards) - 1;
-            if (collection[cardIndex] > 0) {
+            if (collection[cardIndex] == 0) {
+                unique_cards++;
+            } else {
                 repeated = repeated + 1;
             }
             collection[cardIndex]++;

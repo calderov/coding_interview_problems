@@ -6,18 +6,11 @@
 
 int randInt(int low, int high) {
     if (low > high) {
-        return randInt(high, low);
+        int temp = low;
+        low = high;
+        high = temp;
     }
     return rand() % (high - low + 1) + low;
-}
-
-bool isComplete(std::vector<int> collection) {
-    for(int i = 0; i < collection.size(); i++) {
-        if(collection[i] == 0) {
-            return false;
-        }
-    }
-    return true;
 }
 
 std::vector<double> montecarloIteration(int total_cards, int cards_per_pack, int price_per_pack) {
@@ -25,14 +18,17 @@ std::vector<double> montecarloIteration(int total_cards, int cards_per_pack, int
     double total_cost = 0;
     double packs_count = 0;
     double repeated = 0;
+    int unique_cards = 0;
 
-    while (!isComplete(collection)) {
+    while (unique_cards < total_cards) {
         packs_count = packs_count + 1;
         total_cost = total_cost + price_per_pack;
 
         for(int i = 0; i < cards_per_pack; i++) {
             int cardIndex = randInt(1, total_cards) - 1;
-            if (collection[cardIndex] > 0) {
+            if (collection[cardIndex] == 0) {
+                unique_cards++;
+            } else {
                 repeated = repeated + 1;
             }
             collection[cardIndex]++;
